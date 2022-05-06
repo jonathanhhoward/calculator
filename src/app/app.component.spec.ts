@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/angular';
-import { AppComponent } from './app.component';
+import { render, screen } from "@testing-library/angular";
+import { AppComponent } from "./app.component";
 
-describe('AppComponent', () => {
-  it('should render Welcome', async () => {
+describe("AppComponent", () => {
+  it("should render Welcome", async () => {
     await render(AppComponent);
-    await screen.getByText('Welcome');
+    await screen.getByText("Welcome");
   });
 });

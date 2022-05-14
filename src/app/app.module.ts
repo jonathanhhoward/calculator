@@ -3,8 +3,9 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { DisplayComponent } from "./display/display.component";
 import { DigitKeyComponent } from "./keypad/digit-key/digit-key.component";
+import { EqualsKeyComponent } from "./keypad/equals-key/equals-key.component";
+import { KeyComponent } from "./keypad/key/key.component";
 import { KeypadComponent } from "./keypad/keypad.component";
-import { KeyComponent } from './keypad/key/key.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { KeyComponent } from './keypad/key/key.component';
     KeypadComponent,
     DigitKeyComponent,
     KeyComponent,
+    EqualsKeyComponent,
   ],
   imports: [BrowserModule],
   providers: [],

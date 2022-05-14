@@ -23,59 +23,6 @@
   }
 }
 
-.Key {
-  padding: 0;
-  border: none;
-  border-radius: 10vh;
-  font-size: 8vh;
-  color: white;
-
-  @media (orientation: portrait) {
-    font-size: 5vh;
-  }
-
-  &:focus {
-    outline: none;
-    border: 4px solid hsl(0, 0%, 10%);
-  }
-
-  &:hover {
-    color: black;
-  }
-}
-
-@mixin buttonStyle($h, $s, $l) {
-  background-color: hsl($h, $s, $l);
-
-  &:hover {
-    background-color: hsl($h, $s, $l + 30%);
-  }
-
-  &:active {
-    background-color: hsl($h, $s, $l + 15%);
-  }
-}
-
-.clear {
-  @include buttonStyle(10, 100%, 40%);
-}
-
-.delete {
-  @include buttonStyle(30, 100%, 40%);
-}
-
-.digit {
-  @include buttonStyle(0, 0%, 40%);
-}
-
-.equals {
-  @include buttonStyle(200, 100%, 40%);
-}
-
-.operator {
-  @include buttonStyle(150, 50%, 40%);
-}
-
 $keys: "clear", "delete", "divide", "multiply", "subtract", "add", "equals",
   "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "zero",
   "decimal";

@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { DisplayComponent } from "./display/display.component";
+import { ClearKeyComponent } from "./keypad/clear-key/clear-key.component";
 import { DeleteKeyComponent } from "./keypad/delete-key/delete-key.component";
 import { DigitKeyComponent } from "./keypad/digit-key/digit-key.component";
 import { EqualsKeyComponent } from "./keypad/equals-key/equals-key.component";
@@ -19,6 +20,7 @@ import { OperatorKeyComponent } from "./keypad/operator-key/operator-key.compone
     EqualsKeyComponent,
     OperatorKeyComponent,
     DeleteKeyComponent,
+    ClearKeyComponent,
   ],
   imports: [BrowserModule],
   providers: [],

@@ -6,6 +6,7 @@ import { DigitKeyComponent } from "./keypad/digit-key/digit-key.component";
 import { EqualsKeyComponent } from "./keypad/equals-key/equals-key.component";
 import { KeyComponent } from "./keypad/key/key.component";
 import { KeypadComponent } from "./keypad/keypad.component";
+import { OperatorKeyComponent } from "./keypad/operator-key/operator-key.component";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { KeypadComponent } from "./keypad/keypad.component";
     DigitKeyComponent,
     KeyComponent,
     EqualsKeyComponent,
+    OperatorKeyComponent,
   ],
   imports: [BrowserModule],
   providers: [],

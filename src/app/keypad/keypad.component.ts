@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 @Component({
-  selector: "app-keypad",
+  selector: "keypad",
   templateUrl: "./keypad.component.html",
   styleUrls: ["./keypad.component.scss"],
 })

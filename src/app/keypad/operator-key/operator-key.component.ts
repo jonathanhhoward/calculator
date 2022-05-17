@@ -1,4 +1,6 @@
 import { Component, Input } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { testAction } from "src/app/app.actions";
 
 @Component({
   selector: "operator-key",
@@ -6,4 +8,10 @@ import { Component, Input } from "@angular/core";
 })
 export class OperatorKeyComponent {
   @Input() symbol = "?";
+
+  constructor(private store: Store) {}
+
+  handleClick() {
+    this.store.dispatch(testAction({ symbol: this.symbol }));
+  }
 }

@@ -1,15 +1,26 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { testAction } from "src/app/app.actions";
+import { deLete } from "src/app/app.actions";
+import { selectStatus, Status } from "src/app/app.feature";
 
 @Component({
   selector: "delete-key",
   templateUrl: "./delete-key.component.html",
 })
-export class DeleteKeyComponent {
+export class DeleteKeyComponent implements OnInit {
+  private status!: Status;
+
   constructor(private store: Store) {}
 
   handleClick() {
-    this.store.dispatch(testAction({ symbol: "C" }));
+    if (this.status === "input") {
+      this.store.dispatch(deLete());
+    }
+  }
+
+  ngOnInit(): void {
+    this.store.select(selectStatus).subscribe((status) => {
+      this.status = status;
+    });
   }
 }

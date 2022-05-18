@@ -23,7 +23,12 @@ export const feature = createFeature({
       ...state,
       input: symbol,
     })),
-    on(appActions.clear, () => initialState)
+    on(appActions.clear, () => initialState),
+    on(appActions.deLete, (state) => ({
+      ...state,
+      expression: state.expression.slice(0, -state.input.length) + "0",
+      input: "0",
+    }))
   ),
 });
 

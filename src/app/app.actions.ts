@@ -6,3 +6,5 @@ export const testAction = createAction(
 );
 
 export const clear = createAction("[app] clear");
+
+export const deLete = createAction("[app] delete");

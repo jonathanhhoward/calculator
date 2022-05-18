@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { testAction } from "src/app/app.actions";
+import { clear } from "src/app/app.actions";
 
 @Component({
   selector: "clear-key",
@@ -10,6 +10,6 @@ export class ClearKeyComponent {
   constructor(private store: Store) {}
 
   handleClick() {
-    this.store.dispatch(testAction({ symbol: "AC" }));
+    this.store.dispatch(clear());
   }
 }

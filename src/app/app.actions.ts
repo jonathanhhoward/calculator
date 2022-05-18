@@ -1,6 +1,8 @@
 import { createAction, props } from "@ngrx/store";
 
 export const testAction = createAction(
-  "[App] Test Action",
+  "[app] test action",
   props<{ symbol: string }>()
 );
+
+export const clear = createAction("[app] clear");

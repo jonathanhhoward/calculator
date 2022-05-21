@@ -29,17 +29,16 @@ export class OperatorKeyComponent implements OnInit {
   handleClick() {
     const { state, store, symbol } = this;
     switch (state.status) {
-      case "result":
-        return store.dispatch(operatorResult({ symbol }));
-      case "negative":
-        return store.dispatch(operatorNegative({ symbol }));
+      case "input":
+        return store.dispatch(operatorInput({ symbol }));
       case "operator":
         return this.symbol === "-"
           ? store.dispatch(operatorNegateOperator({ symbol }))
           : store.dispatch(operatorOperator({ symbol }));
-      case "input":
-        return store.dispatch(operatorInput({ symbol }));
-      default:
+      case "negative":
+        return store.dispatch(operatorNegative({ symbol }));
+      case "result":
+        return store.dispatch(operatorResult({ symbol }));
     }
   }
 }

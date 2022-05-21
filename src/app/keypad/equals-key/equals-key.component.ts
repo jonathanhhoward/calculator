@@ -26,13 +26,12 @@ export class EqualsKeyComponent implements OnInit {
     const { state, store } = this;
 
     switch (state.status) {
-      case "negative":
-        return store.dispatch(equalsNegative());
-      case "operator":
-        return store.dispatch(equalsOperator());
       case "input":
         return store.dispatch(equalsInput());
-      default:
+      case "operator":
+        return store.dispatch(equalsOperator());
+      case "negative":
+        return store.dispatch(equalsNegative());
     }
   }
 }

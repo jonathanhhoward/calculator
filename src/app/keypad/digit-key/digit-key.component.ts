@@ -53,17 +53,16 @@ export class DigitKeyComponent implements OnInit {
     if (isMaxDigits && state.status !== "result") return;
 
     switch (state.status) {
-      case "result":
-        return store.dispatch(digitResult({ symbol }));
-      case "negative":
-        return store.dispatch(digitNegative({ symbol }));
-      case "operator":
-        return store.dispatch(digitOperator({ symbol }));
       case "input":
         return state.input === "0"
           ? store.dispatch(digitZeroInput({ symbol }))
           : store.dispatch(digitInput({ symbol }));
-      default:
+      case "operator":
+        return store.dispatch(digitOperator({ symbol }));
+      case "negative":
+        return store.dispatch(digitNegative({ symbol }));
+      case "result":
+        return store.dispatch(digitResult({ symbol }));
     }
   }
 }

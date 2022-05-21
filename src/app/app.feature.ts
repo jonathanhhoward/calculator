@@ -110,5 +110,4 @@ export const feature = createFeature({
   ),
 });
 
-export const { selectAppState, selectExpression, selectInput, selectStatus } =
-  feature;
+export const { selectAppState } = feature;

@@ -1,4 +1,4 @@
-<div class="display">
-  <div class="expression">{{ expression$ | async }}</div>
-  <div class="input">{{ input$ | async }}</div>
+<div class="display" *ngIf="state$ | async as state">
+  <div class="expression">{{ state.expression }}</div>
+  <div class="input">{{ state.input }}</div>
 </div>

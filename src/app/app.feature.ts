@@ -53,6 +53,31 @@ export const feature = createFeature({
       expression: symbol,
       input: symbol,
       status: "input",
+    })),
+    on(actions.operatorInput, (state, { symbol }) => ({
+      expression: state.expression + symbol,
+      input: symbol,
+      status: "operator",
+    })),
+    on(actions.operatorOperator, (state, { symbol }) => ({
+      expression: state.expression.slice(0, -1) + symbol,
+      input: symbol,
+      status: "operator",
+    })),
+    on(actions.operatorNegateOperator, (state, { symbol }) => ({
+      expression: state.expression + symbol,
+      input: symbol,
+      status: "negative",
+    })),
+    on(actions.operatorNegative, (state, { symbol }) => ({
+      expression: state.expression.slice(0, -2) + symbol,
+      input: symbol,
+      status: "operator",
+    })),
+    on(actions.operatorResult, (state, { symbol }) => ({
+      expression: state.input + symbol,
+      input: symbol,
+      status: "operator",
     }))
   ),
 });

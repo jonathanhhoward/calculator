@@ -1,15 +1,15 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import * as appActions from "./app.actions";
+import * as actions from "./app.actions";
 
 export type Status = "input" | "operator" | "negative" | "equals" | "result";
 
-export interface State {
+export interface AppState {
   expression: string;
   input: string;
   status: Status;
 }
 
-const initialState: State = {
+const initialState: AppState = {
   expression: "0",
   input: "0",
   status: "input",
@@ -19,17 +19,43 @@ export const feature = createFeature({
   name: "app",
   reducer: createReducer(
     initialState,
-    on(appActions.testAction, (state, { symbol }) => ({
+    on(actions.testAction, (state, { symbol }) => ({
       ...state,
       input: symbol,
     })),
-    on(appActions.clear, () => initialState),
-    on(appActions.deLete, (state) => ({
+    on(actions.clear, () => initialState),
+    on(actions.deLete, (state) => ({
       ...state,
       expression: state.expression.slice(0, -state.input.length) + "0",
       input: "0",
+    })),
+    on(actions.digitInput, (state, { symbol }) => ({
+      expression: state.expression + symbol,
+      input: state.input + symbol,
+      status: "input",
+    })),
+    on(actions.digitZeroInput, (state, { symbol }) => ({
+      expression: state.expression.slice(0, -1) + symbol,
+      input: symbol,
+      status: "input",
+    })),
+    on(actions.digitOperator, (state, { symbol }) => ({
+      expression: state.expression + symbol,
+      input: symbol,
+      status: "input",
+    })),
+    on(actions.digitNegative, (state, { symbol }) => ({
+      expression: state.expression + symbol,
+      input: state.input + symbol,
+      status: "input",
+    })),
+    on(actions.digitResult, (_, { symbol }) => ({
+      expression: symbol,
+      input: symbol,
+      status: "input",
     }))
   ),
 });
 
-export const { selectExpression, selectInput, selectStatus } = feature;
+export const { selectAppState, selectExpression, selectInput, selectStatus } =
+  feature;

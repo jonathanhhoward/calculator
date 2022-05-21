@@ -53,3 +53,9 @@ export const operatorResult = createAction(
   "[app] operator result",
   props<Payload>()
 );
+
+export const equalsInput = createAction("[app] equals input");
+
+export const equalsOperator = createAction("[app] equals operator");
+
+export const equalsNegative = createAction("[app] equals negative");

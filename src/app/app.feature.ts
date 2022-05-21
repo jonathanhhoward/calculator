@@ -15,6 +15,9 @@ const initialState: AppState = {
   status: "input",
 };
 
+const EQUALS = "=";
+const ZERO = "0";
+
 export const feature = createFeature({
   name: "app",
   reducer: createReducer(
@@ -26,8 +29,8 @@ export const feature = createFeature({
     on(actions.clear, () => initialState),
     on(actions.deLete, (state) => ({
       ...state,
-      expression: state.expression.slice(0, -state.input.length) + "0",
-      input: "0",
+      expression: state.expression.slice(0, -state.input.length) + ZERO,
+      input: ZERO,
     })),
     on(actions.digitInput, (state, { symbol }) => ({
       expression: state.expression + symbol,
@@ -78,6 +81,21 @@ export const feature = createFeature({
       expression: state.input + symbol,
       input: symbol,
       status: "operator",
+    })),
+    on(actions.equalsNegative, (state) => ({
+      ...state,
+      expression: state.expression.slice(0, -2) + EQUALS,
+      status: "equals",
+    })),
+    on(actions.equalsOperator, (state) => ({
+      ...state,
+      expression: state.expression.slice(0, -1) + EQUALS,
+      status: "equals",
+    })),
+    on(actions.equalsInput, (state) => ({
+      ...state,
+      expression: state.expression + EQUALS,
+      status: "equals",
     }))
   ),
 });

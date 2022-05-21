@@ -6,6 +6,8 @@ interface Payload {
 
 export const testAction = createAction("[app] test action", props<Payload>());
 
+export const getResult = createAction("[app] get result");
+
 export const clear = createAction("[app] clear");
 
 export const deLete = createAction("[app] delete");

@@ -1,7 +1,8 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
+import { calculate } from "src/lib/calculate";
 import * as actions from "./app.actions";
 
-export type Status = "input" | "operator" | "negative" | "equals" | "result";
+export type Status = "input" | "operator" | "negative" | "result";
 
 export interface AppState {
   expression: string;
@@ -82,21 +83,30 @@ export const feature = createFeature({
       input: symbol,
       status: "operator",
     })),
-    on(actions.equalsNegative, (state) => ({
-      ...state,
-      expression: state.expression.slice(0, -2) + EQUALS,
-      status: "equals",
-    })),
-    on(actions.equalsOperator, (state) => ({
-      ...state,
-      expression: state.expression.slice(0, -1) + EQUALS,
-      status: "equals",
-    })),
-    on(actions.equalsInput, (state) => ({
-      ...state,
-      expression: state.expression + EQUALS,
-      status: "equals",
-    }))
+    on(actions.equalsNegative, (state) => {
+      const expression = state.expression.slice(0, -2) + EQUALS;
+      return {
+        expression,
+        input: calculate(expression),
+        status: "result",
+      };
+    }),
+    on(actions.equalsOperator, (state) => {
+      const expression = state.expression.slice(0, -1) + EQUALS;
+      return {
+        expression,
+        input: calculate(expression),
+        status: "result",
+      };
+    }),
+    on(actions.equalsInput, (state) => {
+      const expression = state.expression + EQUALS;
+      return {
+        expression,
+        input: calculate(expression),
+        status: "result",
+      };
+    })
   ),
 });
 

@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
-import { calculate } from "src/lib/calculate";
+import { calculate } from "lib/calculate";
 import * as actions from "./app.actions";
 
 export type Status = "input" | "operator" | "negative" | "result";

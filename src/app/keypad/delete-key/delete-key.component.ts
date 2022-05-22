@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { deLete } from "src/app/app.actions";
-import { AppState, selectAppState } from "src/app/app.feature";
+import { deLete } from "app/app.actions";
+import { AppState, selectAppState } from "app/app.feature";
 
 @Component({
   selector: "delete-key",

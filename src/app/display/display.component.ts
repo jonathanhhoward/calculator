@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { AppState, selectAppState } from "app/app.feature";
 import { Observable } from "rxjs";
-import { AppState, selectAppState } from "../app.feature";
 
 @Component({
   selector: "display",

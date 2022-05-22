@@ -19,7 +19,7 @@ const initialState: AppState = {
 const EQUALS = "=";
 const ZERO = "0";
 
-export const feature = createFeature({
+export const appFeature = createFeature({
   name: "app",
   reducer: createReducer(
     initialState,
@@ -110,4 +110,4 @@ export const feature = createFeature({
   ),
 });
 
-export const { selectAppState } = feature;
+export const { selectAppState } = appFeature;

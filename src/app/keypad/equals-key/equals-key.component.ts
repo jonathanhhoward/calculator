@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { equalsInput, equalsNegative, equalsOperator } from "app/app.actions";
-import { AppState, selectAppState } from "app/app.feature";
+import { equalsInput, equalsNegative, equalsOperator } from "store/app.actions";
+import { AppState, selectAppState } from "store/app.feature";
 
 @Component({
   selector: "equals-key",

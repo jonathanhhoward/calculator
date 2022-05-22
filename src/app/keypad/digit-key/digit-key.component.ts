@@ -6,8 +6,8 @@ import {
   digitOperator,
   digitResult,
   digitZeroInput,
-} from "app/app.actions";
-import { AppState, selectAppState } from "app/app.feature";
+} from "store/app.actions";
+import { AppState, selectAppState } from "store/app.feature";
 
 @Component({
   selector: "digit-key",

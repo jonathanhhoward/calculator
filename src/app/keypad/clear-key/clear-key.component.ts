@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { clear } from "app/app.actions";
+import { clear } from "store/app.actions";
 
 @Component({
   selector: "clear-key",

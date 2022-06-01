@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 
-interface Payload {
+export interface Payload {
   symbol: string;
 }
 

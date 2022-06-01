@@ -1,13 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-import {
-  digitInput,
-  digitNegative,
-  digitOperator,
-  digitResult,
-  digitZeroInput,
-} from "store/app.actions";
-import { AppState, selectAppState } from "store/app.feature";
+import { AppState } from "store/app.feature";
+import { StoreFacade } from "store/store.facade";
 
 @Component({
   selector: "digit-key",
@@ -18,10 +11,10 @@ export class DigitKeyComponent implements OnInit {
 
   private state!: AppState;
 
-  constructor(private store: Store) {}
+  constructor(private store: StoreFacade) {}
 
   ngOnInit(): void {
-    this.store.select(selectAppState).subscribe((state) => {
+    this.store.appState$.subscribe((state) => {
       this.state = state;
     });
   }
@@ -55,14 +48,14 @@ export class DigitKeyComponent implements OnInit {
     switch (state.status) {
       case "input":
         return state.input === "0"
-          ? store.dispatch(digitZeroInput({ symbol }))
-          : store.dispatch(digitInput({ symbol }));
+          ? store.onDigitZeroInput({ symbol })
+          : store.onDigitInput({ symbol });
       case "operator":
-        return store.dispatch(digitOperator({ symbol }));
+        return store.onDigitOperator({ symbol });
       case "negative":
-        return store.dispatch(digitNegative({ symbol }));
+        return store.onDigitNegative({ symbol });
       case "result":
-        return store.dispatch(digitResult({ symbol }));
+        return store.onDigitResult({ symbol });
     }
   }
 }

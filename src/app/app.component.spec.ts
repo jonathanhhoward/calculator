@@ -28,8 +28,8 @@ describe("display on key click", () => {
     keyPad = Object.freeze({
       CLEAR: getByText("AC"),
       DELETE: getByText("C"),
-      DIVIDE: getByText("/"),
-      MULTIPLY: getByText("*"),
+      DIVIDE: getByText("÷"),
+      MULTIPLY: getByText("×"),
       SUBTRACT: getByText("-"),
       ADD: getByText("+"),
       EQUALS: getByText("="),
@@ -126,7 +126,7 @@ describe("display on key click", () => {
       const { MULTIPLY, SUBTRACT, ADD } = keyPad;
 
       fireClickEvents([MULTIPLY, SUBTRACT]);
-      expectDisplayTextContent(/^0\*-$/, /^-$/);
+      expectDisplayTextContent(/^0×-$/, /^-$/);
 
       fireClickEvents([ADD]);
       expectDisplayTextContent(/^0\+$/, /^\+$/);
@@ -136,14 +136,14 @@ describe("display on key click", () => {
       const { MULTIPLY, SUBTRACT } = keyPad;
 
       fireClickEvents([MULTIPLY, SUBTRACT]);
-      expectDisplayTextContent(/^0\*-$/, /^-$/);
+      expectDisplayTextContent(/^0×-$/, /^-$/);
     });
 
     test("overwrites operator", () => {
       const { MULTIPLY, ADD } = keyPad;
 
       fireClickEvents([MULTIPLY]);
-      expectDisplayTextContent(/^0\*$/, /^\*$/);
+      expectDisplayTextContent(/^0×$/, /^×$/);
 
       fireClickEvents([ADD]);
       expectDisplayTextContent(/^0\+$/, /^\+$/);

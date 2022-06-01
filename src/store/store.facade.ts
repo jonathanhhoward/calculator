@@ -46,4 +46,13 @@ export class StoreFacade {
   onOperatorResult(payload: Payload) {
     this.store.dispatch(actions.operatorResult(payload));
   }
+  onEqualsInput() {
+    this.store.dispatch(actions.equalsInput());
+  }
+  onEqualsOperator() {
+    this.store.dispatch(actions.equalsOperator());
+  }
+  onEqualsNegative() {
+    this.store.dispatch(actions.equalsNegative());
+  }
 }

@@ -83,8 +83,8 @@ export const appFeature = createFeature({
       input: symbol,
       status: "operator",
     })),
-    on(actions.equalsNegative, (state) => {
-      const expression = state.expression.slice(0, -2) + EQUALS;
+    on(actions.equalsInput, (state) => {
+      const expression = state.expression + EQUALS;
       return {
         expression,
         input: calculate(expression),
@@ -99,8 +99,8 @@ export const appFeature = createFeature({
         status: "result",
       };
     }),
-    on(actions.equalsInput, (state) => {
-      const expression = state.expression + EQUALS;
+    on(actions.equalsNegative, (state) => {
+      const expression = state.expression.slice(0, -2) + EQUALS;
       return {
         expression,
         input: calculate(expression),

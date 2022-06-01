@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { equalsInput, equalsNegative, equalsOperator } from "store/app.actions";
-import { AppState, selectAppState } from "store/app.feature";
+import { AppState } from "store/app.feature";
+import { StoreFacade } from "store/store.facade";
 
 @Component({
   selector: "equals-key",
@@ -10,10 +9,10 @@ import { AppState, selectAppState } from "store/app.feature";
 export class EqualsKeyComponent implements OnInit {
   private state!: AppState;
 
-  constructor(private store: Store) {}
+  constructor(private store: StoreFacade) {}
 
   ngOnInit(): void {
-    this.store.select(selectAppState).subscribe((state) => {
+    this.store.appState$.subscribe((state) => {
       this.state = state;
     });
   }
@@ -23,11 +22,11 @@ export class EqualsKeyComponent implements OnInit {
 
     switch (state.status) {
       case "input":
-        return store.dispatch(equalsInput());
+        return store.onEqualsInput();
       case "operator":
-        return store.dispatch(equalsOperator());
+        return store.onEqualsOperator();
       case "negative":
-        return store.dispatch(equalsNegative());
+        return store.onEqualsNegative();
     }
   }
 }

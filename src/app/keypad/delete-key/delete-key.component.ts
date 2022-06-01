@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { deLete } from "store/app.actions";
-import { AppState, selectAppState } from "store/app.feature";
+import { AppState } from "store/app.feature";
+import { StoreFacade } from "store/store.facade";
 
 @Component({
   selector: "delete-key",
@@ -10,17 +9,17 @@ import { AppState, selectAppState } from "store/app.feature";
 export class DeleteKeyComponent implements OnInit {
   private state!: AppState;
 
-  constructor(private store: Store) {}
+  constructor(private store: StoreFacade) {}
+
+  ngOnInit(): void {
+    this.store.appState$.subscribe((state) => {
+      this.state = state;
+    });
+  }
 
   handleClick() {
     if (this.state.status === "input") {
-      this.store.dispatch(deLete());
+      this.store.onDelete();
     }
-  }
-
-  ngOnInit(): void {
-    this.store.select(selectAppState).subscribe((state) => {
-      this.state = state;
-    });
   }
 }

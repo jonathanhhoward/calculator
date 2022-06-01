@@ -13,6 +13,9 @@ export class StoreFacade {
   onClear() {
     this.store.dispatch(actions.clear());
   }
+  onDelete() {
+    this.store.dispatch(actions.deLete());
+  }
   onDigitInput(payload: Payload) {
     this.store.dispatch(actions.digitInput(payload));
   }

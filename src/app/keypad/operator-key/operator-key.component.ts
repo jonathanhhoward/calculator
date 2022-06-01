@@ -23,8 +23,8 @@ export class OperatorKeyComponent {
       case "input":
         return store.onOperatorInput({ symbol });
       case "operator":
-        return this.symbol === "-"
-          ? store.onOperatorNegateOperator({ symbol })
+        return this.symbol === "−"
+          ? store.onOperatorNegateOperator({ symbol: "-" })
           : store.onOperatorOperator({ symbol });
       case "negative":
         return store.onOperatorNegative({ symbol });

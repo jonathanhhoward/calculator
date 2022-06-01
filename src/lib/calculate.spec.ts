@@ -13,7 +13,7 @@ test("adds two numbers", () => {
 });
 
 test("subtracts two numbers", () => {
-  expect(calculate("3-2=")).toEqual("1");
+  expect(calculate("3−2=")).toEqual("1");
 });
 
 test("multiplies two numbers", () => {
@@ -25,7 +25,7 @@ test("divides two numbers", () => {
 });
 
 test("follows algebraic operator precedence", () => {
-  expect(calculate("2+2×2-2÷2=")).toEqual("5");
+  expect(calculate("2+2×2−2÷2=")).toEqual("5");
 });
 
 test("returns error message on divide by zero", () => {

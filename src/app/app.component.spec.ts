@@ -30,7 +30,7 @@ describe("display on key click", () => {
       DELETE: getByText("C"),
       DIVIDE: getByText("÷"),
       MULTIPLY: getByText("×"),
-      SUBTRACT: getByText("-"),
+      SUBTRACT: getByText("−"),
       ADD: getByText("+"),
       EQUALS: getByText("="),
       DECIMAL: getByText("."),

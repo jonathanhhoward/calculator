@@ -2,7 +2,7 @@ export function calculate(expressionString: string): string {
   const mantissa = "\\d+(?:\\.\\d*)?";
   const exponent = "e[-+]\\d+";
   const number = `${mantissa}(?:${exponent})?`;
-  const operator = "[-+×÷=]";
+  const operator = "[-−+×÷=]";
   const numberOrOperator = new RegExp(`${number}|${operator}`, "g");
   const tokens = expressionString.match(numberOrOperator) ?? [];
 
@@ -36,7 +36,7 @@ export function calculate(expressionString: string): string {
           left += term();
           token = tokens.shift();
           break;
-        case "-":
+        case "−":
           left -= term();
           token = tokens.shift();
           break;

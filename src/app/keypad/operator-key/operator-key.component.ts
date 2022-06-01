@@ -1,13 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
-import {
-  operatorInput,
-  operatorNegateOperator,
-  operatorNegative,
-  operatorOperator,
-  operatorResult,
-} from "store/app.actions";
-import { AppState, selectAppState } from "store/app.feature";
+import { AppState } from "store/app.feature";
+import { StoreFacade } from "store/store.facade";
 
 @Component({
   selector: "operator-key",
@@ -18,10 +11,10 @@ export class OperatorKeyComponent implements OnInit {
 
   private state!: AppState;
 
-  constructor(private store: Store) {}
+  constructor(private store: StoreFacade) {}
 
   ngOnInit(): void {
-    this.store.select(selectAppState).subscribe((state) => {
+    this.store.appState$.subscribe((state) => {
       this.state = state;
     });
   }
@@ -30,15 +23,15 @@ export class OperatorKeyComponent implements OnInit {
     const { state, store, symbol } = this;
     switch (state.status) {
       case "input":
-        return store.dispatch(operatorInput({ symbol }));
+        return store.onOperatorInput({ symbol });
       case "operator":
         return this.symbol === "-"
-          ? store.dispatch(operatorNegateOperator({ symbol }))
-          : store.dispatch(operatorOperator({ symbol }));
+          ? store.onOperatorNegateOperator({ symbol })
+          : store.onOperatorOperator({ symbol });
       case "negative":
-        return store.dispatch(operatorNegative({ symbol }));
+        return store.onOperatorNegative({ symbol });
       case "result":
-        return store.dispatch(operatorResult({ symbol }));
+        return store.onOperatorResult({ symbol });
     }
   }
 }

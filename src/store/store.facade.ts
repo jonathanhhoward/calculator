@@ -31,4 +31,19 @@ export class StoreFacade {
   onDigitResult(payload: Payload) {
     this.store.dispatch(actions.digitResult(payload));
   }
+  onOperatorInput(payload: Payload) {
+    this.store.dispatch(actions.operatorInput(payload));
+  }
+  onOperatorOperator(payload: Payload) {
+    this.store.dispatch(actions.operatorOperator(payload));
+  }
+  onOperatorNegateOperator(payload: Payload) {
+    this.store.dispatch(actions.operatorNegateOperator(payload));
+  }
+  onOperatorNegative(payload: Payload) {
+    this.store.dispatch(actions.operatorNegative(payload));
+  }
+  onOperatorResult(payload: Payload) {
+    this.store.dispatch(actions.operatorResult(payload));
+  }
 }

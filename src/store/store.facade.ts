@@ -10,6 +10,9 @@ export class StoreFacade {
 
   constructor(private store: Store<AppState>) {}
 
+  onClear() {
+    this.store.dispatch(actions.clear());
+  }
   onDigitInput(payload: Payload) {
     this.store.dispatch(actions.digitInput(payload));
   }

@@ -1,15 +1,14 @@
 import { Component } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { clear } from "store/app.actions";
+import { StoreFacade } from "store/store.facade";
 
 @Component({
   selector: "clear-key",
   templateUrl: "./clear-key.component.html",
 })
 export class ClearKeyComponent {
-  constructor(private store: Store) {}
+  constructor(private store: StoreFacade) {}
 
   handleClick() {
-    this.store.dispatch(clear());
+    this.store.onClear();
   }
 }

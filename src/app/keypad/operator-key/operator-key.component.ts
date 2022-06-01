@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { AppState } from "store/app.feature";
 import { StoreFacade } from "store/store.facade";
 
@@ -6,14 +6,12 @@ import { StoreFacade } from "store/store.facade";
   selector: "operator-key",
   templateUrl: "./operator-key.component.html",
 })
-export class OperatorKeyComponent implements OnInit {
+export class OperatorKeyComponent {
   @Input() symbol!: string;
 
   private state!: AppState;
 
-  constructor(private store: StoreFacade) {}
-
-  ngOnInit(): void {
+  constructor(private store: StoreFacade) {
     this.store.appState$.subscribe((state) => {
       this.state = state;
     });

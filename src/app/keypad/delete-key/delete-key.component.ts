@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { AppState } from "store/app.feature";
 import { StoreFacade } from "store/store.facade";
 
@@ -6,12 +6,10 @@ import { StoreFacade } from "store/store.facade";
   selector: "delete-key",
   templateUrl: "./delete-key.component.html",
 })
-export class DeleteKeyComponent implements OnInit {
+export class DeleteKeyComponent {
   private state!: AppState;
 
-  constructor(private store: StoreFacade) {}
-
-  ngOnInit(): void {
+  constructor(private store: StoreFacade) {
     this.store.appState$.subscribe((state) => {
       this.state = state;
     });

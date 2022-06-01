@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { AppState } from "store/app.feature";
 import { StoreFacade } from "store/store.facade";
@@ -8,12 +8,10 @@ import { StoreFacade } from "store/store.facade";
   templateUrl: "./display.component.html",
   styleUrls: ["./display.component.scss"],
 })
-export class DisplayComponent implements OnInit {
-  state$!: Observable<AppState>;
+export class DisplayComponent {
+  state$: Observable<AppState>;
 
-  constructor(private store: StoreFacade) {}
-
-  ngOnInit(): void {
+  constructor(private store: StoreFacade) {
     this.state$ = this.store.appState$;
   }
 }

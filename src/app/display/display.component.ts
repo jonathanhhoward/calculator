@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-import { AppState, selectAppState } from "store/app.feature";
+import { AppState } from "store/app.feature";
+import { StoreFacade } from "store/store.facade";
 
 @Component({
   selector: "display",
@@ -11,9 +11,9 @@ import { AppState, selectAppState } from "store/app.feature";
 export class DisplayComponent implements OnInit {
   state$!: Observable<AppState>;
 
-  constructor(private store: Store) {}
+  constructor(private store: StoreFacade) {}
 
   ngOnInit(): void {
-    this.state$ = this.store.select(selectAppState);
+    this.state$ = this.store.appState$;
   }
 }

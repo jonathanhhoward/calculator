@@ -13,8 +13,8 @@ export class StoreFacade {
   onClearClicked() {
     this.store.dispatch(actions.clearClicked());
   }
-  onDelete() {
-    this.store.dispatch(actions.deLete());
+  onDeleteClicked() {
+    this.store.dispatch(actions.deletClicked());
   }
   onDigitInput(payload: Payload) {
     this.store.dispatch(actions.digitInput(payload));

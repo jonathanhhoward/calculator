@@ -28,11 +28,15 @@ export const appFeature = createFeature({
       input: symbol,
     })),
     on(actions.clearClicked, () => initialState),
-    on(actions.deLete, (state) => ({
-      ...state,
-      expression: state.expression.slice(0, -state.input.length) + ZERO,
-      input: ZERO,
-    })),
+    on(actions.deletClicked, (state) => {
+      if (state.status !== "input") return state;
+
+      return {
+        ...state,
+        expression: state.expression.slice(0, -state.input.length) + ZERO,
+        input: ZERO,
+      };
+    }),
     on(actions.digitInput, (state, { symbol }) => ({
       expression: state.expression + symbol,
       input: state.input + symbol,

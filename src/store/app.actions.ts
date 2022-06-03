@@ -10,7 +10,7 @@ export const getResult = createAction("[app] get result");
 
 export const clearClicked = createAction("[app] clear clicked");
 
-export const deLete = createAction("[app] delete");
+export const deletClicked = createAction("[app] delete clicked");
 
 export const digitInput = createAction("[app] digit input", props<Payload>());
 

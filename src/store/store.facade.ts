@@ -10,8 +10,8 @@ export class StoreFacade {
 
   constructor(private store: Store<AppState>) {}
 
-  onClear() {
-    this.store.dispatch(actions.clear());
+  onClearClicked() {
+    this.store.dispatch(actions.clearClicked());
   }
   onDelete() {
     this.store.dispatch(actions.deLete());

@@ -27,7 +27,7 @@ export const appFeature = createFeature({
       ...state,
       input: symbol,
     })),
-    on(actions.clear, () => initialState),
+    on(actions.clearClicked, () => initialState),
     on(actions.deLete, (state) => ({
       ...state,
       expression: state.expression.slice(0, -state.input.length) + ZERO,

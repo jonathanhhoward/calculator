@@ -9,6 +9,6 @@ export class DeleteKeyComponent {
   constructor(private store: StoreFacade) {}
 
   handleClick() {
-    this.store.onDeleteClicked();
+    this.store.onDeleteClick();
   }
 }

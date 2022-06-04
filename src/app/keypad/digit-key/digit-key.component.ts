@@ -12,6 +12,6 @@ export class DigitKeyComponent {
 
   handleClick() {
     const { store, symbol } = this;
-    store.onDigitClicked({ symbol });
+    store.onDigitClick({ symbol });
   }
 }

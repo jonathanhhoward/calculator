@@ -10,19 +10,19 @@ export class StoreFacade {
 
   constructor(private store: Store<AppState>) {}
 
-  onClearClicked() {
-    this.store.dispatch(actions.clearClicked());
+  onClearClick() {
+    this.store.dispatch(actions.clearClick());
   }
-  onDeleteClicked() {
-    this.store.dispatch(actions.deletClicked());
+  onDeleteClick() {
+    this.store.dispatch(actions.deleteClick());
   }
-  onDigitClicked(payload: Payload) {
-    this.store.dispatch(actions.digitClicked(payload));
+  onDigitClick(payload: Payload) {
+    this.store.dispatch(actions.digitClick(payload));
   }
-  onOperatorClicked(payload: Payload) {
-    this.store.dispatch(actions.operatorClicked(payload));
+  onOperatorClick(payload: Payload) {
+    this.store.dispatch(actions.operatorClick(payload));
   }
-  onEqualsClicked() {
-    this.store.dispatch(actions.equalsClicked());
+  onEqualsClick() {
+    this.store.dispatch(actions.equalsClick());
   }
 }

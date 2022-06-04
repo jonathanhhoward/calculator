@@ -12,6 +12,6 @@ export class OperatorKeyComponent {
 
   handleClick() {
     const { store, symbol } = this;
-    store.onOperatorClicked({ symbol });
+    store.onOperatorClick({ symbol });
   }
 }

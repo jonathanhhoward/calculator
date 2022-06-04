@@ -9,6 +9,6 @@ export class ClearKeyComponent {
   constructor(private store: StoreFacade) {}
 
   handleClick() {
-    this.store.onClearClicked();
+    this.store.onClearClick();
   }
 }

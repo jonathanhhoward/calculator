@@ -9,6 +9,6 @@ export class EqualsKeyComponent {
   constructor(private store: StoreFacade) {}
 
   handleClick() {
-    this.store.onEqualsClicked();
+    this.store.onEqualsClick();
   }
 }

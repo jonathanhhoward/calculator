@@ -8,18 +8,15 @@ export const testAction = createAction("[app] test action", props<Payload>());
 
 export const getResult = createAction("[app] get result");
 
-export const clearClicked = createAction("[app] clear clicked");
+export const clearClick = createAction("[app] clear click");
 
-export const deletClicked = createAction("[app] delete clicked");
+export const deleteClick = createAction("[app] delete click");
 
-export const digitClicked = createAction(
-  "[app] digit clicked",
-  props<Payload>()
-);
+export const digitClick = createAction("[app] digit click", props<Payload>());
 
-export const operatorClicked = createAction(
+export const operatorClick = createAction(
   "[app] operator clicked",
   props<Payload>()
 );
 
-export const equalsClicked = createAction("[app] equals clicked");
+export const equalsClick = createAction("[app] equals click");

@@ -27,8 +27,8 @@ export const appFeature = createFeature({
       ...state,
       input: symbol,
     })),
-    on(actions.clearClicked, () => initialState),
-    on(actions.deletClicked, (state) => {
+    on(actions.clearClick, () => initialState),
+    on(actions.deleteClick, (state) => {
       if (state.status !== "input") return state;
 
       return {
@@ -37,7 +37,7 @@ export const appFeature = createFeature({
         input: ZERO,
       };
     }),
-    on(actions.digitClicked, (state, { symbol }) => {
+    on(actions.digitClick, (state, { symbol }) => {
       const isMaxDigits = state.input.replace(/[.-]/g, "").length === 10;
 
       if (isMaxDigits && state.status !== "result") return state;
@@ -85,7 +85,7 @@ export const appFeature = createFeature({
           };
       }
     }),
-    on(actions.operatorClicked, (state, { symbol }) => {
+    on(actions.operatorClick, (state, { symbol }) => {
       switch (state.status) {
         case "input":
           return {
@@ -119,7 +119,7 @@ export const appFeature = createFeature({
           };
       }
     }),
-    on(actions.equalsClicked, (state) => {
+    on(actions.equalsClick, (state) => {
       let expression: string;
 
       switch (state.status) {

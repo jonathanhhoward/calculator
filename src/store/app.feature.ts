@@ -49,18 +49,12 @@ function deleteClickReducer(state: AppState): AppState {
 }
 
 function digitClickReducer(state: AppState, { symbol }: Payload): AppState {
-  const isMaxDigits = state.input.replace(/[.-]/g, "").length === 10;
-
-  if (isMaxDigits && state.status !== "result") return state;
+  if (isMaxDigits()) return state;
 
   if (symbol === ".") {
-    if (state.input.includes(".") && state.status !== "result") {
-      return state;
-    }
+    if (hasDecimal()) return state;
 
-    if (state.input === "0" || state.status !== "input") {
-      symbol = "0.";
-    }
+    if (isLeadingZero()) symbol = "0.";
   }
 
   switch (state.status) {
@@ -94,6 +88,21 @@ function digitClickReducer(state: AppState, { symbol }: Payload): AppState {
         input: symbol,
         status: "input",
       };
+  }
+
+  function isMaxDigits() {
+    return (
+      state.input.replace(/[.-]/g, "").length === 10 &&
+      state.status !== "result"
+    );
+  }
+
+  function hasDecimal() {
+    return state.input.includes(".") && state.status !== "result";
+  }
+
+  function isLeadingZero() {
+    return state.input === "0" || state.status !== "input";
   }
 }
 

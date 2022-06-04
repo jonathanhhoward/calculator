@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { StoreFacade } from "store/store.facade";
+import { StoreFacade } from "lib/store.facade";
 
 @Component({
   selector: "delete-key",

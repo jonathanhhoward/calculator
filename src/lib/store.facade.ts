@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
-import * as actions from "./app.actions";
-import { AppState, selectAppState } from "./app.feature";
+import * as actions from "store/app.actions";
+import { AppState, selectAppState } from "store/app.feature";
 
 @Injectable()
 export class StoreFacade {

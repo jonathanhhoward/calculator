@@ -85,31 +85,40 @@ export const appFeature = createFeature({
           };
       }
     }),
-    on(actions.operatorInput, (state, { symbol }) => ({
-      expression: state.expression + symbol,
-      input: symbol,
-      status: "operator",
-    })),
-    on(actions.operatorOperator, (state, { symbol }) => ({
-      expression: state.expression.slice(0, -1) + symbol,
-      input: symbol,
-      status: "operator",
-    })),
-    on(actions.operatorNegateOperator, (state, { symbol }) => ({
-      expression: state.expression + symbol,
-      input: symbol,
-      status: "negative",
-    })),
-    on(actions.operatorNegative, (state, { symbol }) => ({
-      expression: state.expression.slice(0, -2) + symbol,
-      input: symbol,
-      status: "operator",
-    })),
-    on(actions.operatorResult, (state, { symbol }) => ({
-      expression: state.input + symbol,
-      input: symbol,
-      status: "operator",
-    })),
+    on(actions.operatorClicked, (state, { symbol }) => {
+      switch (state.status) {
+        case "input":
+          return {
+            expression: state.expression + symbol,
+            input: symbol,
+            status: "operator",
+          };
+        case "operator":
+          return symbol === "−"
+            ? {
+                expression: state.expression + "-",
+                input: "-",
+                status: "negative",
+              }
+            : {
+                expression: state.expression.slice(0, -1) + symbol,
+                input: symbol,
+                status: "operator",
+              };
+        case "negative":
+          return {
+            expression: state.expression.slice(0, -2) + symbol,
+            input: symbol,
+            status: "operator",
+          };
+        case "result":
+          return {
+            expression: state.input + symbol,
+            input: symbol,
+            status: "operator",
+          };
+      }
+    }),
     on(actions.equalsInput, (state) => {
       const expression = state.expression + EQUALS;
       return {

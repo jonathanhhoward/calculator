@@ -17,28 +17,8 @@ export const digitClicked = createAction(
   props<Payload>()
 );
 
-export const operatorInput = createAction(
-  "[app] operator input",
-  props<Payload>()
-);
-
-export const operatorOperator = createAction(
-  "[app] operator operator",
-  props<Payload>()
-);
-
-export const operatorNegateOperator = createAction(
-  "[app] operator negate operator",
-  props<Payload>()
-);
-
-export const operatorNegative = createAction(
-  "[app] operator negative",
-  props<Payload>()
-);
-
-export const operatorResult = createAction(
-  "[app] operator result",
+export const operatorClicked = createAction(
+  "[app] operator clicked",
   props<Payload>()
 );
 

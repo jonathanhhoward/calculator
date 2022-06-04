@@ -16,9 +16,6 @@ const initialState: AppState = {
   status: "input",
 };
 
-const EQUALS = "=";
-const ZERO = "0";
-
 export const appFeature = createFeature({
   name: "app",
   reducer: createReducer(
@@ -42,8 +39,8 @@ function deleteClickReducer(state: AppState): AppState {
 
   return {
     ...state,
-    expression: state.expression.slice(0, -state.input.length) + ZERO,
-    input: ZERO,
+    expression: state.expression.slice(0, -state.input.length) + "0",
+    input: "0",
   };
 }
 
@@ -112,6 +109,9 @@ function operatorClickReducer(
   state: AppState,
   { symbol }: actions.Payload
 ): AppState {
+  const MINUS = "−"; // &minus;
+  const NEGATIVE = "-"; // &dash;
+
   switch (state.status) {
     case "input":
       return {
@@ -120,10 +120,10 @@ function operatorClickReducer(
         status: "operator",
       };
     case "operator":
-      return symbol === "−"
+      return symbol === MINUS
         ? {
-            expression: state.expression + "-",
-            input: "-",
+            expression: state.expression + NEGATIVE,
+            input: NEGATIVE,
             status: "negative",
           }
         : {
@@ -151,21 +151,21 @@ function equalsClickReducer(state: AppState): AppState {
 
   switch (state.status) {
     case "input":
-      expression = state.expression + EQUALS;
+      expression = state.expression + "=";
       return {
         expression,
         input: calculate(expression),
         status: "result",
       };
     case "operator":
-      expression = state.expression.slice(0, -1) + EQUALS;
+      expression = state.expression.slice(0, -1) + "=";
       return {
         expression,
         input: calculate(expression),
         status: "result",
       };
     case "negative":
-      expression = state.expression.slice(0, -2) + EQUALS;
+      expression = state.expression.slice(0, -2) + "=";
       return {
         expression,
         input: calculate(expression),

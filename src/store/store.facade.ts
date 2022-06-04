@@ -15,11 +15,11 @@ export class StoreFacade {
   onDeleteClick() {
     this.store.dispatch(actions.deleteClick());
   }
-  onDigitClick(payload: actions.Payload) {
-    this.store.dispatch(actions.digitClick(payload));
+  onDigitClick(symbol: string) {
+    this.store.dispatch(actions.digitClick({ symbol }));
   }
-  onOperatorClick(payload: actions.Payload) {
-    this.store.dispatch(actions.operatorClick(payload));
+  onOperatorClick(symbol: string) {
+    this.store.dispatch(actions.operatorClick({ symbol }));
   }
   onEqualsClick() {
     this.store.dispatch(actions.equalsClick());

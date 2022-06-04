@@ -11,7 +11,6 @@ export class DigitKeyComponent {
   constructor(private store: StoreFacade) {}
 
   handleClick() {
-    const { store, symbol } = this;
-    store.onDigitClick({ symbol });
+    this.store.onDigitClick(this.symbol);
   }
 }

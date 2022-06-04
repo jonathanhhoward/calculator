@@ -11,7 +11,6 @@ export class OperatorKeyComponent {
   constructor(private store: StoreFacade) {}
 
   handleClick() {
-    const { store, symbol } = this;
-    store.onOperatorClick({ symbol });
+    this.store.onOperatorClick(this.symbol);
   }
 }

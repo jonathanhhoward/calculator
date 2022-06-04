@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import * as actions from "./app.actions";
-import { Payload } from "./app.actions";
 import { AppState, selectAppState } from "./app.feature";
 
 @Injectable()
@@ -16,10 +15,10 @@ export class StoreFacade {
   onDeleteClick() {
     this.store.dispatch(actions.deleteClick());
   }
-  onDigitClick(payload: Payload) {
+  onDigitClick(payload: actions.Payload) {
     this.store.dispatch(actions.digitClick(payload));
   }
-  onOperatorClick(payload: Payload) {
+  onOperatorClick(payload: actions.Payload) {
     this.store.dispatch(actions.operatorClick(payload));
   }
   onEqualsClick() {

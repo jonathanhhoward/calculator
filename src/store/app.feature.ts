@@ -1,7 +1,6 @@
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { calculate } from "lib/calculate";
 import * as actions from "./app.actions";
-import { Payload } from "./app.actions";
 
 export type Status = "input" | "operator" | "negative" | "result";
 
@@ -48,7 +47,10 @@ function deleteClickReducer(state: AppState): AppState {
   };
 }
 
-function digitClickReducer(state: AppState, { symbol }: Payload): AppState {
+function digitClickReducer(
+  state: AppState,
+  { symbol }: actions.Payload
+): AppState {
   if (isMaxDigits()) return state;
 
   if (symbol === ".") {
@@ -106,7 +108,10 @@ function digitClickReducer(state: AppState, { symbol }: Payload): AppState {
   }
 }
 
-function operatorClickReducer(state: AppState, { symbol }: Payload): AppState {
+function operatorClickReducer(
+  state: AppState,
+  { symbol }: actions.Payload
+): AppState {
   switch (state.status) {
     case "input":
       return {

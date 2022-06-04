@@ -22,13 +22,7 @@ export class StoreFacade {
   onOperatorClicked(payload: Payload) {
     this.store.dispatch(actions.operatorClicked(payload));
   }
-  onEqualsInput() {
-    this.store.dispatch(actions.equalsInput());
-  }
-  onEqualsOperator() {
-    this.store.dispatch(actions.equalsOperator());
-  }
-  onEqualsNegative() {
-    this.store.dispatch(actions.equalsNegative());
+  onEqualsClicked() {
+    this.store.dispatch(actions.equalsClicked());
   }
 }

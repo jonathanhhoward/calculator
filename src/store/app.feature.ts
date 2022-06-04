@@ -119,29 +119,34 @@ export const appFeature = createFeature({
           };
       }
     }),
-    on(actions.equalsInput, (state) => {
-      const expression = state.expression + EQUALS;
-      return {
-        expression,
-        input: calculate(expression),
-        status: "result",
-      };
-    }),
-    on(actions.equalsOperator, (state) => {
-      const expression = state.expression.slice(0, -1) + EQUALS;
-      return {
-        expression,
-        input: calculate(expression),
-        status: "result",
-      };
-    }),
-    on(actions.equalsNegative, (state) => {
-      const expression = state.expression.slice(0, -2) + EQUALS;
-      return {
-        expression,
-        input: calculate(expression),
-        status: "result",
-      };
+    on(actions.equalsClicked, (state) => {
+      let expression: string;
+
+      switch (state.status) {
+        case "input":
+          expression = state.expression + EQUALS;
+          return {
+            expression,
+            input: calculate(expression),
+            status: "result",
+          };
+        case "operator":
+          expression = state.expression.slice(0, -1) + EQUALS;
+          return {
+            expression,
+            input: calculate(expression),
+            status: "result",
+          };
+        case "negative":
+          expression = state.expression.slice(0, -2) + EQUALS;
+          return {
+            expression,
+            input: calculate(expression),
+            status: "result",
+          };
+      }
+
+      return state;
     })
   ),
 });

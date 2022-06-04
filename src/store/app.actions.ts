@@ -22,8 +22,4 @@ export const operatorClicked = createAction(
   props<Payload>()
 );
 
-export const equalsInput = createAction("[app] equals input");
-
-export const equalsOperator = createAction("[app] equals operator");
-
-export const equalsNegative = createAction("[app] equals negative");
+export const equalsClicked = createAction("[app] equals clicked");

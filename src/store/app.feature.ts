@@ -23,10 +23,6 @@ export const appFeature = createFeature({
   name: "app",
   reducer: createReducer(
     initialState,
-    on(actions.testAction, (state, { symbol }) => ({
-      ...state,
-      input: symbol,
-    })),
     on(actions.clearClick, () => initialState),
     on(actions.deleteClick, (state) => {
       if (state.status !== "input") return state;

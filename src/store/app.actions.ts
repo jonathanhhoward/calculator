@@ -4,8 +4,6 @@ export interface Payload {
   symbol: string;
 }
 
-export const testAction = createAction("[app] test action", props<Payload>());
-
 export const getResult = createAction("[app] get result");
 
 export const clearClick = createAction("[app] clear click");

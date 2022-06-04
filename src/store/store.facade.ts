@@ -16,20 +16,8 @@ export class StoreFacade {
   onDeleteClicked() {
     this.store.dispatch(actions.deletClicked());
   }
-  onDigitInput(payload: Payload) {
-    this.store.dispatch(actions.digitInput(payload));
-  }
-  onDigitZeroInput(payload: Payload) {
-    this.store.dispatch(actions.digitZeroInput(payload));
-  }
-  onDigitOperator(payload: Payload) {
-    this.store.dispatch(actions.digitOperator(payload));
-  }
-  onDigitNegative(payload: Payload) {
-    this.store.dispatch(actions.digitNegative(payload));
-  }
-  onDigitResult(payload: Payload) {
-    this.store.dispatch(actions.digitResult(payload));
+  onDigitClicked(payload: Payload) {
+    this.store.dispatch(actions.digitClicked(payload));
   }
   onOperatorInput(payload: Payload) {
     this.store.dispatch(actions.operatorInput(payload));

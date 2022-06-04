@@ -37,31 +37,54 @@ export const appFeature = createFeature({
         input: ZERO,
       };
     }),
-    on(actions.digitInput, (state, { symbol }) => ({
-      expression: state.expression + symbol,
-      input: state.input + symbol,
-      status: "input",
-    })),
-    on(actions.digitZeroInput, (state, { symbol }) => ({
-      expression: state.expression.slice(0, -1) + symbol,
-      input: symbol,
-      status: "input",
-    })),
-    on(actions.digitOperator, (state, { symbol }) => ({
-      expression: state.expression + symbol,
-      input: symbol,
-      status: "input",
-    })),
-    on(actions.digitNegative, (state, { symbol }) => ({
-      expression: state.expression + symbol,
-      input: state.input + symbol,
-      status: "input",
-    })),
-    on(actions.digitResult, (_, { symbol }) => ({
-      expression: symbol,
-      input: symbol,
-      status: "input",
-    })),
+    on(actions.digitClicked, (state, { symbol }) => {
+      const isMaxDigits = state.input.replace(/[.-]/g, "").length === 10;
+
+      if (isMaxDigits && state.status !== "result") return state;
+
+      if (symbol === ".") {
+        if (state.input.includes(".") && state.status !== "result") {
+          return state;
+        }
+
+        if (state.input === "0" || state.status !== "input") {
+          symbol = "0.";
+        }
+      }
+
+      switch (state.status) {
+        case "input":
+          return state.input === "0"
+            ? {
+                expression: state.expression.slice(0, -1) + symbol,
+                input: symbol,
+                status: "input",
+              }
+            : {
+                expression: state.expression + symbol,
+                input: state.input + symbol,
+                status: "input",
+              };
+        case "operator":
+          return {
+            expression: state.expression + symbol,
+            input: symbol,
+            status: "input",
+          };
+        case "negative":
+          return {
+            expression: state.expression + symbol,
+            input: state.input + symbol,
+            status: "input",
+          };
+        case "result":
+          return {
+            expression: symbol,
+            input: symbol,
+            status: "input",
+          };
+      }
+    }),
     on(actions.operatorInput, (state, { symbol }) => ({
       expression: state.expression + symbol,
       input: symbol,

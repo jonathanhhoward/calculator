@@ -12,24 +12,10 @@ export const clearClicked = createAction("[app] clear clicked");
 
 export const deletClicked = createAction("[app] delete clicked");
 
-export const digitInput = createAction("[app] digit input", props<Payload>());
-
-export const digitZeroInput = createAction(
-  "[app] digit zero input",
+export const digitClicked = createAction(
+  "[app] digit clicked",
   props<Payload>()
 );
-
-export const digitOperator = createAction(
-  "[app] digit operator",
-  props<Payload>()
-);
-
-export const digitNegative = createAction(
-  "[app] digit negative",
-  props<Payload>()
-);
-
-export const digitResult = createAction("[app] digit result", props<Payload>());
 
 export const operatorInput = createAction(
   "[app] operator input",

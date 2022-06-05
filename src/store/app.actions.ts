@@ -17,4 +17,6 @@ export const operatorClick = createAction(
   props<Payload>()
 );
 
+export const negateClick = createAction("[app] function click");
+
 export const equalsClick = createAction("[app] equals click");

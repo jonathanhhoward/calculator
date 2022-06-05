@@ -21,6 +21,9 @@ export class StoreFacade {
   onOperatorClick(symbol: string) {
     this.store.dispatch(actions.operatorClick({ symbol }));
   }
+  onNegateClick() {
+    this.store.dispatch(actions.negateClick());
+  }
   onEqualsClick() {
     this.store.dispatch(actions.equalsClick());
   }

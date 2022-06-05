@@ -24,6 +24,7 @@ export const appFeature = createFeature({
     on(actions.deleteClick, deleteClickReducer),
     on(actions.digitClick, digitClickReducer),
     on(actions.operatorClick, operatorClickReducer),
+    on(actions.negateClick, negateClickReducer),
     on(actions.equalsClick, equalsClickReducer)
   ),
 });
@@ -144,6 +145,10 @@ function operatorClickReducer(
         status: "operator",
       };
   }
+}
+
+function negateClickReducer(state: AppState): AppState {
+  return state;
 }
 
 function equalsClickReducer(state: AppState): AppState {

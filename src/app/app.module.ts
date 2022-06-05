@@ -12,6 +12,7 @@ import {
   EqualsKeyComponent,
   KeyComponent,
   KeypadComponent,
+  NegateKeyComponent,
   OperatorKeyComponent,
 } from "./keypad";
 
@@ -25,6 +26,7 @@ import {
     EqualsKeyComponent,
     KeyComponent,
     KeypadComponent,
+    NegateKeyComponent,
     OperatorKeyComponent,
   ],
   imports: [

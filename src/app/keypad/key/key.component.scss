@@ -49,6 +49,14 @@
   @include buttonStyle(200, 100%, 40%);
 }
 
+.negate {
+  font-size: 5vh;
+  @media (orientation: portrait) {
+    font-size: 3vh;
+  }
+  @include buttonStyle(0, 0%, 28%);
+}
+
 .operator {
   @include buttonStyle(150, 50%, 40%);
 }

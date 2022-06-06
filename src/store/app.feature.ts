@@ -2,7 +2,7 @@ import { createFeature, createReducer, on } from "@ngrx/store";
 import { calculate } from "lib/calculate";
 import * as actions from "./app.actions";
 
-export type Status = "input" | "operator" | "negative" | "result";
+export type Status = "input" | "operator" | "result";
 
 export interface AppState {
   expression: string;
@@ -76,12 +76,6 @@ function digitClickReducer(
         input: symbol,
         status: "input",
       };
-    case "negative":
-      return {
-        expression: state.expression + symbol,
-        input: state.input + symbol,
-        status: "input",
-      };
     case "result":
       return {
         expression: symbol,
@@ -110,9 +104,6 @@ function operatorClickReducer(
   state: AppState,
   { symbol }: actions.Payload
 ): AppState {
-  const MINUS = "−"; // &minus;
-  const NEGATIVE = "-"; // &dash;
-
   switch (state.status) {
     case "input":
       return {
@@ -121,20 +112,8 @@ function operatorClickReducer(
         status: "operator",
       };
     case "operator":
-      return symbol === MINUS
-        ? {
-            expression: state.expression + NEGATIVE,
-            input: NEGATIVE,
-            status: "negative",
-          }
-        : {
-            expression: state.expression.slice(0, -1) + symbol,
-            input: symbol,
-            status: "operator",
-          };
-    case "negative":
       return {
-        expression: state.expression.slice(0, -2) + symbol,
+        expression: state.expression.slice(0, -1) + symbol,
         input: symbol,
         status: "operator",
       };
@@ -183,13 +162,6 @@ function equalsClickReducer(state: AppState): AppState {
       };
     case "operator":
       expression = state.expression.slice(0, -1) + "=";
-      return {
-        expression,
-        input: calculate(expression),
-        status: "result",
-      };
-    case "negative":
-      expression = state.expression.slice(0, -2) + "=";
       return {
         expression,
         input: calculate(expression),

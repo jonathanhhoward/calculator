@@ -4,8 +4,8 @@
   display: grid;
   grid-template-areas:
     "sev eig nin del cle"
-    "fou fiv six sub div"
-    "one two thr add mul"
+    "fou fiv six mul div"
+    "one two thr add sub"
     "zer zer dec equ neg";
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: 24.2%;

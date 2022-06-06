@@ -36,13 +36,16 @@ function clearClickReducer(): AppState {
 }
 
 function deleteClickReducer(state: AppState): AppState {
-  if (state.status !== "input") return state;
-
-  return {
-    ...state,
-    expression: state.expression.slice(0, -state.input.length) + "0",
-    input: "0",
-  };
+  switch (state.status) {
+    case "input":
+      return {
+        ...state,
+        expression: state.expression.slice(0, -state.input.length) + "0",
+        input: "0",
+      };
+    default:
+      return state;
+  }
 }
 
 function digitClickReducer(
@@ -82,6 +85,8 @@ function digitClickReducer(
         input: symbol,
         status: "input",
       };
+    default:
+      return state;
   }
 
   function isMaxDigits() {
@@ -123,6 +128,8 @@ function operatorClickReducer(
         input: symbol,
         status: "operator",
       };
+    default:
+      return state;
   }
 }
 
@@ -167,7 +174,7 @@ function equalsClickReducer(state: AppState): AppState {
         input: calculate(expression),
         status: "result",
       };
+    default:
+      return state;
   }
-
-  return state;
 }

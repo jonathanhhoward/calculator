@@ -32,6 +32,7 @@ describe("display on key click", () => {
       MULTIPLY: getByText("×"),
       SUBTRACT: getByText("−"),
       ADD: getByText("+"),
+      NEGATE: getByText("+/-"),
       EQUALS: getByText("="),
       DECIMAL: getByText("."),
       ZERO: zeros[2],
@@ -233,6 +234,52 @@ describe("display on key click", () => {
 
       fireClickEvents([DECIMAL, ONE, ONE]);
       expectDisplayTextContent(/^0\.11$/, /^0\.11$/);
+    });
+  });
+
+  describe("negate", () => {
+    test("prepends current input with '-' if positive", () => {
+      const { ADD, NEGATE, ONE } = keyPad;
+
+      fireClickEvents([ONE, NEGATE]);
+      expectDisplayTextContent(/^-1$/, /^-1$/);
+
+      fireClickEvents([ADD, ONE, NEGATE]);
+      expectDisplayTextContent(/^-1\+\-1$/, /^-1$/);
+    });
+
+    test("removes '-' from current input if negative", () => {
+      const { ADD, NEGATE, ONE } = keyPad;
+
+      fireClickEvents([ONE, NEGATE, NEGATE]);
+      expectDisplayTextContent(/^1$/, /^1$/);
+
+      fireClickEvents([ADD, ONE, NEGATE, NEGATE]);
+      expectDisplayTextContent(/^1\+1$/, /^1$/);
+    });
+
+    test("does not negate zero", () => {
+      const { NEGATE } = keyPad;
+
+      fireClickEvents([NEGATE]);
+      expectDisplayTextContent(/^0$/, /^0$/);
+    });
+
+    test("does nothing after operator", () => {
+      const { ADD, NEGATE } = keyPad;
+
+      fireClickEvents([ADD, NEGATE]);
+      expectDisplayTextContent(/^0\+$/, /^\+$/);
+    });
+
+    test("negates new expression after result", () => {
+      const { NEGATE, EQUALS, ONE } = keyPad;
+
+      fireClickEvents([ONE, EQUALS, NEGATE]);
+      expectDisplayTextContent(/^-1$/, /^-1$/);
+
+      fireClickEvents([EQUALS, NEGATE, ONE]);
+      expectDisplayTextContent(/^11$/, /^11$/);
     });
   });
 });

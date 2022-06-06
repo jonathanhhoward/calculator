@@ -1,8 +1,8 @@
 export function calculate(expressionString: string): string {
-  const mantissa = "\\d+(?:\\.\\d*)?";
+  const mantissa = "-?\\d+(?:\\.\\d*)?";
   const exponent = "e[-+]\\d+";
   const number = `${mantissa}(?:${exponent})?`;
-  const operator = "[-−+×÷=]";
+  const operator = "[+−×÷=]";
   const numberOrOperator = new RegExp(`${number}|${operator}`, "g");
   const tokens = expressionString.match(numberOrOperator) ?? [];
 
@@ -73,7 +73,6 @@ export function calculate(expressionString: string): string {
 
   function primary(): number {
     const token = tokens.shift();
-    if (token === "-") return -primary();
 
     const result = Number(token);
     if (Number.isNaN(result)) throw new Error("primary expected");

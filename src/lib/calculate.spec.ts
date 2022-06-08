@@ -33,7 +33,7 @@ test("returns error message on divide by zero", () => {
 });
 
 test("returns error message on invalid primary", () => {
-  expect(calculate("x=")).toEqual("primary expected");
+  expect(calculate("h=")).toEqual("primary expected");
 });
 
 test("returns error message on bad symbols", () => {

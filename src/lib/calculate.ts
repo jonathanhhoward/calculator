@@ -1,3 +1,10 @@
+class CalculatorError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = this.constructor.name;
+  }
+}
+
 export function calculate(expressionString: string): string {
   const mantissa = "-?\\d+(?:\\.\\d*)?";
   const exponent = "e[-+]\\d+";
@@ -10,8 +17,12 @@ export function calculate(expressionString: string): string {
 
   try {
     result = setPrecision10(expression());
-  } catch (e: any) {
-    result = e.message;
+  } catch (e: unknown) {
+    if (e instanceof CalculatorError) {
+      result = e.message;
+    } else {
+      throw e;
+    }
   }
 
   return result;
@@ -43,7 +54,7 @@ export function calculate(expressionString: string): string {
         case "=":
           return left;
         default:
-          throw new Error("expression error");
+          throw new CalculatorError("expression error");
       }
     }
   }
@@ -60,7 +71,9 @@ export function calculate(expressionString: string): string {
           break;
         case "÷":
           const d = primary();
-          if (d === 0) throw new Error("divide by zero");
+          if (d === 0) {
+            throw new CalculatorError("divide by zero");
+          }
           left /= d;
           token = tokens.shift();
           break;
@@ -75,7 +88,9 @@ export function calculate(expressionString: string): string {
     const token = tokens.shift();
 
     const result = Number(token);
-    if (Number.isNaN(result)) throw new Error("primary expected");
+    if (Number.isNaN(result)) {
+      throw new CalculatorError("primary expected");
+    }
 
     return result;
   }

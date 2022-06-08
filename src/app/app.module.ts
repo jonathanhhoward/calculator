@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { StoreModule } from "@ngrx/store";
-import { StoreFacade } from "lib/store.facade";
 import { appFeature } from "store/app.feature";
 import { AppComponent } from "./app.component";
 import { DisplayComponent } from "./display/display.component";
@@ -34,7 +33,7 @@ import {
     StoreModule.forRoot({}),
     StoreModule.forFeature(appFeature),
   ],
-  providers: [StoreFacade],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

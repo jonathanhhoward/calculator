@@ -3,8 +3,10 @@ import { Store } from "@ngrx/store";
 import * as actions from "store/app.actions";
 import { AppState, selectAppState } from "store/app.feature";
 
-@Injectable()
-export class StoreFacade {
+@Injectable({
+  providedIn: "root",
+})
+export class StoreService {
   appState$ = this.store.select(selectAppState);
 
   constructor(private store: Store<AppState>) {}

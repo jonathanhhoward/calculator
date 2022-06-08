@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { StoreFacade } from "lib/store.facade";
+import { StoreService } from "lib/store.service";
 
 @Component({
   selector: "display",
@@ -7,5 +7,5 @@ import { StoreFacade } from "lib/store.facade";
   styleUrls: ["./display.component.scss"],
 })
 export class DisplayComponent {
-  constructor(public store: StoreFacade) {}
+  constructor(public store: StoreService) {}
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { StoreFacade } from "lib/store.facade";
+import { StoreService } from "lib/store.service";
 
 @Component({
   selector: "operator-key",
@@ -8,7 +8,7 @@ import { StoreFacade } from "lib/store.facade";
 export class OperatorKeyComponent {
   @Input() symbol!: string;
 
-  constructor(private store: StoreFacade) {}
+  constructor(private store: StoreService) {}
 
   handleClick() {
     this.store.onOperatorClick(this.symbol);

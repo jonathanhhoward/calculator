@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
-import { StoreFacade } from "lib/store.facade";
+import { StoreService } from "lib/store.service";
 
 @Component({
   selector: "equals-key",
   templateUrl: "./equals-key.component.html",
 })
 export class EqualsKeyComponent {
-  constructor(private store: StoreFacade) {}
+  constructor(private store: StoreService) {}
 
   handleClick() {
     this.store.onEqualsClick();

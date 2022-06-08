@@ -134,25 +134,29 @@ function operatorClickReducer(
 }
 
 function negateClickReducer(state: AppState): AppState {
-  if (state.status === "operator") return state;
-
-  const negated = (Number(state.input) * -1).toString();
+  let input: string;
 
   switch (state.status) {
     case "input":
+      input = negateInput();
       return {
         ...state,
-        expression: state.expression.slice(0, -state.input.length) + negated,
-        input: negated,
+        expression: state.expression.slice(0, -state.input.length) + input,
+        input,
       };
     case "result":
+      input = negateInput();
       return {
-        expression: negated,
-        input: negated,
+        expression: input,
+        input,
         status: "input",
       };
     default:
       return state;
+  }
+
+  function negateInput() {
+    return (Number(state.input) * -1).toString();
   }
 }
 

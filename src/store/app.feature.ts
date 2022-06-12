@@ -165,20 +165,24 @@ function equalsClickReducer(state: AppState): AppState {
 
   switch (state.status) {
     case "input":
-      expression = state.expression + "=";
+      expression = normalizeOperators(state.expression);
       return {
-        expression,
+        expression: state.expression + "=",
         input: calculate(expression),
         status: "result",
       };
     case "operator":
-      expression = state.expression.slice(0, -1) + "=";
+      expression = normalizeOperators(state.expression.slice(0, -1));
       return {
-        expression,
+        expression: state.expression.slice(0, -1) + "=",
         input: calculate(expression),
         status: "result",
       };
     default:
       return state;
+  }
+
+  function normalizeOperators(expression: string): string {
+    return expression.replace(/−/, "-").replace(/×/, "*").replace(/÷/, "/");
   }
 }

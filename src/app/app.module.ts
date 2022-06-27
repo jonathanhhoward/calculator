@@ -3,13 +3,14 @@ import { BrowserModule } from "@angular/platform-browser";
 import { StoreModule } from "@ngrx/store";
 import { appFeature } from "store/app.feature";
 import { AppComponent } from "./app.component";
-import { DisplayComponent } from "./display/display.component";
+import { DisplayModule } from "./display/display.module";
 import { KeypadModule } from "./keypad/keypad.module";
 
 @NgModule({
-  declarations: [AppComponent, DisplayComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
+    DisplayModule,
     KeypadModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature(appFeature),

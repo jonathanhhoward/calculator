@@ -4,32 +4,13 @@ import { StoreModule } from "@ngrx/store";
 import { appFeature } from "store/app.feature";
 import { AppComponent } from "./app.component";
 import { DisplayComponent } from "./display/display.component";
-import {
-  ClearKeyComponent,
-  DeleteKeyComponent,
-  DigitKeyComponent,
-  EqualsKeyComponent,
-  KeyComponent,
-  KeypadComponent,
-  NegateKeyComponent,
-  OperatorKeyComponent,
-} from "./keypad";
+import { KeypadModule } from "./keypad/keypad.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ClearKeyComponent,
-    DeleteKeyComponent,
-    DigitKeyComponent,
-    DisplayComponent,
-    EqualsKeyComponent,
-    KeyComponent,
-    KeypadComponent,
-    NegateKeyComponent,
-    OperatorKeyComponent,
-  ],
+  declarations: [AppComponent, DisplayComponent],
   imports: [
     BrowserModule,
+    KeypadModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature(appFeature),
   ],

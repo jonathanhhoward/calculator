@@ -1,11 +1,14 @@
+/* eslint-disable jest/expect-expect */
 import { fireEvent, render } from "@testing-library/angular";
 import "@testing-library/jest-dom/extend-expect";
 import { AppComponent } from "./app.component";
 import { AppModule } from "./app.module";
 
 describe("display on key click", () => {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   let display: any;
   let keyPad: any;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   function fireClickEvents(nodes: Node[]) {
     nodes.forEach((node) => fireEvent.click(node));
@@ -135,7 +138,7 @@ describe("display on key click", () => {
     });
 
     test("prepends decimal with zero", () => {
-      const { SUBTRACT, ADD, EQUALS, DECIMAL } = keyPad;
+      const { ADD, EQUALS, DECIMAL } = keyPad;
 
       fireClickEvents([DECIMAL, ADD, DECIMAL]);
       expectDisplayTextContent("0.+0.", "0.");

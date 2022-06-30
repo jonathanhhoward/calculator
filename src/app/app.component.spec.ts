@@ -14,9 +14,9 @@ describe("display on key click", () => {
     nodes.forEach((node) => fireEvent.click(node));
   }
 
-  function expectDisplayTextContent(expr: string, inpt: string) {
+  function expectDisplayTextContent(expr: string, input: string) {
     expect(display.EXPRESSION).toHaveTextContent(expr);
-    expect(display.INPUT).toHaveTextContent(inpt);
+    expect(display.INPUT).toHaveTextContent(input);
   }
 
   beforeEach(async () => {

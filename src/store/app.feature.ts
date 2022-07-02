@@ -156,7 +156,7 @@ function negateClickReducer(state: AppState): AppState {
   }
 
   function negateInput() {
-    return (Number(state.input) * -1).toString();
+    return (-Number(state.input)).toString();
   }
 }
 

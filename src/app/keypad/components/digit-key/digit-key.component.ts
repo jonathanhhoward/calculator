@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { StoreService } from "lib/store.service";
+import { StoreService } from "shared/store/store.service";
 
 @Component({
   selector: "digit-key",

@@ -1,7 +1,9 @@
 # Ng Calculator
 
-This is an Angular version of my project [JavaScript Calculator](https://github.com/jonathanhhoward/javascript-calculator).
+A simple expression calculator built with Angular.
 
 ## License
+
+MIT
 
 &copy; Jonathan Howard 2022

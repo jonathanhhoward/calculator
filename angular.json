@@ -29,14 +29,22 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-            "allowedCommonJsDependencies": ["seedrandom"]
+            "allowedCommonJsDependencies": [
+              "complex.js",
+              "decimal.js",
+              "escape-latex",
+              "fraction.js",
+              "seedrandom",
+              "typed-function",
+              "javascript-natural-sort"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "750kb",
                   "maximumError": "1mb"
                 },
                 {
@@ -96,5 +104,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

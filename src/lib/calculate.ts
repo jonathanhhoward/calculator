@@ -1,15 +1,11 @@
 import { evaluate } from "mathjs";
 
 export function calculate(expression: string): string {
-  let result: string;
-
   try {
-    result = setPrecision10(evaluate(expression));
-  } catch (e: any) {
-    result = e.message;
+    return setPrecision10(evaluate(expression));
+  } catch (e) {
+    return (<Error>e).message;
   }
-
-  return result;
 }
 
 function setPrecision10(n: number): string {

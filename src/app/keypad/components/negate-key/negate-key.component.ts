@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { StoreService } from "shared/store/store.service";
+import { StoreService } from "app/store/store.service";
 
 @Component({
   selector: "negate-key",

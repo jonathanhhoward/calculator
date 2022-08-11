@@ -1,4 +1,4 @@
-import { calculate } from "shared/lib/calculate";
+import { calculate } from "lib/calculate";
 
 test("zero returns zero", () => {
   expect(calculate("0")).toEqual("0");

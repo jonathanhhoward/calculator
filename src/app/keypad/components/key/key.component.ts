@@ -6,6 +6,6 @@ import { Component, Input } from "@angular/core";
   styleUrls: ["./key.component.scss"],
 })
 export class KeyComponent {
-  @Input() type = "?";
-  @Input() symbol = "?";
+  @Input() type!: string;
+  @Input() symbol!: string;
 }

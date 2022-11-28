@@ -2,18 +2,18 @@ import { createFeature, createReducer, on } from "@ngrx/store";
 import { calculate } from "lib/calculate";
 import * as actions from "./app.actions";
 
-export type Status = "input" | "operator" | "result";
+export type Mode = "input" | "operator" | "result";
 
 export interface AppState {
   expression: string;
   input: string;
-  status: Status;
+  mode: Mode;
 }
 
 const initialState: AppState = {
   expression: "0",
   input: "0",
-  status: "input",
+  mode: "input",
 };
 
 export const appFeature = createFeature({
@@ -36,7 +36,7 @@ function clearClickReducer(): AppState {
 }
 
 function deleteClickReducer(state: AppState): AppState {
-  switch (state.status) {
+  switch (state.mode) {
     case "input":
       return {
         ...state,
@@ -60,30 +60,30 @@ function digitClickReducer(
     if (isLeadingZero()) symbol = "0.";
   }
 
-  switch (state.status) {
+  switch (state.mode) {
     case "input":
       return state.input === "0"
         ? {
             expression: state.expression.slice(0, -1) + symbol,
             input: symbol,
-            status: "input",
+            mode: "input",
           }
         : {
             expression: state.expression + symbol,
             input: state.input + symbol,
-            status: "input",
+            mode: "input",
           };
     case "operator":
       return {
         expression: state.expression + symbol,
         input: symbol,
-        status: "input",
+        mode: "input",
       };
     case "result":
       return {
         expression: symbol,
         input: symbol,
-        status: "input",
+        mode: "input",
       };
     default:
       return state;
@@ -91,17 +91,16 @@ function digitClickReducer(
 
   function isMaxDigits() {
     return (
-      state.input.replace(/[.-]/g, "").length === 10 &&
-      state.status !== "result"
+      state.input.replace(/[.-]/g, "").length === 10 && state.mode !== "result"
     );
   }
 
   function hasDecimal() {
-    return state.input.includes(".") && state.status !== "result";
+    return state.input.includes(".") && state.mode !== "result";
   }
 
   function isLeadingZero() {
-    return state.input === "0" || state.status !== "input";
+    return state.input === "0" || state.mode !== "input";
   }
 }
 
@@ -109,24 +108,24 @@ function operatorClickReducer(
   state: AppState,
   { symbol }: actions.Payload
 ): AppState {
-  switch (state.status) {
+  switch (state.mode) {
     case "input":
       return {
         expression: state.expression + symbol,
         input: symbol,
-        status: "operator",
+        mode: "operator",
       };
     case "operator":
       return {
         expression: state.expression.slice(0, -1) + symbol,
         input: symbol,
-        status: "operator",
+        mode: "operator",
       };
     case "result":
       return {
         expression: state.input + symbol,
         input: symbol,
-        status: "operator",
+        mode: "operator",
       };
     default:
       return state;
@@ -136,7 +135,7 @@ function operatorClickReducer(
 function negateClickReducer(state: AppState): AppState {
   let input: string;
 
-  switch (state.status) {
+  switch (state.mode) {
     case "input":
       input = negateInput();
       return {
@@ -149,7 +148,7 @@ function negateClickReducer(state: AppState): AppState {
       return {
         expression: input,
         input,
-        status: "input",
+        mode: "input",
       };
     default:
       return state;
@@ -163,20 +162,20 @@ function negateClickReducer(state: AppState): AppState {
 function equalsClickReducer(state: AppState): AppState {
   let expression: string;
 
-  switch (state.status) {
+  switch (state.mode) {
     case "input":
       expression = normalizeOperators(state.expression);
       return {
         expression: state.expression + "=",
         input: calculate(expression),
-        status: "result",
+        mode: "result",
       };
     case "operator":
       expression = normalizeOperators(state.expression.slice(0, -1));
       return {
         expression: state.expression.slice(0, -1) + "=",
         input: calculate(expression),
-        status: "result",
+        mode: "result",
       };
     default:
       return state;

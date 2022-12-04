@@ -58,14 +58,14 @@ export class InputReducer extends AppReducer {
   }
 
   equalsClick(state: AppState): AppState {
-    const expression = (state.expression + state.input)
+    const finalExpression = (state.expression + state.input)
       .replace(/−/, "-")
       .replace(/×/, "*")
       .replace(/÷/, "/");
 
     return {
       expression: state.expression + state.input + "=",
-      input: calculate(expression),
+      input: calculate(finalExpression),
       reducer: new ResultReducer(),
     };
   }

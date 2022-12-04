@@ -10,7 +10,7 @@ export interface AppState {
 }
 
 export const initialState: AppState = {
-  expression: "0",
+  expression: "",
   input: "0",
   reducer: new InputReducer(),
 };

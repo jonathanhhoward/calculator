@@ -13,7 +13,7 @@ export class ResultReducer extends AppReducer {
     if (symbol === ".") symbol = "0.";
 
     return {
-      expression: state.expression + symbol,
+      expression: "",
       input: symbol,
       reducer: new InputReducer(),
     };
@@ -21,18 +21,16 @@ export class ResultReducer extends AppReducer {
 
   operatorClick(state: AppState, { symbol }: Payload): AppState {
     return {
-      expression: state.input + symbol,
+      expression: state.input,
       input: symbol,
       reducer: new OperatorReducer(),
     };
   }
 
   negateClick(state: AppState): AppState {
-    const input = (-Number(state.input)).toString();
-
     return {
-      expression: input,
-      input,
+      expression: "",
+      input: (-Number(state.input)).toString(),
       reducer: new InputReducer(),
     };
   }

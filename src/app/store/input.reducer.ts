@@ -8,7 +8,7 @@ import { AppState } from "./app.feature";
 export class InputReducer extends AppReducer {
   deleteClick(state: AppState): AppState {
     return {
-      expression: state.expression.slice(0, -state.input.length) + "0",
+      expression: state.expression,
       input: "0",
       reducer: this,
     };
@@ -30,12 +30,12 @@ export class InputReducer extends AppReducer {
 
     return inputIsZero
       ? {
-          expression: state.expression.slice(0, -1) + symbol,
+          expression: state.expression,
           input: symbol,
           reducer: this,
         }
       : {
-          expression: state.expression + symbol,
+          expression: state.expression,
           input: state.input + symbol,
           reducer: this,
         };
@@ -43,30 +43,28 @@ export class InputReducer extends AppReducer {
 
   operatorClick(state: AppState, { symbol }: Payload): AppState {
     return {
-      expression: state.expression + symbol,
+      expression: state.expression + state.input,
       input: symbol,
       reducer: new OperatorReducer(),
     };
   }
 
   negateClick(state: AppState): AppState {
-    const input = (-Number(state.input)).toString();
-
     return {
-      expression: state.expression.slice(0, -state.input.length) + input,
-      input,
+      expression: state.expression,
+      input: (-Number(state.input)).toString(),
       reducer: this,
     };
   }
 
   equalsClick(state: AppState): AppState {
-    const expression = state.expression
+    const expression = (state.expression + state.input)
       .replace(/−/, "-")
       .replace(/×/, "*")
       .replace(/÷/, "/");
 
     return {
-      expression: state.expression + "=",
+      expression: state.expression + state.input + "=",
       input: calculate(expression),
       reducer: new ResultReducer(),
     };

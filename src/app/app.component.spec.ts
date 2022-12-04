@@ -20,13 +20,16 @@ describe("display on key click", () => {
   }
 
   beforeEach(async () => {
-    const { getByText, getAllByText } = await render(AppComponent, {
-      imports: [AppModule],
-    });
+    const { getByText, getAllByText, getByTestId } = await render(
+      AppComponent,
+      {
+        imports: [AppModule],
+      }
+    );
     const zeros = getAllByText("0");
     display = Object.freeze({
-      EXPRESSION: zeros[0],
-      INPUT: zeros[1],
+      EXPRESSION: getByTestId("expression"),
+      INPUT: zeros[0],
     });
     keyPad = Object.freeze({
       CLEAR: getByText("AC"),
@@ -38,7 +41,7 @@ describe("display on key click", () => {
       NEGATE: getByText("+/-"),
       EQUALS: getByText("="),
       DECIMAL: getByText("."),
-      ZERO: zeros[2],
+      ZERO: zeros[1],
       ONE: getByText("1"),
       TWO: getByText("2"),
       THREE: getByText("3"),
@@ -56,7 +59,7 @@ describe("display on key click", () => {
       const { DELETE, ADD, ONE } = keyPad;
 
       fireClickEvents([ONE, ADD, DELETE]);
-      expectDisplayTextContent("1+", "+");
+      expectDisplayTextContent("1", "+");
     });
 
     test("does nothing after result", () => {
@@ -70,13 +73,13 @@ describe("display on key click", () => {
       const { DELETE, ADD, NEGATE, ONE } = keyPad;
 
       fireClickEvents([ONE, DELETE]);
-      expectDisplayTextContent("0", "0");
+      expectDisplayTextContent("", "0");
 
       fireClickEvents([ADD, ONE, DELETE]);
-      expectDisplayTextContent("0+0", "0");
+      expectDisplayTextContent("0+", "0");
 
       fireClickEvents([ADD, ONE, NEGATE, DELETE]);
-      expectDisplayTextContent("0+0+0", "0");
+      expectDisplayTextContent("0+", "0");
     });
   });
 
@@ -104,28 +107,28 @@ describe("display on key click", () => {
   });
 
   describe("operators", () => {
-    test("overwrites expression and appends to result", () => {
+    test("starts new expression from a result", () => {
       const { ADD, EQUALS, ONE } = keyPad;
 
       fireClickEvents([ONE, ADD, ONE, EQUALS]);
       expectDisplayTextContent("1+1=", "2");
 
       fireClickEvents([ADD]);
-      expectDisplayTextContent("2+", "+");
+      expectDisplayTextContent("2", "+");
     });
 
     test("overwrites operator", () => {
       const { MULTIPLY, ADD } = keyPad;
 
       fireClickEvents([MULTIPLY, ADD]);
-      expectDisplayTextContent("0+", "+");
+      expectDisplayTextContent("0", "+");
     });
 
-    test("appends to digits and decimal", () => {
+    test("appends input to expression", () => {
       const { ADD, DECIMAL } = keyPad;
 
       fireClickEvents([ADD, DECIMAL, ADD]);
-      expectDisplayTextContent("0+0.+", "+");
+      expectDisplayTextContent("0+0.", "+");
     });
   });
 
@@ -134,17 +137,17 @@ describe("display on key click", () => {
       const { DECIMAL, ONE } = keyPad;
 
       fireClickEvents([ONE, DECIMAL, DECIMAL]);
-      expectDisplayTextContent("1.", "1.");
+      expectDisplayTextContent("", "1.");
     });
 
     test("prepends decimal with zero", () => {
       const { ADD, EQUALS, DECIMAL } = keyPad;
 
       fireClickEvents([DECIMAL, ADD, DECIMAL]);
-      expectDisplayTextContent("0.+0.", "0.");
+      expectDisplayTextContent("0.+", "0.");
 
       fireClickEvents([EQUALS, DECIMAL]);
-      expectDisplayTextContent("0.", "0.");
+      expectDisplayTextContent("", "0.");
     });
   });
 
@@ -154,50 +157,50 @@ describe("display on key click", () => {
       const elevenOnes = new Array(11).fill(ONE);
 
       fireClickEvents(elevenOnes);
-      expectDisplayTextContent("1111111111", "1111111111");
+      expectDisplayTextContent("", "1111111111");
 
       fireClickEvents([CLEAR, ADD, ...elevenOnes, NEGATE]);
-      expectDisplayTextContent("0+-1111111111", "-1111111111");
+      expectDisplayTextContent("0+", "-1111111111");
 
       fireClickEvents([CLEAR, DECIMAL, ...elevenOnes]);
-      expectDisplayTextContent("0.111111111", "0.111111111");
+      expectDisplayTextContent("", "0.111111111");
 
       fireClickEvents([CLEAR, ADD, DECIMAL, ...elevenOnes, NEGATE]);
-      expectDisplayTextContent("0+-0.111111111", "-0.111111111");
+      expectDisplayTextContent("0+", "-0.111111111");
 
       fireClickEvents([EQUALS, ONE]);
-      expectDisplayTextContent("1", "1");
+      expectDisplayTextContent("", "1");
     });
 
-    test("overwrites expression and result", () => {
+    test("clears expression and overwrites result", () => {
       const { EQUALS, ONE } = keyPad;
 
       fireClickEvents([EQUALS]);
       expectDisplayTextContent("0=", "0");
 
       fireClickEvents([ONE]);
-      expectDisplayTextContent("1", "1");
+      expectDisplayTextContent("", "1");
     });
 
-    test("appends to operator", () => {
+    test("overwrites operator", () => {
       const { ADD, ONE } = keyPad;
 
       fireClickEvents([ADD, ONE]);
-      expectDisplayTextContent("0+1", "1");
+      expectDisplayTextContent("0+", "1");
     });
 
-    test("ignores leading zeros", () => {
+    test("overwrites leading zeros", () => {
       const { ZERO, ONE } = keyPad;
 
       fireClickEvents([ZERO, ONE]);
-      expectDisplayTextContent("1", "1");
+      expectDisplayTextContent("", "1");
     });
 
     test("appends to digits and decimal", () => {
       const { DECIMAL, ONE } = keyPad;
 
       fireClickEvents([DECIMAL, ONE, ONE]);
-      expectDisplayTextContent("0.11", "0.11");
+      expectDisplayTextContent("", "0.11");
     });
   });
 
@@ -206,44 +209,44 @@ describe("display on key click", () => {
       const { ADD, NEGATE, ONE } = keyPad;
 
       fireClickEvents([ONE, NEGATE]);
-      expectDisplayTextContent("-1", "-1");
+      expectDisplayTextContent("", "-1");
 
       fireClickEvents([ADD, ONE, NEGATE]);
-      expectDisplayTextContent("-1+-1", "-1");
+      expectDisplayTextContent("-1+", "-1");
     });
 
     test("removes '-' from current input if negative", () => {
       const { ADD, NEGATE, ONE } = keyPad;
 
       fireClickEvents([ONE, NEGATE, NEGATE]);
-      expectDisplayTextContent("1", "1");
+      expectDisplayTextContent("", "1");
 
       fireClickEvents([ADD, ONE, NEGATE, NEGATE]);
-      expectDisplayTextContent("1+1", "1");
+      expectDisplayTextContent("1+", "1");
     });
 
     test("does not negate zero", () => {
       const { NEGATE } = keyPad;
 
       fireClickEvents([NEGATE]);
-      expectDisplayTextContent("0", "0");
+      expectDisplayTextContent("", "0");
     });
 
     test("does nothing after operator", () => {
       const { ADD, NEGATE } = keyPad;
 
       fireClickEvents([ADD, NEGATE]);
-      expectDisplayTextContent("0+", "+");
+      expectDisplayTextContent("0", "+");
     });
 
-    test("negates new expression after result", () => {
+    test("clears expression negates result", () => {
       const { NEGATE, EQUALS, ONE } = keyPad;
 
       fireClickEvents([ONE, EQUALS, NEGATE]);
-      expectDisplayTextContent("-1", "-1");
+      expectDisplayTextContent("", "-1");
 
       fireClickEvents([EQUALS, NEGATE, ONE]);
-      expectDisplayTextContent("11", "11");
+      expectDisplayTextContent("", "11");
     });
   });
 });

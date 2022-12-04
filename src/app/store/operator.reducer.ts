@@ -14,7 +14,7 @@ export class OperatorReducer extends AppReducer {
     if (symbol === ".") symbol = "0.";
 
     return {
-      expression: state.expression + symbol,
+      expression: state.expression + state.input,
       input: symbol,
       reducer: new InputReducer(),
     };
@@ -22,7 +22,7 @@ export class OperatorReducer extends AppReducer {
 
   operatorClick(state: AppState, { symbol }: Payload): AppState {
     return {
-      expression: state.expression.slice(0, -1) + symbol,
+      expression: state.expression,
       input: symbol,
       reducer: this,
     };
@@ -34,13 +34,12 @@ export class OperatorReducer extends AppReducer {
 
   equalsClick(state: AppState): AppState {
     const expression = state.expression
-      .slice(0, -1)
       .replace(/−/, "-")
       .replace(/×/, "*")
       .replace(/÷/, "/");
 
     return {
-      expression: state.expression.slice(0, -1) + "=",
+      expression: state.expression + "=",
       input: calculate(expression),
       reducer: new ResultReducer(),
     };

@@ -9,7 +9,7 @@ export interface AppState {
   reducer: AppReducer;
 }
 
-const initialState: AppState = {
+export const initialState: AppState = {
   expression: "0",
   input: "0",
   reducer: new InputReducer(),

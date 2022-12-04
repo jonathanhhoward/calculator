@@ -1,14 +1,9 @@
 import { Payload } from "app/store/app.actions";
-import { AppState } from "app/store/app.feature";
-import { InputReducer } from "app/store/input.reducer";
+import { AppState, initialState } from "app/store/app.feature";
 
 export abstract class AppReducer {
   clearClick(): AppState {
-    return {
-      expression: "0",
-      input: "0",
-      reducer: new InputReducer(),
-    };
+    return initialState;
   }
 
   abstract deleteClick(state: AppState): AppState;

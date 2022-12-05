@@ -31,9 +31,9 @@ export class OperatorReducer extends AppReducer {
 
   equalsClick(state: AppState): AppState {
     const finalExpression = state.expression
-      .replace(/−/, "-")
-      .replace(/×/, "*")
-      .replace(/÷/, "/");
+      .replace(/−/g, "-")
+      .replace(/×/g, "*")
+      .replace(/÷/g, "/");
 
     return {
       expression: state.expression + "=",

@@ -50,9 +50,9 @@ export class InputReducer extends AppReducer {
 
   equalsClick(state: AppState): AppState {
     const finalExpression = (state.expression + state.input)
-      .replace(/−/, "-")
-      .replace(/×/, "*")
-      .replace(/÷/, "/");
+      .replace(/−/g, "-")
+      .replace(/×/g, "*")
+      .replace(/÷/g, "/");
 
     return {
       expression: state.expression + state.input + "=",

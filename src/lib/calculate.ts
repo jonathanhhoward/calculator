@@ -2,10 +2,14 @@ import { evaluate } from "mathjs";
 
 export function calculate(expression: string): string {
   try {
-    return setPrecision10(evaluate(expression));
+    return setPrecision10(evaluate(normalizeOperators(expression)));
   } catch (e) {
     return (<Error>e).message;
   }
+}
+
+function normalizeOperators(expression: string) {
+  return expression.replace(/−/g, "-").replace(/×/g, "*").replace(/÷/g, "/");
 }
 
 function setPrecision10(n: number): string {

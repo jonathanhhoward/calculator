@@ -49,14 +49,9 @@ export class InputReducer extends AppReducer {
   }
 
   equalsClick(state: AppState): AppState {
-    const finalExpression = (state.expression + state.input)
-      .replace(/−/g, "-")
-      .replace(/×/g, "*")
-      .replace(/÷/g, "/");
-
     return {
       expression: state.expression + state.input + "=",
-      input: calculate(finalExpression),
+      input: calculate(state.expression + state.input),
       reducer: new ResultReducer(),
     };
   }

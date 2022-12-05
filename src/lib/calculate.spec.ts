@@ -62,3 +62,7 @@ test("returns 'NaN' on invalid primary", () => {
 test("returns error message on bad symbols", () => {
   expect(calculate("2 x 2")).toEqual("Undefined symbol x");
 });
+
+test("handles special symbols", () => {
+  expect(calculate("2×2×2÷2÷2−2−2")).toEqual("-2");
+});

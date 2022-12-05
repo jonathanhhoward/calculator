@@ -8,9 +8,8 @@ import { AppState } from "./app.feature";
 export class InputReducer extends AppReducer {
   deleteClick(state: AppState): AppState {
     return {
-      expression: state.expression,
+      ...state,
       input: "0",
-      reducer: this,
     };
   }
 
@@ -28,17 +27,10 @@ export class InputReducer extends AppReducer {
       if (inputIsZero) symbol = "0.";
     }
 
-    return inputIsZero
-      ? {
-          expression: state.expression,
-          input: symbol,
-          reducer: this,
-        }
-      : {
-          expression: state.expression,
-          input: state.input + symbol,
-          reducer: this,
-        };
+    return {
+      ...state,
+      input: inputIsZero ? symbol : state.input + symbol,
+    };
   }
 
   operatorClick(state: AppState, { symbol }: Payload): AppState {
@@ -51,9 +43,8 @@ export class InputReducer extends AppReducer {
 
   negateClick(state: AppState): AppState {
     return {
-      expression: state.expression,
+      ...state,
       input: (-Number(state.input)).toString(),
-      reducer: this,
     };
   }
 

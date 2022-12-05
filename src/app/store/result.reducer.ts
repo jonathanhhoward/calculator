@@ -10,11 +10,9 @@ export class ResultReducer extends AppReducer {
   }
 
   digitClick(state: AppState, { symbol }: Payload): AppState {
-    if (symbol === ".") symbol = "0.";
-
     return {
       expression: "",
-      input: symbol,
+      input: symbol === "." ? "0." : symbol,
       reducer: new InputReducer(),
     };
   }

@@ -11,20 +11,17 @@ export class OperatorReducer extends AppReducer {
   }
 
   digitClick(state: AppState, { symbol }: Payload): AppState {
-    if (symbol === ".") symbol = "0.";
-
     return {
       expression: state.expression + state.input,
-      input: symbol,
+      input: symbol === "." ? "0." : symbol,
       reducer: new InputReducer(),
     };
   }
 
   operatorClick(state: AppState, { symbol }: Payload): AppState {
     return {
-      expression: state.expression,
+      ...state,
       input: symbol,
-      reducer: this,
     };
   }
 

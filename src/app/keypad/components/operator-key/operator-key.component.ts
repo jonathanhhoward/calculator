@@ -1,5 +1,5 @@
 import { Component, HostListener, Input } from "@angular/core";
-import { StoreService } from "app/store/store.service";
+import { StateService } from "app/state/state.service";
 
 const operatorMap = new Map([
   ["Divide", "÷"],
@@ -13,9 +13,9 @@ const operatorMap = new Map([
   templateUrl: "./operator-key.component.html",
 })
 export class OperatorKeyComponent {
-  @Input() symbol!: string;
+  @Input() symbol = "";
 
-  constructor(private store: StoreService) {}
+  constructor(private stateService: StateService) {}
 
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
@@ -28,6 +28,6 @@ export class OperatorKeyComponent {
   }
 
   handleClick() {
-    this.store.onOperatorClick(this.symbol);
+    this.stateService.onOperatorClick(this.symbol);
   }
 }

@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
-import { StoreService } from "app/store/store.service";
+import { StateService } from "app/state/state.service";
 
 @Component({
   selector: "clear-key",
   templateUrl: "./clear-key.component.html",
 })
 export class ClearKeyComponent {
-  constructor(private store: StoreService) {}
+  constructor(private stateService: StateService) {}
 
   handleClick() {
-    this.store.onClearClick();
+    this.stateService.onClearClick();
   }
 }

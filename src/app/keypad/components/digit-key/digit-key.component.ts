@@ -1,14 +1,14 @@
 import { Component, HostListener, Input } from "@angular/core";
-import { StoreService } from "app/store/store.service";
+import { StateService } from "app/state/state.service";
 
 @Component({
   selector: "digit-key",
   templateUrl: "./digit-key.component.html",
 })
 export class DigitKeyComponent {
-  @Input() symbol!: string;
+  @Input() symbol = "";
 
-  constructor(private store: StoreService) {}
+  constructor(private stateService: StateService) {}
 
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
@@ -22,6 +22,6 @@ export class DigitKeyComponent {
   }
 
   handleClick() {
-    this.store.onDigitClick(this.symbol);
+    this.stateService.onDigitClick(this.symbol);
   }
 }

@@ -1,12 +1,12 @@
 import { Component, HostListener } from "@angular/core";
-import { StoreService } from "app/store/store.service";
+import { StateService } from "app/state/state.service";
 
 @Component({
   selector: "equals-key",
   templateUrl: "./equals-key.component.html",
 })
 export class EqualsKeyComponent {
-  constructor(private store: StoreService) {}
+  constructor(private stateService: StateService) {}
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
     const isNumpad = code.slice(0, 6) === "Numpad";
@@ -18,6 +18,6 @@ export class EqualsKeyComponent {
   }
 
   handleClick() {
-    this.store.onEqualsClick();
+    this.stateService.onEqualsClick();
   }
 }

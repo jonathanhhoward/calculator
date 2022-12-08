@@ -1,11 +1,10 @@
-import { AppReducer } from "app/store/app.reducer";
-import { OperatorReducer } from "app/store/operator.reducer";
-import { ResultReducer } from "app/store/result.reducer";
+import { Injectable } from "@angular/core";
+import { AppReducer } from "app/state/app-reducer";
+import { AppState } from "app/state/app-state";
 import { calculate } from "lib/calculate";
-import { Payload } from "./app.actions";
-import { AppState } from "./app.feature";
 
-export class InputReducer extends AppReducer {
+@Injectable({ providedIn: "root" })
+export class InputReducer implements AppReducer {
   deleteClick(state: AppState): AppState {
     return {
       ...state,
@@ -13,7 +12,7 @@ export class InputReducer extends AppReducer {
     };
   }
 
-  digitClick(state: AppState, { symbol }: Payload): AppState {
+  digitClick(state: AppState, symbol: string): AppState {
     const inputHasMaxDigits = state.input.replace(/[.-]/g, "").length === 10;
     const symbolIsDecimal = symbol === ".";
     const inputHasDecimal = state.input.includes(".");
@@ -33,11 +32,11 @@ export class InputReducer extends AppReducer {
     };
   }
 
-  operatorClick(state: AppState, { symbol }: Payload): AppState {
+  operatorClick(state: AppState, symbol: string): AppState {
     return {
       expression: state.expression + state.input,
       input: symbol,
-      reducer: new OperatorReducer(),
+      inputMode: "operator",
     };
   }
 
@@ -52,7 +51,7 @@ export class InputReducer extends AppReducer {
     return {
       expression: state.expression + state.input + "=",
       input: calculate(state.expression + state.input),
-      reducer: new ResultReducer(),
+      inputMode: "result",
     };
   }
 }

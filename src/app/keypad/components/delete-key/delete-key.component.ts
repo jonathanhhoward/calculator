@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
-import { StoreService } from "app/store/store.service";
+import { StateService } from "app/state/state.service";
 
 @Component({
   selector: "delete-key",
   templateUrl: "./delete-key.component.html",
 })
 export class DeleteKeyComponent {
-  constructor(private store: StoreService) {}
+  constructor(private stateService: StateService) {}
 
   handleClick() {
-    this.store.onDeleteClick();
+    this.stateService.onDeleteClick();
   }
 }

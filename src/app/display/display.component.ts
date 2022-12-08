@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { StoreService } from "app/store/store.service";
+import { StateService } from "app/state/state.service";
 
 @Component({
   selector: "display",
@@ -7,5 +7,5 @@ import { StoreService } from "app/store/store.service";
   styleUrls: ["./display.component.scss"],
 })
 export class DisplayComponent {
-  constructor(public store: StoreService) {}
+  constructor(public stateService: StateService) {}
 }

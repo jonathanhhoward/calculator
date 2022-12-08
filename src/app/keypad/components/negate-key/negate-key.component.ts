@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
-import { StoreService } from "app/store/store.service";
+import { StateService } from "app/state/state.service";
 
 @Component({
   selector: "negate-key",
   templateUrl: "./negate-key.component.html",
 })
 export class NegateKeyComponent {
-  constructor(private store: StoreService) {}
+  constructor(private stateService: StateService) {}
 
   handleClick() {
-    this.store.onNegateClick();
+    this.stateService.onNegateClick();
   }
 }

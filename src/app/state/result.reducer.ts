@@ -12,7 +12,6 @@ export class ResultReducer implements AppReducer {
     return {
       expression: "",
       input: symbol === "." ? "0." : symbol,
-      inputMode: "input",
     };
   }
 
@@ -20,7 +19,6 @@ export class ResultReducer implements AppReducer {
     return {
       expression: state.input,
       input: symbol,
-      inputMode: "operator",
     };
   }
 
@@ -28,7 +26,6 @@ export class ResultReducer implements AppReducer {
     return {
       expression: "",
       input: (-Number(state.input)).toString(),
-      inputMode: "input",
     };
   }
 

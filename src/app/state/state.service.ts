@@ -7,7 +7,6 @@ import { BehaviorSubject, Observable } from "rxjs";
 const initialState: AppState = {
   expression: "",
   input: "0",
-  inputMode: "input",
 };
 
 @Injectable({ providedIn: "root" })

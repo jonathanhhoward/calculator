@@ -36,7 +36,6 @@ export class InputReducer implements AppReducer {
     return {
       expression: state.expression + state.input,
       input: symbol,
-      inputMode: "operator",
     };
   }
 
@@ -51,7 +50,6 @@ export class InputReducer implements AppReducer {
     return {
       expression: state.expression + state.input + "=",
       input: calculate(state.expression + state.input),
-      inputMode: "result",
     };
   }
 }

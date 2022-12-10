@@ -13,7 +13,6 @@ export class OperatorReducer implements AppReducer {
     return {
       expression: state.expression + state.input,
       input: symbol === "." ? "0." : symbol,
-      inputMode: "input",
     };
   }
 
@@ -32,7 +31,6 @@ export class OperatorReducer implements AppReducer {
     return {
       expression: state.expression + "=",
       input: calculate(state.expression),
-      inputMode: "result",
     };
   }
 }

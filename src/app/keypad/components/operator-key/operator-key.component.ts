@@ -2,13 +2,6 @@ import { Component, HostListener, Input } from "@angular/core";
 import { OperatorReducer } from "app/state/operator.reducer";
 import { StateService } from "app/state/state.service";
 
-const operatorMap = new Map([
-  ["Divide", "÷"],
-  ["Multiply", "×"],
-  ["Add", "+"],
-  ["Subtract", "−"],
-]);
-
 @Component({
   selector: "operator-key",
   templateUrl: "./operator-key.component.html",
@@ -23,14 +16,25 @@ export class OperatorKeyComponent {
 
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
-    const isNumpad = code.slice(0, 6) === "Numpad";
-    const isOperator = operatorMap.get(code.slice(6)) === this.symbol;
+    const isThisOperator =
+      this.mapCodeToOperator(code) === "Numpad" + this.symbol;
 
-    if (isNumpad && isOperator) this.handleClick();
+    if (isThisOperator) this.handleClick();
   }
 
   handleClick() {
     this.stateService.onOperatorClick(this.symbol);
     this.stateService.reducer = this.operatorReducer;
+  }
+
+  private mapCodeToOperator(code: string): string {
+    const operators = new Map([
+      ["Divide", "÷"],
+      ["Multiply", "×"],
+      ["Add", "+"],
+      ["Subtract", "−"],
+    ]);
+
+    return code.slice(0, 6) + operators.get(code.slice(6));
   }
 }

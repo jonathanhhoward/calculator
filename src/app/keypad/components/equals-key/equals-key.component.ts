@@ -13,10 +13,9 @@ export class EqualsKeyComponent {
   ) {}
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
-    const isNumpad = code.slice(0, 6) === "Numpad";
-    const isEnter = code.slice(6) === "Enter";
+    const isThisEquals = code === "NumpadEnter";
 
-    if (isNumpad && isEnter) this.handleClick();
+    if (isThisEquals) this.handleClick();
   }
 
   handleClick() {

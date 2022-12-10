@@ -239,14 +239,11 @@ describe("display on key click", () => {
       expectDisplayTextContent("0", "+");
     });
 
-    test("clears expression negates result", () => {
+    test("keeps expression negates result", () => {
       const { NEGATE, EQUALS, ONE } = keyPad;
 
       fireClickEvents([ONE, EQUALS, NEGATE]);
-      expectDisplayTextContent("", "-1");
-
-      fireClickEvents([EQUALS, NEGATE, ONE]);
-      expectDisplayTextContent("", "11");
+      expectDisplayTextContent("1=", "-1");
     });
   });
 });

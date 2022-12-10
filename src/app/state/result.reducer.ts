@@ -24,7 +24,7 @@ export class ResultReducer implements AppReducer {
 
   negateClick(state: AppState): AppState {
     return {
-      expression: "",
+      ...state,
       input: (-Number(state.input)).toString(),
     };
   }

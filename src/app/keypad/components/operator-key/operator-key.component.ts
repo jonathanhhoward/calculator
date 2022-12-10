@@ -24,11 +24,9 @@ export class OperatorKeyComponent {
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
     const isNumpad = code.slice(0, 6) === "Numpad";
-    const key = code.slice(6);
+    const isOperator = operatorMap.get(code.slice(6)) === this.symbol;
 
-    if (isNumpad && operatorMap.get(key) === this.symbol) {
-      this.handleClick();
-    }
+    if (isNumpad && isOperator) this.handleClick();
   }
 
   handleClick() {

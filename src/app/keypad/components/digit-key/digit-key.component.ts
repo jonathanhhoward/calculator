@@ -17,10 +17,10 @@ export class DigitKeyComponent {
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
     const isNumpad = code.slice(0, 6) === "Numpad";
-    const symbol = code.slice(6);
-    const key = symbol === "Decimal" ? "." : symbol;
+    const isDigit =
+      code.slice(6) === "Decimal" || code.slice(6) === this.symbol;
 
-    if (isNumpad && key === this.symbol) this.handleClick();
+    if (isNumpad && isDigit) this.handleClick();
   }
 
   handleClick() {

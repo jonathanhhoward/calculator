@@ -1,4 +1,5 @@
 import { Component, HostListener, Input } from "@angular/core";
+import { OperatorReducer } from "app/state/operator.reducer";
 import { StateService } from "app/state/state.service";
 
 const operatorMap = new Map([
@@ -15,7 +16,10 @@ const operatorMap = new Map([
 export class OperatorKeyComponent {
   @Input() symbol = "";
 
-  constructor(private stateService: StateService) {}
+  constructor(
+    private stateService: StateService,
+    private operatorReducer: OperatorReducer
+  ) {}
 
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
@@ -29,5 +33,6 @@ export class OperatorKeyComponent {
 
   handleClick() {
     this.stateService.onOperatorClick(this.symbol);
+    this.stateService.reducer = this.operatorReducer;
   }
 }

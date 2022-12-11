@@ -20,6 +20,6 @@ export class EqualsKeyComponent {
 
   handleClick() {
     this.stateService.onEqualsClick();
-    this.stateService.reducer = this.resultReducer;
+    this.stateService.setReducer(this.resultReducer);
   }
 }

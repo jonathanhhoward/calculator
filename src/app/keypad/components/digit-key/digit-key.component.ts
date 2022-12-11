@@ -24,6 +24,6 @@ export class DigitKeyComponent {
 
   handleClick() {
     this.stateService.onDigitClick(this.symbol);
-    this.stateService.reducer = this.inputReducer;
+    this.stateService.setReducer(this.inputReducer);
   }
 }

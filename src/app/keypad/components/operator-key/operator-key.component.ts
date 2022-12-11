@@ -24,7 +24,7 @@ export class OperatorKeyComponent {
 
   handleClick() {
     this.stateService.onOperatorClick(this.symbol);
-    this.stateService.reducer = this.operatorReducer;
+    this.stateService.setReducer(this.operatorReducer);
   }
 
   private mapCodeToOperator(code: string): string {

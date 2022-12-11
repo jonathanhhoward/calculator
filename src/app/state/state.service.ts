@@ -11,8 +11,8 @@ const initialState: AppState = {
 
 @Injectable({ providedIn: "root" })
 export class StateService {
-  reducer: AppReducer = this.inputReducer;
   private appStateSubject = new BehaviorSubject(initialState);
+  private reducer: AppReducer = this.inputReducer;
 
   constructor(private inputReducer: InputReducer) {}
 
@@ -26,6 +26,10 @@ export class StateService {
 
   private set state(newState: AppState) {
     this.appStateSubject.next(newState);
+  }
+
+  setReducer(reducer: AppReducer) {
+    this.reducer = reducer;
   }
 
   onClearClick(): void {

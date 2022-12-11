@@ -14,6 +14,6 @@ export class ClearKeyComponent {
 
   handleClick() {
     this.stateService.onClearClick();
-    this.stateService.reducer = this.inputReducer;
+    this.stateService.setReducer(this.inputReducer);
   }
 }

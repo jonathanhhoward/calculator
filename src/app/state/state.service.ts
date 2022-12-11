@@ -1,20 +1,19 @@
-import { Injectable } from "@angular/core";
+import { Inject, Injectable } from "@angular/core";
 import { AppReducer } from "app/state/app-reducer";
 import { AppState } from "app/state/app-state";
-import { InputReducer } from "app/state/input.reducer";
+import { APP_REDUCER, APP_STATE } from "app/state/state.service.provider";
 import { BehaviorSubject, Observable } from "rxjs";
-
-const initialState: AppState = {
-  expression: "",
-  input: "0",
-};
 
 @Injectable({ providedIn: "root" })
 export class StateService {
-  private appStateSubject = new BehaviorSubject(initialState);
-  private reducer: AppReducer = this.inputReducer;
+  private appStateSubject: BehaviorSubject<AppState>;
 
-  constructor(private inputReducer: InputReducer) {}
+  constructor(
+    @Inject(APP_STATE) private initialState: AppState,
+    @Inject(APP_REDUCER) private reducer: AppReducer
+  ) {
+    this.appStateSubject = new BehaviorSubject(this.initialState);
+  }
 
   get appState$(): Observable<AppState> {
     return this.appStateSubject.asObservable();
@@ -33,7 +32,7 @@ export class StateService {
   }
 
   onClearClick(): void {
-    this.state = initialState;
+    this.state = this.initialState;
   }
 
   onDeleteClick(): void {

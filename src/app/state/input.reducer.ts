@@ -13,23 +13,24 @@ export class InputReducer implements AppReducer {
   }
 
   digitClick(state: AppState, symbol: string): AppState {
-    const inputHasMaxDigits = state.input.replace(/[.-]/g, "").length === 10;
-    const symbolIsDecimal = symbol === ".";
-    const inputHasDecimal = state.input.includes(".");
-    const inputIsZero = state.input === "0";
-
-    if (inputHasMaxDigits) return state;
-
-    if (symbolIsDecimal) {
-      if (inputHasDecimal) return state;
-
-      if (inputIsZero) symbol = "0.";
-    }
+    if (guard()) return state;
 
     return {
       ...state,
-      input: inputIsZero ? symbol : state.input + symbol,
+      input: isOverwriteZero() ? symbol : state.input + symbol,
     };
+
+    function guard() {
+      const inputHasMaxDigits = state.input.replace(/[.-]/g, "").length === 10;
+      const inputHasDecimal = state.input.includes(".");
+      const symbolIsDecimal = symbol === ".";
+
+      return inputHasMaxDigits || (symbolIsDecimal && inputHasDecimal);
+    }
+
+    function isOverwriteZero() {
+      return state.input === "0" && !(symbol === ".");
+    }
   }
 
   operatorClick(state: AppState, symbol: string): AppState {

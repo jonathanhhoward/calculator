@@ -1,4 +1,7 @@
+import { InjectionToken } from "@angular/core";
 import { AppState } from "app/state/app-state";
+
+export const APP_REDUCER = new InjectionToken("AppReducer");
 
 export interface AppReducer {
   deleteClick(state: AppState): AppState;

@@ -1,7 +1,6 @@
 import { Inject, Injectable } from "@angular/core";
-import { AppReducer } from "app/state/app-reducer";
-import { AppState } from "app/state/app-state";
-import { APP_REDUCER, APP_STATE } from "app/state/state.service.provider";
+import { APP_REDUCER, AppReducer } from "app/state/app-reducer";
+import { APP_STATE, AppState } from "app/state/app-state";
 import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })

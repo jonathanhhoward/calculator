@@ -7,35 +7,6 @@ import {
 import renderApp from "app/test-utils/render-app";
 
 describe("display on key click", () => {
-  describe("operators", () => {
-    test("starts new expression from a result", async () => {
-      const { display, keyPad } = await renderApp();
-      const { add, equals, one } = keyPad;
-
-      fireClickEvents([one, add, one, equals]);
-      expectDisplayTextContent(display, "1+1=", "2");
-
-      fireClickEvents([add]);
-      expectDisplayTextContent(display, "2", "+");
-    });
-
-    test("overwrites operator", async () => {
-      const { display, keyPad } = await renderApp();
-      const { multiply, add } = keyPad;
-
-      fireClickEvents([multiply, add]);
-      expectDisplayTextContent(display, "0", "+");
-    });
-
-    test("appends input to expression", async () => {
-      const { display, keyPad } = await renderApp();
-      const { add, decimal } = keyPad;
-
-      fireClickEvents([add, decimal, add]);
-      expectDisplayTextContent(display, "0+0.", "+");
-    });
-  });
-
   describe("decimal", () => {
     test("only one per number", async () => {
       const { display, keyPad } = await renderApp();

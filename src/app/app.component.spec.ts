@@ -2,6 +2,7 @@
 import { fireEvent } from "@testing-library/angular";
 import "@testing-library/jest-dom/extend-expect";
 import testSetup from "app/test-utils/test-setup";
+import { Display, KeyPad } from "app/test-utils/types";
 
 function fireClickEvents(nodes: Node[]) {
   nodes.forEach((node) => fireEvent.click(node));
@@ -12,19 +13,19 @@ function fireKeydownEvents(codes: string[]) {
 }
 
 function expectDisplayTextContent(
-  display: Record<string, HTMLElement>,
-  expression: string,
-  input: string
+  display: Display,
+  expectedExpression: string,
+  expectedInput: string
 ) {
-  const { EXPRESSION, INPUT } = display;
+  const { expression, input } = display;
 
-  expect(EXPRESSION.textContent).toBe(expression);
-  expect(INPUT.textContent).toBe(input);
+  expect(expression.textContent).toBe(expectedExpression);
+  expect(input.textContent).toBe(expectedInput);
 }
 
 describe("display on key click", () => {
-  let display: Record<string, HTMLElement>;
-  let keyPad: Record<string, HTMLElement>;
+  let display: Display;
+  let keyPad: KeyPad;
 
   beforeEach(async () => {
     const setup = await testSetup();
@@ -34,193 +35,193 @@ describe("display on key click", () => {
 
   describe("delete", () => {
     test("does nothing after operator", () => {
-      const { DELETE, ADD, ONE } = keyPad;
+      const { del, add, one } = keyPad;
 
-      fireClickEvents([ONE, ADD, DELETE]);
+      fireClickEvents([one, add, del]);
       expectDisplayTextContent(display, "1", "+");
     });
 
     test("does nothing after result", () => {
-      const { DELETE, EQUALS, ONE } = keyPad;
+      const { del, equals, one } = keyPad;
 
-      fireClickEvents([ONE, EQUALS, DELETE]);
+      fireClickEvents([one, equals, del]);
       expectDisplayTextContent(display, "1=", "1");
     });
 
     test("overwrites current number input with zero", () => {
-      const { DELETE, ADD, NEGATE, ONE } = keyPad;
+      const { del, add, negate, one } = keyPad;
 
-      fireClickEvents([ONE, DELETE]);
+      fireClickEvents([one, del]);
       expectDisplayTextContent(display, "", "0");
 
-      fireClickEvents([ADD, ONE, DELETE]);
+      fireClickEvents([add, one, del]);
       expectDisplayTextContent(display, "0+", "0");
 
-      fireClickEvents([ADD, ONE, NEGATE, DELETE]);
+      fireClickEvents([add, one, negate, del]);
       expectDisplayTextContent(display, "0+0+", "0");
     });
   });
 
   describe("equals", () => {
     test("ignored while result displayed", () => {
-      const { ADD, EQUALS, ONE } = keyPad;
+      const { add, equals, one } = keyPad;
 
-      fireClickEvents([ONE, ADD, ONE, EQUALS, EQUALS]);
+      fireClickEvents([one, add, one, equals, equals]);
       expectDisplayTextContent(display, "1+1=", "2");
     });
 
     test("overwrites operator", () => {
-      const { ADD, EQUALS } = keyPad;
+      const { add, equals } = keyPad;
 
-      fireClickEvents([ADD, EQUALS]);
+      fireClickEvents([add, equals]);
       expectDisplayTextContent(display, "0=", "0");
     });
 
     test("appends to expression and displays result", () => {
-      const { ADD, EQUALS, ONE } = keyPad;
+      const { add, equals, one } = keyPad;
 
-      fireClickEvents([ONE, ADD, ONE, EQUALS]);
+      fireClickEvents([one, add, one, equals]);
       expectDisplayTextContent(display, "1+1=", "2");
     });
   });
 
   describe("operators", () => {
     test("starts new expression from a result", () => {
-      const { ADD, EQUALS, ONE } = keyPad;
+      const { add, equals, one } = keyPad;
 
-      fireClickEvents([ONE, ADD, ONE, EQUALS]);
+      fireClickEvents([one, add, one, equals]);
       expectDisplayTextContent(display, "1+1=", "2");
 
-      fireClickEvents([ADD]);
+      fireClickEvents([add]);
       expectDisplayTextContent(display, "2", "+");
     });
 
     test("overwrites operator", () => {
-      const { MULTIPLY, ADD } = keyPad;
+      const { multiply, add } = keyPad;
 
-      fireClickEvents([MULTIPLY, ADD]);
+      fireClickEvents([multiply, add]);
       expectDisplayTextContent(display, "0", "+");
     });
 
     test("appends input to expression", () => {
-      const { ADD, DECIMAL } = keyPad;
+      const { add, decimal } = keyPad;
 
-      fireClickEvents([ADD, DECIMAL, ADD]);
+      fireClickEvents([add, decimal, add]);
       expectDisplayTextContent(display, "0+0.", "+");
     });
   });
 
   describe("decimal", () => {
     test("only one per number", () => {
-      const { DECIMAL, ONE } = keyPad;
+      const { decimal, one } = keyPad;
 
-      fireClickEvents([ONE, DECIMAL, DECIMAL]);
+      fireClickEvents([one, decimal, decimal]);
       expectDisplayTextContent(display, "", "1.");
     });
 
     test("prepends decimal with zero", () => {
-      const { ADD, EQUALS, DECIMAL } = keyPad;
+      const { add, equals, decimal } = keyPad;
 
-      fireClickEvents([DECIMAL, ADD, DECIMAL]);
+      fireClickEvents([decimal, add, decimal]);
       expectDisplayTextContent(display, "0.+", "0.");
 
-      fireClickEvents([EQUALS, DECIMAL]);
+      fireClickEvents([equals, decimal]);
       expectDisplayTextContent(display, "", "0.");
     });
   });
 
   describe("digits", () => {
     test("limited to 10", () => {
-      const { CLEAR, ADD, NEGATE, EQUALS, DECIMAL, ONE } = keyPad;
-      const elevenOnes = new Array(11).fill(ONE);
+      const { clear, add, negate, equals, decimal, one } = keyPad;
+      const elevenOnes = new Array(11).fill(one);
 
       fireClickEvents(elevenOnes);
       expectDisplayTextContent(display, "", "1111111111");
 
-      fireClickEvents([CLEAR, ADD, ...elevenOnes, NEGATE]);
+      fireClickEvents([clear, add, ...elevenOnes, negate]);
       expectDisplayTextContent(display, "0+", "-1111111111");
 
-      fireClickEvents([CLEAR, DECIMAL, ...elevenOnes]);
+      fireClickEvents([clear, decimal, ...elevenOnes]);
       expectDisplayTextContent(display, "", "0.111111111");
 
-      fireClickEvents([CLEAR, ADD, DECIMAL, ...elevenOnes, NEGATE]);
+      fireClickEvents([clear, add, decimal, ...elevenOnes, negate]);
       expectDisplayTextContent(display, "0+", "-0.111111111");
 
-      fireClickEvents([EQUALS, ONE]);
+      fireClickEvents([equals, one]);
       expectDisplayTextContent(display, "", "1");
     });
 
     test("clears expression and overwrites result", () => {
-      const { EQUALS, ONE } = keyPad;
+      const { equals, one } = keyPad;
 
-      fireClickEvents([EQUALS]);
+      fireClickEvents([equals]);
       expectDisplayTextContent(display, "0=", "0");
 
-      fireClickEvents([ONE]);
+      fireClickEvents([one]);
       expectDisplayTextContent(display, "", "1");
     });
 
     test("overwrites operator", () => {
-      const { ADD, ONE } = keyPad;
+      const { add, one } = keyPad;
 
-      fireClickEvents([ADD, ONE]);
+      fireClickEvents([add, one]);
       expectDisplayTextContent(display, "0+", "1");
     });
 
     test("overwrites leading zeros", () => {
-      const { ZERO, ONE } = keyPad;
+      const { zero, one } = keyPad;
 
-      fireClickEvents([ZERO, ONE]);
+      fireClickEvents([zero, one]);
       expectDisplayTextContent(display, "", "1");
     });
 
     test("appends to digits and decimal", () => {
-      const { DECIMAL, ONE } = keyPad;
+      const { decimal, one } = keyPad;
 
-      fireClickEvents([DECIMAL, ONE, ONE]);
+      fireClickEvents([decimal, one, one]);
       expectDisplayTextContent(display, "", "0.11");
     });
   });
 
   describe("negate", () => {
     test("prepends current input with '-' if positive", () => {
-      const { ADD, NEGATE, ONE } = keyPad;
+      const { add, negate, one } = keyPad;
 
-      fireClickEvents([ONE, NEGATE]);
+      fireClickEvents([one, negate]);
       expectDisplayTextContent(display, "", "-1");
 
-      fireClickEvents([ADD, ONE, NEGATE]);
+      fireClickEvents([add, one, negate]);
       expectDisplayTextContent(display, "-1+", "-1");
     });
 
     test("removes '-' from current input if negative", () => {
-      const { ADD, NEGATE, ONE } = keyPad;
+      const { add, negate, one } = keyPad;
 
-      fireClickEvents([ONE, NEGATE, NEGATE]);
+      fireClickEvents([one, negate, negate]);
       expectDisplayTextContent(display, "", "1");
 
-      fireClickEvents([ADD, ONE, NEGATE, NEGATE]);
+      fireClickEvents([add, one, negate, negate]);
       expectDisplayTextContent(display, "1+", "1");
     });
 
     test("does not negate zero", () => {
-      const { NEGATE } = keyPad;
+      const { negate } = keyPad;
 
-      fireClickEvents([NEGATE]);
+      fireClickEvents([negate]);
       expectDisplayTextContent(display, "", "0");
     });
 
     test("does nothing after operator", () => {
-      const { ADD, NEGATE } = keyPad;
+      const { add, negate } = keyPad;
 
-      fireClickEvents([ADD, NEGATE]);
+      fireClickEvents([add, negate]);
       expectDisplayTextContent(display, "0", "+");
     });
 
     test("keeps expression negates result", () => {
-      const { NEGATE, EQUALS, ONE } = keyPad;
+      const { negate, equals, one } = keyPad;
 
-      fireClickEvents([ONE, EQUALS, NEGATE]);
+      fireClickEvents([one, equals, negate]);
       expectDisplayTextContent(display, "1=", "-1");
     });
   });

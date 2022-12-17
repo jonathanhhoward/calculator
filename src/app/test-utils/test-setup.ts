@@ -1,36 +1,37 @@
 import { render } from "@testing-library/angular";
 import { AppComponent } from "app/app.component";
 import { AppModule } from "app/app.module";
+import { Display, KeyPad } from "app/test-utils/types";
 
 export default async function () {
   const { getByText, getAllByText, getByTestId } = await render(AppComponent, {
     imports: [AppModule],
   });
   const zeros = getAllByText("0");
-  const display = {
-    EXPRESSION: getByTestId("expression"),
-    INPUT: zeros[0],
+  const display: Display = {
+    expression: getByTestId("expression"),
+    input: zeros[0],
   };
-  const keyPad = {
-    CLEAR: getByText("AC"),
-    DELETE: getByText("C"),
-    DIVIDE: getByText("÷"),
-    MULTIPLY: getByText("×"),
-    SUBTRACT: getByText("−"),
-    ADD: getByText("+"),
-    NEGATE: getByText("+/-"),
-    EQUALS: getByText("="),
-    DECIMAL: getByText("."),
-    ZERO: zeros[1],
-    ONE: getByText("1"),
-    TWO: getByText("2"),
-    THREE: getByText("3"),
-    FOUR: getByText("4"),
-    FIVE: getByText("5"),
-    SIX: getByText("6"),
-    SEVEN: getByText("7"),
-    EIGHT: getByText("8"),
-    NINE: getByText("9"),
+  const keyPad: KeyPad = {
+    clear: getByText("AC"),
+    del: getByText("C"),
+    divide: getByText("÷"),
+    multiply: getByText("×"),
+    subtract: getByText("−"),
+    add: getByText("+"),
+    negate: getByText("+/-"),
+    equals: getByText("="),
+    decimal: getByText("."),
+    zero: zeros[1],
+    one: getByText("1"),
+    two: getByText("2"),
+    three: getByText("3"),
+    four: getByText("4"),
+    five: getByText("5"),
+    six: getByText("6"),
+    seven: getByText("7"),
+    eight: getByText("8"),
+    nine: getByText("9"),
   };
 
   return { display, keyPad };

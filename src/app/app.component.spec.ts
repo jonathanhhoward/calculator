@@ -1,7 +1,7 @@
 /* eslint-disable jest/expect-expect */
 import { fireEvent } from "@testing-library/angular";
 import "@testing-library/jest-dom/extend-expect";
-import testSetup from "app/test-utils/test-setup";
+import renderApp from "app/test-utils/render-app";
 import { Display, KeyPad } from "app/test-utils/types";
 
 function fireClickEvents(nodes: Node[]) {
@@ -28,9 +28,9 @@ describe("display on key click", () => {
   let keyPad: KeyPad;
 
   beforeEach(async () => {
-    const setup = await testSetup();
-    display = setup.display;
-    keyPad = setup.keyPad;
+    const app = await renderApp();
+    display = app.display;
+    keyPad = app.keyPad;
   });
 
   describe("delete", () => {

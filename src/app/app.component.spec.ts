@@ -5,10 +5,8 @@ import { AppComponent } from "./app.component";
 import { AppModule } from "./app.module";
 
 describe("display on key click", () => {
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  let display: any;
-  let keyPad: any;
-  /* eslint-enable @typescript-eslint/no-explicit-any */
+  let display: Record<string, HTMLElement>;
+  let keyPad: Record<string, HTMLElement>;
 
   function fireClickEvents(nodes: Node[]) {
     nodes.forEach((node) => fireEvent.click(node));
@@ -18,9 +16,11 @@ describe("display on key click", () => {
     codes.forEach((code) => fireEvent.keyDown(document.body, { code }));
   }
 
-  function expectDisplayTextContent(expr: string, input: string) {
-    expect(display.EXPRESSION.textContent).toBe(expr);
-    expect(display.INPUT.textContent).toBe(input);
+  function expectDisplayTextContent(expression: string, input: string) {
+    const { EXPRESSION, INPUT } = display;
+
+    expect(EXPRESSION.textContent).toBe(expression);
+    expect(INPUT.textContent).toBe(input);
   }
 
   beforeEach(async () => {
@@ -31,11 +31,11 @@ describe("display on key click", () => {
       }
     );
     const zeros = getAllByText("0");
-    display = Object.freeze({
+    display = {
       EXPRESSION: getByTestId("expression"),
       INPUT: zeros[0],
-    });
-    keyPad = Object.freeze({
+    };
+    keyPad = {
       CLEAR: getByText("AC"),
       DELETE: getByText("C"),
       DIVIDE: getByText("÷"),
@@ -55,7 +55,7 @@ describe("display on key click", () => {
       SEVEN: getByText("7"),
       EIGHT: getByText("8"),
       NINE: getByText("9"),
-    });
+    };
   });
 
   describe("delete", () => {

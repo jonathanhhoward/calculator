@@ -14,9 +14,13 @@ describe("display on key click", () => {
     nodes.forEach((node) => fireEvent.click(node));
   }
 
+  function fireKeydownEvents(codes: string[]) {
+    codes.forEach((code) => fireEvent.keyDown(document.body, { code }));
+  }
+
   function expectDisplayTextContent(expr: string, input: string) {
-    expect(display.EXPRESSION).toHaveTextContent(expr);
-    expect(display.INPUT).toHaveTextContent(input);
+    expect(display.EXPRESSION.textContent).toBe(expr);
+    expect(display.INPUT.textContent).toBe(input);
   }
 
   beforeEach(async () => {
@@ -79,7 +83,7 @@ describe("display on key click", () => {
       expectDisplayTextContent("0+", "0");
 
       fireClickEvents([ADD, ONE, NEGATE, DELETE]);
-      expectDisplayTextContent("0+", "0");
+      expectDisplayTextContent("0+0+", "0");
     });
   });
 
@@ -244,6 +248,31 @@ describe("display on key click", () => {
 
       fireClickEvents([ONE, EQUALS, NEGATE]);
       expectDisplayTextContent("1=", "-1");
+    });
+  });
+
+  describe("keyboard", () => {
+    test("handles numpad keydown events", () => {
+      fireKeydownEvents([
+        "Numpad1",
+        "NumpadDecimal",
+        "Numpad0",
+        "NumpadAdd",
+        "Numpad2",
+        "Numpad3",
+        "NumpadSubtract",
+        "Numpad4",
+        "Numpad5",
+        "NumpadMultiply",
+        "Numpad6",
+        "Numpad7",
+        "NumpadDivide",
+        "Numpad8",
+        "Numpad9",
+        "NumpadEnter",
+      ]);
+
+      expectDisplayTextContent("1.0+23−45×67÷89=", "-9.876404494");
     });
   });
 });

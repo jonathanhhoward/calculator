@@ -1,4 +1,3 @@
-/* eslint-disable jest/expect-expect */
 import "@testing-library/jest-dom/extend-expect";
 import {
   expectDisplayTextContent,

@@ -6,6 +6,10 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
+    "plugin:jest/style",
     "prettier",
   ],
+  rules: {
+    "jest/expect-expect": "off",
+  },
 };

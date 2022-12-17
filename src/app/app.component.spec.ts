@@ -6,34 +6,27 @@ import {
   fireKeydownEvents,
 } from "app/test-utils/helpers";
 import renderApp from "app/test-utils/render-app";
-import { Display, KeyPad } from "app/test-utils/types";
 
 describe("display on key click", () => {
-  let display: Display;
-  let keyPad: KeyPad;
-
-  beforeEach(async () => {
-    const app = await renderApp();
-    display = app.display;
-    keyPad = app.keyPad;
-  });
-
   describe("delete", () => {
-    test("does nothing after operator", () => {
+    test("does nothing after operator", async () => {
+      const { display, keyPad } = await renderApp();
       const { del, add, one } = keyPad;
 
       fireClickEvents([one, add, del]);
       expectDisplayTextContent(display, "1", "+");
     });
 
-    test("does nothing after result", () => {
+    test("does nothing after result", async () => {
+      const { display, keyPad } = await renderApp();
       const { del, equals, one } = keyPad;
 
       fireClickEvents([one, equals, del]);
       expectDisplayTextContent(display, "1=", "1");
     });
 
-    test("overwrites current number input with zero", () => {
+    test("overwrites current number input with zero", async () => {
+      const { display, keyPad } = await renderApp();
       const { del, add, negate, one } = keyPad;
 
       fireClickEvents([one, del]);
@@ -48,21 +41,24 @@ describe("display on key click", () => {
   });
 
   describe("equals", () => {
-    test("ignored while result displayed", () => {
+    test("ignored while result displayed", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, equals, one } = keyPad;
 
       fireClickEvents([one, add, one, equals, equals]);
       expectDisplayTextContent(display, "1+1=", "2");
     });
 
-    test("overwrites operator", () => {
+    test("overwrites operator", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, equals } = keyPad;
 
       fireClickEvents([add, equals]);
       expectDisplayTextContent(display, "0=", "0");
     });
 
-    test("appends to expression and displays result", () => {
+    test("appends to expression and displays result", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, equals, one } = keyPad;
 
       fireClickEvents([one, add, one, equals]);
@@ -71,7 +67,8 @@ describe("display on key click", () => {
   });
 
   describe("operators", () => {
-    test("starts new expression from a result", () => {
+    test("starts new expression from a result", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, equals, one } = keyPad;
 
       fireClickEvents([one, add, one, equals]);
@@ -81,14 +78,16 @@ describe("display on key click", () => {
       expectDisplayTextContent(display, "2", "+");
     });
 
-    test("overwrites operator", () => {
+    test("overwrites operator", async () => {
+      const { display, keyPad } = await renderApp();
       const { multiply, add } = keyPad;
 
       fireClickEvents([multiply, add]);
       expectDisplayTextContent(display, "0", "+");
     });
 
-    test("appends input to expression", () => {
+    test("appends input to expression", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, decimal } = keyPad;
 
       fireClickEvents([add, decimal, add]);
@@ -97,14 +96,16 @@ describe("display on key click", () => {
   });
 
   describe("decimal", () => {
-    test("only one per number", () => {
+    test("only one per number", async () => {
+      const { display, keyPad } = await renderApp();
       const { decimal, one } = keyPad;
 
       fireClickEvents([one, decimal, decimal]);
       expectDisplayTextContent(display, "", "1.");
     });
 
-    test("prepends decimal with zero", () => {
+    test("prepends decimal with zero", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, equals, decimal } = keyPad;
 
       fireClickEvents([decimal, add, decimal]);
@@ -116,7 +117,8 @@ describe("display on key click", () => {
   });
 
   describe("digits", () => {
-    test("limited to 10", () => {
+    test("limited to 10", async () => {
+      const { display, keyPad } = await renderApp();
       const { clear, add, negate, equals, decimal, one } = keyPad;
       const elevenOnes = new Array(11).fill(one);
 
@@ -136,7 +138,8 @@ describe("display on key click", () => {
       expectDisplayTextContent(display, "", "1");
     });
 
-    test("clears expression and overwrites result", () => {
+    test("clears expression and overwrites result", async () => {
+      const { display, keyPad } = await renderApp();
       const { equals, one } = keyPad;
 
       fireClickEvents([equals]);
@@ -146,21 +149,24 @@ describe("display on key click", () => {
       expectDisplayTextContent(display, "", "1");
     });
 
-    test("overwrites operator", () => {
+    test("overwrites operator", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, one } = keyPad;
 
       fireClickEvents([add, one]);
       expectDisplayTextContent(display, "0+", "1");
     });
 
-    test("overwrites leading zeros", () => {
+    test("overwrites leading zeros", async () => {
+      const { display, keyPad } = await renderApp();
       const { zero, one } = keyPad;
 
       fireClickEvents([zero, one]);
       expectDisplayTextContent(display, "", "1");
     });
 
-    test("appends to digits and decimal", () => {
+    test("appends to digits and decimal", async () => {
+      const { display, keyPad } = await renderApp();
       const { decimal, one } = keyPad;
 
       fireClickEvents([decimal, one, one]);
@@ -169,7 +175,8 @@ describe("display on key click", () => {
   });
 
   describe("negate", () => {
-    test("prepends current input with '-' if positive", () => {
+    test("prepends current input with '-' if positive", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, negate, one } = keyPad;
 
       fireClickEvents([one, negate]);
@@ -179,7 +186,8 @@ describe("display on key click", () => {
       expectDisplayTextContent(display, "-1+", "-1");
     });
 
-    test("removes '-' from current input if negative", () => {
+    test("removes '-' from current input if negative", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, negate, one } = keyPad;
 
       fireClickEvents([one, negate, negate]);
@@ -189,21 +197,24 @@ describe("display on key click", () => {
       expectDisplayTextContent(display, "1+", "1");
     });
 
-    test("does not negate zero", () => {
+    test("does not negate zero", async () => {
+      const { display, keyPad } = await renderApp();
       const { negate } = keyPad;
 
       fireClickEvents([negate]);
       expectDisplayTextContent(display, "", "0");
     });
 
-    test("does nothing after operator", () => {
+    test("does nothing after operator", async () => {
+      const { display, keyPad } = await renderApp();
       const { add, negate } = keyPad;
 
       fireClickEvents([add, negate]);
       expectDisplayTextContent(display, "0", "+");
     });
 
-    test("keeps expression negates result", () => {
+    test("keeps expression negates result", async () => {
+      const { display, keyPad } = await renderApp();
       const { negate, equals, one } = keyPad;
 
       fireClickEvents([one, equals, negate]);
@@ -212,7 +223,8 @@ describe("display on key click", () => {
   });
 
   describe("keyboard", () => {
-    test("handles numpad keydown events", () => {
+    test("handles numpad keydown events", async () => {
+      const { display } = await renderApp();
       fireKeydownEvents([
         "Numpad1",
         "NumpadDecimal",

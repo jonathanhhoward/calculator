@@ -1,8 +1,8 @@
 import {
   expectDisplayTextContent,
   fireClickEvents,
-} from "app/test-utils/helpers";
-import renderApp from "app/test-utils/render-app";
+} from "app/__tests__/test-utils/helpers";
+import renderApp from "app/__tests__/test-utils/render-app";
 
 test("only one decimal per number", async () => {
   const { display, keyPad } = await renderApp();
@@ -78,4 +78,3 @@ test("appends to digits and decimal", async () => {
   fireClickEvents([decimal, one, one]);
   expectDisplayTextContent(display, "", "0.11");
 });
-

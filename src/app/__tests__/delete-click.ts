@@ -1,8 +1,8 @@
 import {
   expectDisplayTextContent,
   fireClickEvents,
-} from "app/test-utils/helpers";
-import renderApp from "app/test-utils/render-app";
+} from "app/__tests__/test-utils/helpers";
+import renderApp from "app/__tests__/test-utils/render-app";
 
 test("does nothing after operator", async () => {
   const { display, keyPad } = await renderApp();

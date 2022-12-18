@@ -1,5 +1,5 @@
 import { fireEvent } from "@testing-library/angular";
-import { Display } from "app/test-utils/types";
+import { Display } from "app/__tests__/test-utils/types";
 
 export function fireClickEvents(nodes: Node[]) {
   nodes.forEach((node) => fireEvent.click(node));

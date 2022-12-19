@@ -23,7 +23,6 @@ export class DigitKeyComponent {
   }
 
   handleClick() {
-    this.stateService.onDigitClick(this.symbol);
-    this.stateService.setReducer(this.numberReducer);
+    this.stateService.onDigitClick(this.symbol, this.numberReducer);
   }
 }

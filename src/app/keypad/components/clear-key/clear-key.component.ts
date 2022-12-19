@@ -13,7 +13,6 @@ export class ClearKeyComponent {
   ) {}
 
   handleClick() {
-    this.stateService.onClearClick();
-    this.stateService.setReducer(this.numberReducer);
+    this.stateService.onClearClick(this.numberReducer);
   }
 }

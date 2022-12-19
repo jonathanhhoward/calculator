@@ -23,8 +23,7 @@ export class OperatorKeyComponent {
   }
 
   handleClick() {
-    this.stateService.onOperatorClick(this.symbol);
-    this.stateService.setReducer(this.operatorReducer);
+    this.stateService.onOperatorClick(this.symbol, this.operatorReducer);
   }
 
   private mapCodeToOperator(code: string): string {

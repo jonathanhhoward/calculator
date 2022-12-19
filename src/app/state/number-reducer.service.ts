@@ -4,7 +4,7 @@ import { AppState } from "app/state/app-state";
 import { calculate } from "lib/calculate";
 
 @Injectable({ providedIn: "root" })
-export class InputReducer implements AppReducer {
+export class NumberReducer implements AppReducer {
   deleteClick(state: AppState): AppState {
     return {
       ...state,

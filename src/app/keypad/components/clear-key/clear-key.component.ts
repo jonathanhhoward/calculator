@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { InputReducer } from "app/state/input.reducer";
+import { NumberReducer } from "app/state/number-reducer.service";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -9,11 +9,11 @@ import { StateService } from "app/state/state.service";
 export class ClearKeyComponent {
   constructor(
     private stateService: StateService,
-    private inputReducer: InputReducer
+    private numberReducer: NumberReducer
   ) {}
 
   handleClick() {
     this.stateService.onClearClick();
-    this.stateService.setReducer(this.inputReducer);
+    this.stateService.setReducer(this.numberReducer);
   }
 }

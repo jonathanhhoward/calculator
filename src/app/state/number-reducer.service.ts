@@ -29,7 +29,7 @@ export class NumberReducer implements AppReducer {
     }
 
     function isOverwriteZero() {
-      return state.input === "0" && !(symbol === ".");
+      return state.input === "0" && symbol !== ".";
     }
   }
 

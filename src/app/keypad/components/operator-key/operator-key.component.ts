@@ -17,7 +17,7 @@ export class OperatorKeyComponent {
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
     const isThisOperator =
-      this.mapCodeToOperator(code) === "Numpad" + this.symbol;
+      this.mapCodeToSymbol(code) === "Numpad" + this.symbol;
 
     if (isThisOperator) this.handleClick();
   }
@@ -26,14 +26,16 @@ export class OperatorKeyComponent {
     this.stateService.onOperatorClick(this.symbol, this.operatorReducer);
   }
 
-  private mapCodeToOperator(code: string): string {
+  private mapCodeToSymbol(code: string): string {
     const operators = new Map([
       ["Divide", "÷"],
       ["Multiply", "×"],
       ["Add", "+"],
       ["Subtract", "−"],
     ]);
+    const keyCode = code.substring("Numpad".length);
+    const symbol = operators.get(keyCode) ?? "";
 
-    return code.slice(0, 6) + operators.get(code.slice(6));
+    return code.replace(keyCode, symbol);
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NumberReducer } from "app/state/number-reducer.service";
+import { NumberReducer } from "app/state/number.reducer";
 import { StateService } from "app/state/state.service";
 
 @Component({

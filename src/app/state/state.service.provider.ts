@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AppReducer } from "app/state/app-reducer";
 import { AppState } from "app/state/app-state";
-import { NumberReducer } from "app/state/number-reducer.service";
+import { NumberReducer } from "app/state/number.reducer";
 import { StateService } from "app/state/state.service";
 
 @Injectable({ providedIn: "root" })

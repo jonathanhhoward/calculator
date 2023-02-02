@@ -1,18 +1,16 @@
-import { Injectable } from "@angular/core";
-import { AppReducer } from "app/state/app-reducer";
-import { AppState } from "app/state/app-state";
+import { Reducer } from "app/state/reducer";
+import { State } from "app/state/state";
 import { calculate } from "lib/calculate";
 
-@Injectable({ providedIn: "root" })
-export class NumberReducer implements AppReducer {
-  deleteClick(state: AppState): AppState {
+export class NumberReducer implements Reducer {
+  deleteClick(state: State): State {
     return {
       ...state,
       input: "0",
     };
   }
 
-  digitClick(state: AppState, symbol: string): AppState {
+  digitClick(state: State, symbol: string): State {
     if (guard()) return state;
 
     return {
@@ -33,21 +31,21 @@ export class NumberReducer implements AppReducer {
     }
   }
 
-  operatorClick(state: AppState, symbol: string): AppState {
+  operatorClick(state: State, symbol: string): State {
     return {
       expression: state.expression + state.input,
       input: symbol,
     };
   }
 
-  negateClick(state: AppState): AppState {
+  negateClick(state: State): State {
     return {
       ...state,
       input: (-Number(state.input)).toString(),
     };
   }
 
-  equalsClick(state: AppState): AppState {
+  equalsClick(state: State): State {
     return {
       expression: state.expression + state.input + "=",
       input: calculate(state.expression + state.input),

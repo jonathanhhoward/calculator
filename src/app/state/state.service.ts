@@ -1,37 +1,35 @@
-import { Inject, Injectable } from "@angular/core";
-import { APP_REDUCER, AppReducer } from "app/state/app-reducer";
-import { APP_STATE, AppState } from "app/state/app-state";
+import { Injectable } from "@angular/core";
+import { NumberReducer } from "app/state/number.reducer";
+import { OperatorReducer } from "app/state/operator.reducer";
+import { Reducer } from "app/state/reducer";
+import { ResultReducer } from "app/state/result.reducer";
+import { State } from "app/state/state";
 import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class StateService {
-  private appStateSubject: BehaviorSubject<AppState>;
+  private readonly initialState: State = { expression: "", input: "0" };
+  private stateSubject = new BehaviorSubject(this.initialState);
+  private numberReducer = new NumberReducer();
+  private operatorReducer = new OperatorReducer();
+  private resultReducer = new ResultReducer();
+  private reducer: Reducer = this.numberReducer;
 
-  constructor(
-    @Inject(APP_STATE) private initialState: AppState,
-    @Inject(APP_REDUCER) private reducer: AppReducer
-  ) {
-    this.appStateSubject = new BehaviorSubject(this.initialState);
+  get state$(): Observable<State> {
+    return this.stateSubject.asObservable();
   }
 
-  get appState$(): Observable<AppState> {
-    return this.appStateSubject.asObservable();
+  private get state(): State {
+    return this.stateSubject.getValue();
   }
 
-  private get state(): AppState {
-    return this.appStateSubject.getValue();
-  }
-
-  private set state(newState: AppState) {
-    this.appStateSubject.next(newState);
-  }
-
-  setReducer(newReducer: AppReducer): void {
-    this.reducer = newReducer;
+  private set state(state: State) {
+    this.stateSubject.next(state);
   }
 
   onClearClick(): void {
     this.state = this.initialState;
+    this.reducer = this.numberReducer;
   }
 
   onDeleteClick(): void {
@@ -40,10 +38,12 @@ export class StateService {
 
   onDigitClick(symbol: string): void {
     this.state = this.reducer.digitClick(this.state, symbol);
+    this.reducer = this.numberReducer;
   }
 
   onOperatorClick(symbol: string): void {
     this.state = this.reducer.operatorClick(this.state, symbol);
+    this.reducer = this.operatorReducer;
   }
 
   onNegateClick(): void {
@@ -52,5 +52,6 @@ export class StateService {
 
   onEqualsClick(): void {
     this.state = this.reducer.equalsClick(this.state);
+    this.reducer = this.resultReducer;
   }
 }

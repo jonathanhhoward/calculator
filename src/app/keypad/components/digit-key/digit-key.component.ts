@@ -1,5 +1,4 @@
 import { Component, HostListener, Input } from "@angular/core";
-import { NumberReducer } from "app/state/number.reducer";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -9,10 +8,7 @@ import { StateService } from "app/state/state.service";
 export class DigitKeyComponent {
   @Input() symbol = "";
 
-  constructor(
-    private stateService: StateService,
-    private numberReducer: NumberReducer
-  ) {}
+  constructor(private stateService: StateService) {}
 
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
@@ -24,6 +20,5 @@ export class DigitKeyComponent {
 
   handleClick() {
     this.stateService.onDigitClick(this.symbol);
-    this.stateService.setReducer(this.numberReducer);
   }
 }

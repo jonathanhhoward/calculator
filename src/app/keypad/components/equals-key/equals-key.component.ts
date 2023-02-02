@@ -1,5 +1,4 @@
 import { Component, HostListener } from "@angular/core";
-import { ResultReducer } from "app/state/result.reducer";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -7,10 +6,8 @@ import { StateService } from "app/state/state.service";
   templateUrl: "./equals-key.component.html",
 })
 export class EqualsKeyComponent {
-  constructor(
-    private stateService: StateService,
-    private resultReducer: ResultReducer
-  ) {}
+  constructor(private stateService: StateService) {}
+
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
     const isThisEquals = code === "NumpadEnter";
@@ -20,6 +17,5 @@ export class EqualsKeyComponent {
 
   handleClick() {
     this.stateService.onEqualsClick();
-    this.stateService.setReducer(this.resultReducer);
   }
 }

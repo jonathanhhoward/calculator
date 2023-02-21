@@ -1,6 +1,8 @@
+import { Injectable } from "@angular/core";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 
+@Injectable({ providedIn: "root" })
 export class ResultReducer implements Reducer {
   deleteClick(state: State): State {
     return state;

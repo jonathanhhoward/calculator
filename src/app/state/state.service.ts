@@ -10,10 +10,13 @@ import { BehaviorSubject, Observable } from "rxjs";
 export class StateService {
   private readonly initialState: State = { expression: "", input: "0" };
   private stateSubject = new BehaviorSubject(this.initialState);
-  private numberReducer = new NumberReducer();
-  private operatorReducer = new OperatorReducer();
-  private resultReducer = new ResultReducer();
   private reducer: Reducer = this.numberReducer;
+
+  constructor(
+    private numberReducer: NumberReducer,
+    private operatorReducer: OperatorReducer,
+    private resultReducer: ResultReducer
+  ) {}
 
   get state$(): Observable<State> {
     return this.stateSubject.asObservable();

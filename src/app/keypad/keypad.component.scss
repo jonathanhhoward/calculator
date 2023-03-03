@@ -3,29 +3,29 @@
   background-color: hsl(0, 0%, 10%);
   display: grid;
   grid-template-areas:
-    "sev eig nin del cle"
-    "fou fiv six mul div"
-    "one two thr add sub"
-    "zer zer dec equ neg";
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: 24.2%;
-  gap: 1%;
-
-  @media (orientation: portrait) {
-    grid-template-areas:
       "cle del neg div"
       "sev eig nin mul"
       "fou fiv six sub"
       "one two thr add"
-      "zer zer dec equ";
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 19.2%;
+      "zer dec exp equ";
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 19.2%;
+  gap: 1%;
+
+  @media (orientation: landscape) {
+    grid-template-areas:
+    "sev eig nin del cle"
+    "fou fiv six mul div"
+    "one two thr add sub"
+    "zer dec exp equ neg";
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 24.2%;
   }
 }
 
 $keys: "clear", "delete", "divide", "multiply", "subtract", "add", "negate",
   "equals", "one", "two", "three", "four", "five", "six", "seven", "eight",
-  "nine", "zero", "decimal";
+  "nine", "zero", "decimal", "exponent";
 
 @each $key in $keys {
   ##{$key} {

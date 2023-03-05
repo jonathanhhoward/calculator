@@ -1,24 +1,19 @@
-import { Inject, Injectable, InjectionToken } from "@angular/core";
+import { Injectable } from "@angular/core";
+import { NumberReducer } from "app/state/number.reducer";
+import { OperatorReducer } from "app/state/operator.reducer";
 import { Reducer } from "app/state/reducer";
+import { ResultReducer } from "app/state/result.reducer";
 import { State } from "app/state/state";
 import { BehaviorSubject, Observable } from "rxjs";
 
-export const INITIAL_STATE = new InjectionToken<State>("InitialState");
-export const NUMBER_REDUCER = new InjectionToken<Reducer>("NumberReducer");
-export const OPERATOR_REDUCER = new InjectionToken<Reducer>("OperatorReducer");
-export const RESULT_REDUCER = new InjectionToken<Reducer>("ResultReducer");
-
 @Injectable({ providedIn: "root" })
 export class StateService {
-  private stateSubject = new BehaviorSubject(this.initialState);
+  private readonly initialState: State = { expression: "", input: "0" };
+  private readonly numberReducer: Reducer = new NumberReducer();
+  private readonly operatorReducer: Reducer = new OperatorReducer();
+  private readonly resultReducer: Reducer = new ResultReducer();
+  private readonly stateSubject = new BehaviorSubject(this.initialState);
   private reducer: Reducer = this.numberReducer;
-
-  constructor(
-    @Inject(INITIAL_STATE) private readonly initialState: State,
-    @Inject(NUMBER_REDUCER) private numberReducer: Reducer,
-    @Inject(OPERATOR_REDUCER) private operatorReducer: Reducer,
-    @Inject(RESULT_REDUCER) private resultReducer: Reducer
-  ) {}
 
   get state$(): Observable<State> {
     return this.stateSubject.asObservable();

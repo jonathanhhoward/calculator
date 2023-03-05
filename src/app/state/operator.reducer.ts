@@ -1,6 +1,6 @@
+import { calculate } from "app/state/calculate";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
-import { calculate } from "lib/calculate";
 
 export class OperatorReducer implements Reducer {
   deleteClick(state: State): State {

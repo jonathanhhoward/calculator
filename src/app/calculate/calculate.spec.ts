@@ -1,4 +1,4 @@
-import { calculate } from "app/state/calculate/index";
+import { calculate } from "app/calculate/index";
 
 test("zero returns zero", () => {
   expect(calculate("0")).toBe("0");

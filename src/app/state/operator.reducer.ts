@@ -1,4 +1,4 @@
-import { calculate } from "app/state/calculate";
+import { calculate } from "app/calculate";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 

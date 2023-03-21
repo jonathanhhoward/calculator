@@ -25,3 +25,8 @@ export interface KeyPad {
   eight: HTMLElement;
   nine: HTMLElement;
 }
+
+export type DisplayTextContent = {
+  expression: string | null;
+  input: string | null;
+};

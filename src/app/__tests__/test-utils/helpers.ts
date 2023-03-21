@@ -1,5 +1,5 @@
 import { fireEvent } from "@testing-library/angular";
-import { Display } from "app/__tests__/test-utils/types";
+import { Display, DisplayTextContent } from "app/__tests__/test-utils/types";
 
 export function fireClickEvents(nodes: Node[]) {
   nodes.forEach((node) => fireEvent.click(node));
@@ -18,4 +18,11 @@ export function expectDisplayTextContent(
 
   expect(expression.textContent).toBe(expectedExpression);
   expect(input.textContent).toBe(expectedInput);
+}
+
+export function getTextContent(display: Display): DisplayTextContent {
+  return {
+    expression: display.expression.textContent,
+    input: display.input.textContent,
+  };
 }

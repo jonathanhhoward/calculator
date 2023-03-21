@@ -12,6 +12,7 @@ export interface KeyPad {
   add: HTMLElement;
   negate: HTMLElement;
   equals: HTMLElement;
+  exponent: HTMLElement;
   decimal: HTMLElement;
   zero: HTMLElement;
   one: HTMLElement;

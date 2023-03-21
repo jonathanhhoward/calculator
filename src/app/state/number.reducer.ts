@@ -19,15 +19,29 @@ export class NumberReducer implements Reducer {
     };
 
     function guard() {
-      const inputHasMaxDigits = state.input.replace(/[.-]/g, "").length === 10;
-      const inputHasDecimal = state.input.includes(".");
-      const symbolIsDecimal = symbol === ".";
+      const [mantissa, exponent] = state.input.split("e");
+      const mantissaHasTenDigits = mantissa.replace(/[.-]/g, "").length === 10;
+      const exponentHasTwoDigits = exponent
+        ? exponent.replace(/-/g, "").length === 2
+        : null;
+      const inputHasMaxDigits =
+        exponent != null
+          ? exponentHasTwoDigits
+          : mantissaHasTenDigits && symbol !== "e";
+      const isDuplicateDecimal = symbol === "." && state.input.includes(".");
+      const isDuplicateExponent = symbol === "e" && state.input.includes("e");
+      const isDecimalOnExponent = symbol === "." && state.input.includes("e");
 
-      return inputHasMaxDigits || (symbolIsDecimal && inputHasDecimal);
+      return (
+        inputHasMaxDigits ||
+        isDuplicateDecimal ||
+        isDuplicateExponent ||
+        isDecimalOnExponent
+      );
     }
 
     function isOverwriteZero() {
-      return state.input === "0" && symbol !== ".";
+      return state.input === "0" && symbol !== "." && symbol !== "e";
     }
   }
 

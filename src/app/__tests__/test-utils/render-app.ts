@@ -21,6 +21,7 @@ export default async function () {
     add: getByText("+"),
     negate: getByText("+/-"),
     equals: getByText("="),
+    exponent: getByText("e"),
     decimal: getByText("."),
     zero: zeros[1],
     one: getByText("1"),

@@ -12,7 +12,7 @@ test("only one decimal per number", async () => {
   expectDisplayTextContent(display, "", "1.");
 });
 
-test("prepends decimal with zero", async () => {
+test("appends decimal to zero", async () => {
   const { display, keyPad } = await renderApp();
   const { add, equals, decimal } = keyPad;
 
@@ -77,4 +77,36 @@ test("appends to digits and decimal", async () => {
 
   fireClickEvents([decimal, one, one]);
   expectDisplayTextContent(display, "", "0.11");
+});
+
+test("can add exponent once", async () => {
+  const { display, keyPad } = await renderApp();
+  const { exponent } = keyPad;
+
+  fireClickEvents([exponent, exponent]);
+  expectDisplayTextContent(display, "", "0e");
+});
+
+test("exponent can have two digits", async () => {
+  const { display, keyPad } = await renderApp();
+  const { exponent, one } = keyPad;
+
+  fireClickEvents([exponent, one, one, one]);
+  expectDisplayTextContent(display, "", "0e11");
+});
+
+test("decimal not allowed in exponent", async () => {
+  const { display, keyPad } = await renderApp();
+  const { exponent, decimal } = keyPad;
+
+  fireClickEvents([exponent, decimal]);
+  expectDisplayTextContent(display, "", "0e");
+});
+
+test("appends exponent to zero", async () => {
+  const { display, keyPad } = await renderApp();
+  const { exponent } = keyPad;
+
+  fireClickEvents([exponent]);
+  expectDisplayTextContent(display, "", "0e");
 });

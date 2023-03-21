@@ -1,6 +1,6 @@
 import {
-  expectDisplayTextContent,
   fireClickEvents,
+  getTextContent,
 } from "app/__tests__/test-utils/helpers";
 import renderApp from "app/__tests__/test-utils/render-app";
 
@@ -9,10 +9,10 @@ test("starts new expression from a result", async () => {
   const { add, equals, one } = keyPad;
 
   fireClickEvents([one, add, one, equals]);
-  expectDisplayTextContent(display, "1+1=", "2");
+  expect(getTextContent(display)).toEqual({ expression: "1+1=", input: "2" });
 
   fireClickEvents([add]);
-  expectDisplayTextContent(display, "2", "+");
+  expect(getTextContent(display)).toEqual({ expression: "2", input: "+" });
 });
 
 test("overwrites operator", async () => {
@@ -20,7 +20,7 @@ test("overwrites operator", async () => {
   const { multiply, add } = keyPad;
 
   fireClickEvents([multiply, add]);
-  expectDisplayTextContent(display, "0", "+");
+  expect(getTextContent(display)).toEqual({ expression: "0", input: "+" });
 });
 
 test("appends input to expression", async () => {
@@ -28,5 +28,5 @@ test("appends input to expression", async () => {
   const { add, decimal } = keyPad;
 
   fireClickEvents([add, decimal, add]);
-  expectDisplayTextContent(display, "0+0.", "+");
+  expect(getTextContent(display)).toEqual({ expression: "0+0.", input: "+" });
 });

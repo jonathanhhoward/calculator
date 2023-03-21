@@ -1,6 +1,6 @@
 import {
-  expectDisplayTextContent,
   fireClickEvents,
+  getTextContent,
 } from "app/__tests__/test-utils/helpers";
 import renderApp from "app/__tests__/test-utils/render-app";
 
@@ -9,10 +9,10 @@ test("prepends current input with '-' if positive", async () => {
   const { add, negate, one } = keyPad;
 
   fireClickEvents([one, negate]);
-  expectDisplayTextContent(display, "", "-1");
+  expect(getTextContent(display)).toEqual({ expression: "", input: "-1" });
 
   fireClickEvents([add, one, negate]);
-  expectDisplayTextContent(display, "-1+", "-1");
+  expect(getTextContent(display)).toEqual({ expression: "-1+", input: "-1" });
 });
 
 test("removes '-' from current input if negative", async () => {
@@ -20,10 +20,10 @@ test("removes '-' from current input if negative", async () => {
   const { add, negate, one } = keyPad;
 
   fireClickEvents([one, negate, negate]);
-  expectDisplayTextContent(display, "", "1");
+  expect(getTextContent(display)).toEqual({ expression: "", input: "1" });
 
   fireClickEvents([add, one, negate, negate]);
-  expectDisplayTextContent(display, "1+", "1");
+  expect(getTextContent(display)).toEqual({ expression: "1+", input: "1" });
 });
 
 test("does not negate zero", async () => {
@@ -31,7 +31,7 @@ test("does not negate zero", async () => {
   const { negate } = keyPad;
 
   fireClickEvents([negate]);
-  expectDisplayTextContent(display, "", "0");
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0" });
 });
 
 test("does nothing after operator", async () => {
@@ -39,7 +39,7 @@ test("does nothing after operator", async () => {
   const { add, negate } = keyPad;
 
   fireClickEvents([add, negate]);
-  expectDisplayTextContent(display, "0", "+");
+  expect(getTextContent(display)).toEqual({ expression: "0", input: "+" });
 });
 
 test("keeps expression negates result", async () => {
@@ -47,5 +47,5 @@ test("keeps expression negates result", async () => {
   const { negate, equals, one } = keyPad;
 
   fireClickEvents([one, equals, negate]);
-  expectDisplayTextContent(display, "1=", "-1");
+  expect(getTextContent(display)).toEqual({ expression: "1=", input: "-1" });
 });

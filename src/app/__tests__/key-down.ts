@@ -1,6 +1,6 @@
 import {
-  expectDisplayTextContent,
   fireKeydownEvents,
+  getTextContent,
 } from "app/__tests__/test-utils/helpers";
 import renderApp from "app/__tests__/test-utils/render-app";
 
@@ -25,5 +25,8 @@ test("handles numpad keydown events", async () => {
     "NumpadEnter",
   ]);
 
-  expectDisplayTextContent(display, "1.0+23−45×67÷89=", "-9.876404494");
+  expect(getTextContent(display)).toEqual({
+    expression: "1.0+23−45×67÷89=",
+    input: "-9.876404494",
+  });
 });

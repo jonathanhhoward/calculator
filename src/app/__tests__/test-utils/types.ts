@@ -3,6 +3,11 @@ export interface Display {
   input: HTMLElement;
 }
 
+export interface DisplayTextContent {
+  expression: string | null;
+  input: string | null;
+}
+
 export interface KeyPad {
   clear: HTMLElement;
   del: HTMLElement;
@@ -25,8 +30,3 @@ export interface KeyPad {
   eight: HTMLElement;
   nine: HTMLElement;
 }
-
-export type DisplayTextContent = {
-  expression: string | null;
-  input: string | null;
-};

@@ -11,38 +11,30 @@ export class NumberReducer implements Reducer {
   }
 
   digitClick(state: State, symbol: string): State {
-    if (guard()) return state;
+    const [mantissa, exponent] = state.input.split("e");
+    let input: string;
 
-    return {
-      ...state,
-      input: isOverwriteZero() ? symbol : state.input + symbol,
-    };
+    if (exponent !== undefined) {
+      const isIgnoreSymbol =
+        symbol === "e" ||
+        symbol === "." ||
+        exponent.replace(/-/g, "").length === 2;
 
-    function guard() {
-      const [mantissa, exponent] = state.input.split("e");
-      const mantissaHasTenDigits = mantissa.replace(/[.-]/g, "").length === 10;
-      const exponentHasTwoDigits = exponent
-        ? exponent.replace(/-/g, "").length === 2
-        : null;
-      const inputHasMaxDigits =
-        exponent != null
-          ? exponentHasTwoDigits
-          : mantissaHasTenDigits && symbol !== "e";
-      const isDuplicateDecimal = symbol === "." && state.input.includes(".");
-      const isDuplicateExponent = symbol === "e" && state.input.includes("e");
-      const isDecimalOnExponent = symbol === "." && state.input.includes("e");
+      input = isIgnoreSymbol ? state.input : state.input + symbol;
+    } else {
+      const isOverwriteZero = mantissa === "0" && symbol !== ".";
+      const isIgnoreSymbol =
+        (symbol === "." && mantissa.includes(".")) ||
+        (symbol !== "e" && mantissa.replace(/[.-]/g, "").length === 10);
 
-      return (
-        inputHasMaxDigits ||
-        isDuplicateDecimal ||
-        isDuplicateExponent ||
-        isDecimalOnExponent
-      );
+      input = isIgnoreSymbol
+        ? state.input
+        : isOverwriteZero
+        ? symbol
+        : state.input + symbol;
     }
 
-    function isOverwriteZero() {
-      return state.input === "0" && symbol !== "." && symbol !== "e";
-    }
+    return { ...state, input };
   }
 
   operatorClick(state: State, symbol: string): State {

@@ -32,7 +32,10 @@ export class NumberReducer implements Reducer {
         : state.input + symbol;
     }
 
-    return { ...state, input };
+    return {
+      ...state,
+      input,
+    };
   }
 
   operatorClick(state: State, symbol: string): State {

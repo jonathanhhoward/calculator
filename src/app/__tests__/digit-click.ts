@@ -122,3 +122,11 @@ test("appends exponent to zero", async () => {
   fireClickEvents([exponent]);
   expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
 });
+
+test("exponent overwrites result with leading zero", async () => {
+  const { display, keyPad } = await renderApp();
+  const { equals, exponent } = keyPad;
+
+  fireClickEvents([equals, exponent]);
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
+});

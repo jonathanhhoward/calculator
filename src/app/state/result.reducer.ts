@@ -9,7 +9,7 @@ export class ResultReducer implements Reducer {
   digitClick(state: State, symbol: string): State {
     return {
       expression: "",
-      input: symbol === "." ? "0." : symbol,
+      input: /[.e]/.test(symbol) ? "0" + symbol : symbol,
     };
   }
 
@@ -23,7 +23,7 @@ export class ResultReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: (-Number(state.input)).toString(),
+      input: (-state.input).toString(),
     };
   }
 

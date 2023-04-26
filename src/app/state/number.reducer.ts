@@ -24,12 +24,13 @@ export class NumberReducer implements Reducer {
       const isIgnoreSymbol =
         (symbol === "." && mantissa.includes(".")) ||
         (symbol !== "e" && mantissa.replace(/[.-]/, "").length === 10);
+      const fill = symbol === "e" && mantissa.endsWith(".") ? "0" : "";
 
       input = isIgnoreSymbol
         ? state.input
         : isOverwriteZero
         ? symbol
-        : state.input + symbol;
+        : state.input + fill + symbol;
     }
 
     return {

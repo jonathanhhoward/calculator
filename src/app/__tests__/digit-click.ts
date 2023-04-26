@@ -26,6 +26,14 @@ test("appends decimal to zero", async () => {
   expect(getTextContent(display)).toEqual({ expression: "", input: "0." });
 });
 
+test("appends zero to decimal before exponent", async () => {
+  const { display, keyPad } = await renderApp();
+  const { exponent, decimal } = keyPad;
+
+  fireClickEvents([decimal, exponent]);
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0.0e" });
+});
+
 test("limited to 10", async () => {
   const { display, keyPad } = await renderApp();
   const { clear, add, negate, equals, decimal, one } = keyPad;

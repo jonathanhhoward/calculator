@@ -16,14 +16,11 @@ export class NumberReducer implements Reducer {
 
     if (exponent !== undefined) {
       const isIgnoreSymbol =
-        symbol === "e" ||
-        symbol === "." ||
-        exponent.replace(/-/g, "").length === 2;
+        /[.e]/.test(symbol) || exponent.replace(/-/g, "").length === 2;
 
       input = isIgnoreSymbol ? state.input : state.input + symbol;
     } else {
-      const isOverwriteZero =
-        mantissa === "0" && symbol !== "." && symbol !== "e";
+      const isOverwriteZero = mantissa === "0" && !/[.e]/.test(symbol);
       const isIgnoreSymbol =
         (symbol === "." && mantissa.includes(".")) ||
         (symbol !== "e" && mantissa.replace(/[.-]/g, "").length === 10);

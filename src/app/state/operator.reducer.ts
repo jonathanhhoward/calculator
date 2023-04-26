@@ -10,7 +10,7 @@ export class OperatorReducer implements Reducer {
   digitClick(state: State, symbol: string): State {
     return {
       expression: state.expression + state.input,
-      input: symbol === "." ? "0." : symbol,
+      input: /[.e]/.test(symbol) ? "0" + symbol : symbol,
     };
   }
 

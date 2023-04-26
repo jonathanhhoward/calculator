@@ -91,6 +91,17 @@ test("appends to digits and decimal", async () => {
   expect(getTextContent(display)).toEqual({ expression: "", input: "0.11" });
 });
 
+test("appends exponent to zero", async () => {
+  const { display, keyPad } = await renderApp();
+  const { equals, exponent, add } = keyPad;
+
+  fireClickEvents([exponent, add, exponent]);
+  expect(getTextContent(display)).toEqual({ expression: "0e0+", input: "0e" });
+
+  fireClickEvents([equals, exponent]);
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
+});
+
 test("can add exponent once", async () => {
   const { display, keyPad } = await renderApp();
   const { exponent } = keyPad;
@@ -112,21 +123,5 @@ test("decimal not allowed in exponent", async () => {
   const { exponent, decimal } = keyPad;
 
   fireClickEvents([exponent, decimal]);
-  expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
-});
-
-test("appends exponent to zero", async () => {
-  const { display, keyPad } = await renderApp();
-  const { exponent } = keyPad;
-
-  fireClickEvents([exponent]);
-  expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
-});
-
-test("exponent overwrites result with leading zero", async () => {
-  const { display, keyPad } = await renderApp();
-  const { equals, exponent } = keyPad;
-
-  fireClickEvents([equals, exponent]);
   expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
 });

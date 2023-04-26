@@ -25,10 +25,10 @@ test("overwrites operator", async () => {
 
 test("appends input to expression", async () => {
   const { display, keyPad } = await renderApp();
-  const { add, decimal } = keyPad;
+  const { add, zero } = keyPad;
 
-  fireClickEvents([add, decimal, add]);
-  expect(getTextContent(display)).toEqual({ expression: "0+0.", input: "+" });
+  fireClickEvents([add, zero, add]);
+  expect(getTextContent(display)).toEqual({ expression: "0+0", input: "+" });
 });
 
 test("appends zero to empty exponent", async () => {
@@ -37,4 +37,12 @@ test("appends zero to empty exponent", async () => {
 
   fireClickEvents([exponent, add]);
   expect(getTextContent(display)).toEqual({ expression: "0e0", input: "+" });
+});
+
+test("appends zero to decimal", async () => {
+  const { display, keyPad } = await renderApp();
+  const { add, decimal } = keyPad;
+
+  fireClickEvents([decimal, add]);
+  expect(getTextContent(display)).toEqual({ expression: "0.0", input: "+" });
 });

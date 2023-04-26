@@ -35,3 +35,11 @@ test("appends zero to empty exponent", async () => {
   fireClickEvents([exponent, equals]);
   expect(getTextContent(display)).toEqual({ expression: "0e0=", input: "0" });
 });
+
+test("appends zero to decimal", async () => {
+  const { display, keyPad } = await renderApp();
+  const { equals, decimal } = keyPad;
+
+  fireClickEvents([decimal, equals]);
+  expect(getTextContent(display)).toEqual({ expression: "0.0=", input: "0" });
+});

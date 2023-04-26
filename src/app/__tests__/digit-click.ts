@@ -14,12 +14,15 @@ test("only one decimal per number", async () => {
 
 test("appends decimal to zero", async () => {
   const { display, keyPad } = await renderApp();
-  const { add, equals, decimal } = keyPad;
+  const { clear, add, equals, decimal } = keyPad;
 
-  fireClickEvents([decimal, add, decimal]);
-  expect(getTextContent(display)).toEqual({ expression: "0.+", input: "0." });
+  fireClickEvents([decimal]);
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0." });
 
-  fireClickEvents([equals, decimal]);
+  fireClickEvents([clear, add, decimal]);
+  expect(getTextContent(display)).toEqual({ expression: "0+", input: "0." });
+
+  fireClickEvents([clear, equals, decimal]);
   expect(getTextContent(display)).toEqual({ expression: "", input: "0." });
 });
 

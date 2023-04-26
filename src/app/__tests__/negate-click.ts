@@ -49,3 +49,14 @@ test("keeps expression negates result", async () => {
   fireClickEvents([one, equals, negate]);
   expect(getTextContent(display)).toEqual({ expression: "1=", input: "-1" });
 });
+
+test("negates exponent when present", async () => {
+  const { display, keyPad } = await renderApp();
+  const { negate, exponent, one } = keyPad;
+
+  fireClickEvents([exponent, one, negate]);
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0e-1" });
+
+  fireClickEvents([negate]);
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0e1" });
+});

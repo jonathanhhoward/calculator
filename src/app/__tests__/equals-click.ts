@@ -27,3 +27,11 @@ test("appends to expression and displays result", async () => {
   fireClickEvents([one, add, one, equals]);
   expect(getTextContent(display)).toEqual({ expression: "1+1=", input: "2" });
 });
+
+test("appends zero to empty exponent", async () => {
+  const { display, keyPad } = await renderApp();
+  const { equals, exponent } = keyPad;
+
+  fireClickEvents([exponent, equals]);
+  expect(getTextContent(display)).toEqual({ expression: "0e0=", input: "0" });
+});

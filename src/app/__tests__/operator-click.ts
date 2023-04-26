@@ -30,3 +30,11 @@ test("appends input to expression", async () => {
   fireClickEvents([add, decimal, add]);
   expect(getTextContent(display)).toEqual({ expression: "0+0.", input: "+" });
 });
+
+test("appends zero to empty exponent", async () => {
+  const { display, keyPad } = await renderApp();
+  const { add, exponent } = keyPad;
+
+  fireClickEvents([exponent, add]);
+  expect(getTextContent(display)).toEqual({ expression: "0e0", input: "+" });
+});

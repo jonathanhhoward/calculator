@@ -9,10 +9,10 @@ import { BehaviorSubject, Observable } from "rxjs";
 @Injectable({ providedIn: "root" })
 export class StateService {
   private readonly initialState: State = { expression: "", input: "0" };
-  private readonly numberReducer: Reducer = new NumberReducer();
-  private readonly operatorReducer: Reducer = new OperatorReducer();
-  private readonly resultReducer: Reducer = new ResultReducer();
   private readonly stateSubject = new BehaviorSubject(this.initialState);
+  private readonly numberReducer = new NumberReducer();
+  private readonly operatorReducer = new OperatorReducer();
+  private readonly resultReducer = new ResultReducer();
   private reducer: Reducer = this.numberReducer;
 
   get state$(): Observable<State> {

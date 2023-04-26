@@ -48,9 +48,7 @@ export class NumberReducer implements Reducer {
     return {
       ...state,
       input:
-        exponent !== undefined
-          ? `${mantissa}e${-exponent}`
-          : (-mantissa).toString(),
+        exponent !== undefined ? `${mantissa}e${-exponent}` : `${-mantissa}`,
     };
   }
 

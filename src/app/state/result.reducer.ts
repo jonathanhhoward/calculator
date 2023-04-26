@@ -23,7 +23,7 @@ export class ResultReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: (-state.input).toString(),
+      input: `${-state.input}`,
     };
   }
 

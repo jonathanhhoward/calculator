@@ -34,7 +34,7 @@ test("does not negate zero", async () => {
   expect(getTextContent(display)).toEqual({ expression: "", input: "0" });
 });
 
-test("does nothing after operator", async () => {
+test("ignored with operator", async () => {
   const { display, keyPad } = await renderApp();
   const { add, negate } = keyPad;
 
@@ -59,4 +59,12 @@ test("negates exponent when present", async () => {
 
   fireClickEvents([negate]);
   expect(getTextContent(display)).toEqual({ expression: "", input: "0e1" });
+});
+
+test("ignored with empty exponent", async () => {
+  const { display, keyPad } = await renderApp();
+  const { negate, exponent } = keyPad;
+
+  fireClickEvents([exponent, negate]);
+  expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
 });

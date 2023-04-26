@@ -45,11 +45,15 @@ export class NumberReducer implements Reducer {
 
   negateClick(state: State): State {
     const [mantissa, exponent] = state.input.split("e");
-    return {
-      ...state,
-      input:
-        exponent !== undefined ? `${mantissa}e${-exponent}` : `${-mantissa}`,
-    };
+    return state.input.endsWith("e")
+      ? state
+      : {
+          ...state,
+          input:
+            exponent !== undefined
+              ? `${mantissa}e${-exponent}`
+              : `${-mantissa}`,
+        };
   }
 
   equalsClick(state: State): State {

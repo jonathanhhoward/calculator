@@ -20,9 +20,7 @@ function setPrecision10(n: number): string {
   const absNumber = Math.abs(n);
 
   const precision10 =
-    1e-6 <= absNumber && absNumber < 1
-      ? Number(n.toFixed(9))
-      : Number(n.toPrecision(10));
+    1e-6 <= absNumber && absNumber < 1 ? +n.toFixed(9) : +n.toPrecision(10);
 
   return absNumber < 1e-6 || 1e10 <= absNumber
     ? precision10.toExponential()

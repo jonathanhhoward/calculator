@@ -16,6 +16,6 @@ export class EqualsKeyComponent {
   }
 
   handleClick() {
-    this.stateService.onEqualsClick();
+    this.stateService.equalsClick();
   }
 }

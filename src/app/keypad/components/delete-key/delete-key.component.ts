@@ -9,6 +9,6 @@ export class DeleteKeyComponent {
   constructor(private stateService: StateService) {}
 
   handleClick() {
-    this.stateService.onDeleteClick();
+    this.stateService.deleteClick();
   }
 }

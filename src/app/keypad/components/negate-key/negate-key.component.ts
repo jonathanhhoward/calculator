@@ -9,6 +9,6 @@ export class NegateKeyComponent {
   constructor(private stateService: StateService) {}
 
   handleClick() {
-    this.stateService.onNegateClick();
+    this.stateService.negateClick();
   }
 }

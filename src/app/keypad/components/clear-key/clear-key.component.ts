@@ -9,6 +9,6 @@ export class ClearKeyComponent {
   constructor(private stateService: StateService) {}
 
   handleClick() {
-    this.stateService.onClearClick();
+    this.stateService.clearClick();
   }
 }

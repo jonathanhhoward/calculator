@@ -19,6 +19,6 @@ export class DigitKeyComponent {
   }
 
   handleClick() {
-    this.stateService.onDigitClick(this.symbol);
+    this.stateService.digitClick(this.symbol);
   }
 }

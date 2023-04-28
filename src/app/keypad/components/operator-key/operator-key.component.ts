@@ -19,7 +19,7 @@ export class OperatorKeyComponent {
   }
 
   handleClick() {
-    this.stateService.onOperatorClick(this.symbol);
+    this.stateService.operatorClick(this.symbol);
   }
 
   private mapCodeToSymbol(code: string): string {

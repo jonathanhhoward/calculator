@@ -30,30 +30,30 @@ export class StateService {
     this.stateSubject.next(state);
   }
 
-  onClearClick(): void {
+  clearClick(): void {
     this.state = this.initialState;
     this.reducer = this.numberReducer;
   }
 
-  onDeleteClick(): void {
+  deleteClick(): void {
     this.state = this.reducer.deleteClick(this.state);
   }
 
-  onDigitClick(symbol: string): void {
+  digitClick(symbol: string): void {
     this.state = this.reducer.digitClick(this.state, symbol);
     this.reducer = this.numberReducer;
   }
 
-  onOperatorClick(symbol: string): void {
+  operatorClick(symbol: string): void {
     this.state = this.reducer.operatorClick(this.state, symbol);
     this.reducer = this.operatorReducer;
   }
 
-  onNegateClick(): void {
+  negateClick(): void {
     this.state = this.reducer.negateClick(this.state);
   }
 
-  onEqualsClick(): void {
+  equalsClick(): void {
     this.state = this.reducer.equalsClick(this.state);
     this.reducer = this.resultReducer;
   }

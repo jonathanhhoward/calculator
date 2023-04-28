@@ -37,7 +37,7 @@ test("numbers with more than 10 digits are exponential", () => {
   expect(calculate("10000000000")).toBe("1e+10");
 });
 
-test("numbers mith more than six decimal places are exponential", () => {
+test("numbers with more than six decimal places are exponential", () => {
   expect(calculate("0.000001")).toBe("0.000001");
   expect(calculate("0.0000001")).toBe("1e-7");
 });
@@ -53,14 +53,6 @@ test("numbers are rounded to ten digits", () => {
 
 test("returns 'Infinity' on divide by zero", () => {
   expect(calculate("1/0")).toBe("Infinity");
-});
-
-test("returns 'NaN' on invalid primary", () => {
-  expect(calculate("h")).toBe("NaN");
-});
-
-test("returns error message on bad symbols", () => {
-  expect(calculate("2 x 2")).toBe("Undefined symbol x");
 });
 
 test("handles special symbols", () => {

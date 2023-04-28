@@ -61,10 +61,11 @@ export class NumberReducer implements Reducer {
   }
 
   equalsClick(state: State): State {
-    const tag = /[.e]/.test(state.input.slice(-1)) ? "0=" : "=";
+    const tag = /[.e]/.test(state.input.slice(-1)) ? "0" : "";
+    const expression = state.expression + state.input + tag;
     return {
-      expression: state.expression + state.input + tag,
-      input: calculate(state.expression + state.input),
+      expression: expression + "=",
+      input: calculate(expression),
     };
   }
 }

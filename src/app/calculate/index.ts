@@ -1,8 +1,9 @@
 import { evaluate } from "mathjs";
 
 export function calculate(expression: string): string {
+  const expr = normalizeOperators(expression);
   try {
-    return setPrecision10(evaluate(normalizeOperators(expression)));
+    return setPrecision10(evaluate(expr));
   } catch (e) {
     return (<Error>e).message;
   }
@@ -13,8 +14,6 @@ function normalizeOperators(expression: string) {
 }
 
 function setPrecision10(n: number): string {
-  if (isNaN(n)) return NaN.toString();
-
   if (n === 0) return "0";
 
   const absNumber = Math.abs(n);

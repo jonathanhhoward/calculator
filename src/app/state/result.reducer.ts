@@ -24,7 +24,7 @@ export class ResultReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: calculate("-" + state.input),
+      input: calculate(`-${state.input}`),
     };
   }
 

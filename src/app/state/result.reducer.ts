@@ -1,8 +1,12 @@
-import { calculate } from "app/calculate";
+import { Injectable } from "@angular/core";
+import { Calculator } from "app/calculator/calculator";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 
+@Injectable({ providedIn: "root" })
 export class ResultReducer implements Reducer {
+  constructor(private calculator: Calculator) {}
+
   deleteClick(state: State): State {
     return state;
   }
@@ -24,7 +28,7 @@ export class ResultReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: calculate(`-${state.input}`),
+      input: this.calculator.eval(`-${state.input}`),
     };
   }
 

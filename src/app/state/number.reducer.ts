@@ -1,8 +1,12 @@
-import { calculate } from "app/calculate";
+import { Injectable } from "@angular/core";
+import { Calculator } from "app/calculator/calculator";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 
+@Injectable({ providedIn: "root" })
 export class NumberReducer implements Reducer {
+  constructor(private calculator: Calculator) {}
+
   deleteClick(state: State): State {
     return {
       ...state,
@@ -65,7 +69,7 @@ export class NumberReducer implements Reducer {
     const expression = state.expression + state.input + tag;
     return {
       expression: expression + "=",
-      input: calculate(expression),
+      input: this.calculator.eval(expression),
     };
   }
 }

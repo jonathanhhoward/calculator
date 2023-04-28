@@ -50,7 +50,7 @@ test("keeps expression negates result", async () => {
   expect(getTextContent(display)).toEqual({ expression: "1=", input: "-1" });
 });
 
-test("negates exponent when present", async () => {
+test("negates exponent when entering exponent", async () => {
   const { display, keyPad } = await renderApp();
   const { negate, exponent, one } = keyPad;
 
@@ -59,6 +59,23 @@ test("negates exponent when present", async () => {
 
   fireClickEvents([negate]);
   expect(getTextContent(display)).toEqual({ expression: "", input: "0e1" });
+});
+
+test("negates mantissa when result", async () => {
+  const { display, keyPad } = await renderApp();
+  const { negate, equals, exponent, zero, one } = keyPad;
+
+  fireClickEvents([one, exponent, one, zero, equals, negate]);
+  expect(getTextContent(display)).toEqual({
+    expression: "1e10=",
+    input: "-1e+10",
+  });
+
+  fireClickEvents([negate]);
+  expect(getTextContent(display)).toEqual({
+    expression: "1e10=",
+    input: "1e+10",
+  });
 });
 
 test("ignored with empty exponent", async () => {

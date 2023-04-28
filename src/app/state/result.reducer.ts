@@ -1,3 +1,4 @@
+import { calculate } from "app/calculate";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 
@@ -23,7 +24,7 @@ export class ResultReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: `${-state.input}`,
+      input: calculate("-" + state.input),
     };
   }
 

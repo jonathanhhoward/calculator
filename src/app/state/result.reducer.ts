@@ -12,9 +12,10 @@ export class ResultReducer implements Reducer {
   }
 
   digitClick(state: State, symbol: string): State {
+    const tag = symbol === "e" ? "0" : "";
     return {
       expression: "",
-      input: /[.e]/.test(symbol) ? "0" + symbol : symbol,
+      input: /[.e]/.test(symbol) ? "0" + symbol + tag : symbol,
     };
   }
 

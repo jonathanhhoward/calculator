@@ -77,11 +77,3 @@ test("negates mantissa when result", async () => {
     input: "1e+10",
   });
 });
-
-test("ignored with empty exponent", async () => {
-  const { display, keyPad } = await renderApp();
-  const { negate, exponent } = keyPad;
-
-  fireClickEvents([exponent, negate]);
-  expect(getTextContent(display)).toEqual({ expression: "", input: "0e" });
-});

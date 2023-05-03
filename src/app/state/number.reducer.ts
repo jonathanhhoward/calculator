@@ -19,22 +19,28 @@ export class NumberReducer implements Reducer {
     let input: string;
 
     if (exponent !== undefined) {
+      const isOverwriteZero = exponent === "0";
       const isIgnoreSymbol =
         /[.e]/.test(symbol) || exponent.replace(/-/, "").length === 2;
 
-      input = isIgnoreSymbol ? state.input : state.input + symbol;
+      input = isIgnoreSymbol
+        ? state.input
+        : isOverwriteZero
+        ? `${mantissa}e${symbol}`
+        : state.input + symbol;
     } else {
       const isOverwriteZero = mantissa === "0" && !/[.e]/.test(symbol);
       const isIgnoreSymbol =
         (symbol === "." && mantissa.includes(".")) ||
         (symbol !== "e" && mantissa.replace(/[.-]/, "").length === 10);
       const fill = symbol === "e" && mantissa.endsWith(".") ? "0" : "";
+      const tag = symbol === "e" ? "0" : "";
 
       input = isIgnoreSymbol
         ? state.input
         : isOverwriteZero
         ? symbol
-        : state.input + fill + symbol;
+        : state.input + fill + symbol + tag;
     }
 
     return {
@@ -53,15 +59,11 @@ export class NumberReducer implements Reducer {
 
   negateClick(state: State): State {
     const [mantissa, exponent] = state.input.split("e");
-    return state.input.endsWith("e")
-      ? state
-      : {
-          ...state,
-          input:
-            exponent !== undefined
-              ? `${mantissa}e${-exponent}`
-              : `${-mantissa}`,
-        };
+    return {
+      ...state,
+      input:
+        exponent !== undefined ? `${mantissa}e${-exponent}` : `${-mantissa}`,
+    };
   }
 
   equalsClick(state: State): State {

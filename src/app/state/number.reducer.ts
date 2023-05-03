@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Calculator } from "app/calculator/calculator";
+import { Digit, FloatingPoint } from "app/models/floating-point";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 
@@ -15,37 +16,9 @@ export class NumberReducer implements Reducer {
   }
 
   digitClick(state: State, symbol: string): State {
-    const [mantissa, exponent] = state.input.split("e");
-    let input: string;
-
-    if (exponent !== undefined) {
-      const isOverwriteZero = exponent === "0";
-      const isIgnoreSymbol =
-        /[.e]/.test(symbol) || exponent.replace(/-/, "").length === 2;
-
-      input = isIgnoreSymbol
-        ? state.input
-        : isOverwriteZero
-        ? `${mantissa}e${symbol}`
-        : state.input + symbol;
-    } else {
-      const isOverwriteZero = mantissa === "0" && !/[.e]/.test(symbol);
-      const isIgnoreSymbol =
-        (symbol === "." && mantissa.includes(".")) ||
-        (symbol !== "e" && mantissa.replace(/[.-]/, "").length === 10);
-      const fill = symbol === "e" && mantissa.endsWith(".") ? "0" : "";
-      const tag = symbol === "e" ? "0" : "";
-
-      input = isIgnoreSymbol
-        ? state.input
-        : isOverwriteZero
-        ? symbol
-        : state.input + fill + symbol + tag;
-    }
-
     return {
       ...state,
-      input,
+      input: new FloatingPoint(state.input).append(symbol as Digit).value,
     };
   }
 

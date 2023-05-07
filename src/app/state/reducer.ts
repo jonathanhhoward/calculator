@@ -1,4 +1,4 @@
-import { Digit } from "app/models/types";
+import { Digit, Operator } from "app/models/types";
 import { State } from "app/state/state";
 
 export interface Reducer {
@@ -6,7 +6,7 @@ export interface Reducer {
 
   digitClick(state: State, symbol: Digit): State;
 
-  operatorClick(state: State, symbol: string): State;
+  operatorClick(state: State, symbol: Operator): State;
 
   negateClick(state: State): State;
 

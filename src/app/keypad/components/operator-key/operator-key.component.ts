@@ -1,4 +1,5 @@
 import { Component, HostListener, Input } from "@angular/core";
+import { Operator } from "app/models/types";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -6,7 +7,7 @@ import { StateService } from "app/state/state.service";
   templateUrl: "./operator-key.component.html",
 })
 export class OperatorKeyComponent {
-  @Input() symbol = "";
+  @Input() symbol!: Operator;
 
   constructor(private stateService: StateService) {}
 

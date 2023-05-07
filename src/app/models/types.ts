@@ -11,3 +11,5 @@ export type Digit =
   | "9"
   | "."
   | "e";
+
+export type Operator = "+" | "−" | "×" | "÷";

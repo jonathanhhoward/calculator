@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Digit } from "app/models/types";
+import { Digit, Operator } from "app/models/types";
 import { NumberReducer } from "app/state/number.reducer";
 import { OperatorReducer } from "app/state/operator.reducer";
 import { Reducer } from "app/state/reducer";
@@ -45,7 +45,7 @@ export class StateService {
     this.reducer = this.numberReducer;
   }
 
-  operatorClick(symbol: string): void {
+  operatorClick(symbol: Operator): void {
     this.state = this.reducer.operatorClick(this.state, symbol);
     this.reducer = this.operatorReducer;
   }

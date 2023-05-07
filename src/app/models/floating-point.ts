@@ -15,32 +15,37 @@ export class FloatingPoint {
   }
 
   append(digit: Digit): FloatingPoint {
-    let input: string;
+    const float =
+      this.exponent !== undefined
+        ? this.appendToExponent(digit)
+        : this.appendToMantissa(digit);
 
-    if (this.exponent !== undefined) {
-      const isOverwriteZero = this.exponent === "0";
-      const isIgnoreSymbol =
-        /[.e]/.test(digit) || this.exponent.replace(/-/, "").length === 2;
+    return new FloatingPoint(float);
+  }
 
-      input = isIgnoreSymbol
-        ? this.value
-        : isOverwriteZero
-        ? this.mantissa + "e" + digit
-        : this.value + digit;
-    } else {
-      const isOverwriteZero = this.mantissa === "0" && !/[.e]/.test(digit);
-      const isIgnoreSymbol =
-        (digit === "." && this.mantissa.includes(".")) ||
-        (digit !== "e" && this.mantissa.replace(/[.-]/, "").length === 10);
-      const tag = digit === "e" ? "0" : "";
+  private appendToMantissa(digit: Digit) {
+    const isOverwriteZero = this.mantissa === "0" && !/[.e]/.test(digit);
+    const isIgnoreSymbol =
+      (digit === "." && this.mantissa.includes(".")) ||
+      (digit !== "e" && this.mantissa.replace(/[.-]/, "").length === 10);
+    const tag = digit === "e" ? "0" : "";
 
-      input = isIgnoreSymbol
-        ? this.value
-        : isOverwriteZero
-        ? digit
-        : this.value + digit + tag;
-    }
+    return isIgnoreSymbol
+      ? this.value
+      : isOverwriteZero
+      ? digit
+      : this.value + digit + tag;
+  }
 
-    return new FloatingPoint(input);
+  private appendToExponent(digit: Digit) {
+    const isOverwriteZero = this.exponent === "0";
+    const isIgnoreSymbol =
+      /[.e]/.test(digit) || this.exponent?.replace(/-/, "").length === 2;
+
+    return isIgnoreSymbol
+      ? this.value
+      : isOverwriteZero
+      ? this.mantissa + "e" + digit
+      : this.value + digit;
   }
 }

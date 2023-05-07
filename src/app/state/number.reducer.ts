@@ -23,7 +23,7 @@ export class NumberReducer implements Reducer {
   }
 
   operatorClick(state: State, symbol: string): State {
-    const tag = /[.e]/.test(state.input.slice(-1)) ? "0" : "";
+    const tag = state.input.endsWith(".") ? "0" : "";
     return {
       expression: state.expression + state.input + tag,
       input: symbol,
@@ -40,7 +40,7 @@ export class NumberReducer implements Reducer {
   }
 
   equalsClick(state: State): State {
-    const tag = /[.e]/.test(state.input.slice(-1)) ? "0" : "";
+    const tag = state.input.endsWith(".") ? "0" : "";
     const expression = state.expression + state.input + tag;
     return {
       expression: expression + "=",

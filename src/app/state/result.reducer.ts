@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Calculator } from "app/calculator/calculator";
+import { Digit, FloatingPoint } from "app/models/floating-point";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 
@@ -12,10 +13,9 @@ export class ResultReducer implements Reducer {
   }
 
   digitClick(state: State, symbol: string): State {
-    const tag = symbol === "e" ? "0" : "";
     return {
       expression: "",
-      input: /[.e]/.test(symbol) ? "0" + symbol + tag : symbol,
+      input: new FloatingPoint("0").append(symbol as Digit).value,
     };
   }
 

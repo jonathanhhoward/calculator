@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Calculator } from "app/calculator/calculator";
-import { Digit, FloatingPoint } from "app/models/floating-point";
+import { FloatingPoint } from "app/models/floating-point";
+import { Digit } from "app/models/types";
 import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 

@@ -12,7 +12,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 export class StateService {
   private readonly initialState: State = {
     expression: "",
-    input: new FloatingPoint("0"),
+    input: new FloatingPoint(),
   };
   private readonly stateSubject = new BehaviorSubject(this.initialState);
   private reducer: Reducer = this.numberReducer;

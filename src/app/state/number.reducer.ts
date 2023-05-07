@@ -19,9 +19,7 @@ export class NumberReducer implements Reducer {
   digitClick(state: State, symbol: Digit): State {
     return {
       ...state,
-      input: new FloatingPoint((state.input as FloatingPoint).value).append(
-        symbol
-      ),
+      input: new FloatingPoint(state.input as FloatingPoint).append(symbol),
     };
   }
 

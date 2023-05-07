@@ -1,11 +1,18 @@
 import { Digit } from "app/models/types";
 
 export class FloatingPoint {
-  private mantissa: string;
-  private exponent: string | undefined;
+  private readonly mantissa: string;
+  private readonly exponent?: string;
 
-  constructor(float: string) {
-    [this.mantissa, this.exponent] = float.split("e");
+  constructor();
+  constructor(float: string | FloatingPoint);
+  constructor(float?: string | FloatingPoint) {
+    [this.mantissa, this.exponent] =
+      float instanceof FloatingPoint
+        ? float.value.split("e")
+        : typeof float === "string"
+        ? float.split("e")
+        : ["0"];
   }
 
   get value() {

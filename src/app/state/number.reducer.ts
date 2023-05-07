@@ -16,10 +16,10 @@ export class NumberReducer implements Reducer {
     };
   }
 
-  digitClick(state: State, symbol: string): State {
+  digitClick(state: State, symbol: Digit): State {
     return {
       ...state,
-      input: new FloatingPoint(state.input).append(symbol as Digit).value,
+      input: new FloatingPoint(state.input).append(symbol).value,
     };
   }
 

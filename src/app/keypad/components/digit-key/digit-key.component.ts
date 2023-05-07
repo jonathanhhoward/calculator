@@ -1,4 +1,5 @@
 import { Component, HostListener, Input } from "@angular/core";
+import { Digit } from "app/models/types";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -6,7 +7,7 @@ import { StateService } from "app/state/state.service";
   templateUrl: "./digit-key.component.html",
 })
 export class DigitKeyComponent {
-  @Input() symbol = "";
+  @Input() symbol!: Digit;
 
   constructor(private stateService: StateService) {}
 

@@ -13,10 +13,10 @@ export class ResultReducer implements Reducer {
     return state;
   }
 
-  digitClick(state: State, symbol: string): State {
+  digitClick(state: State, symbol: Digit): State {
     return {
       expression: "",
-      input: new FloatingPoint("0").append(symbol as Digit).value,
+      input: new FloatingPoint("0").append(symbol).value,
     };
   }
 

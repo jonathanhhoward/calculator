@@ -17,15 +17,15 @@ export class FloatingPoint {
 
   get value(): string {
     return (
-      this.mantissa + (this.exponent !== undefined ? "e" + this.exponent : "")
+      this.mantissa + (this.exponent === undefined ? "" : "e" + this.exponent)
     );
   }
 
   append(digit: Digit): FloatingPoint {
     const float =
-      this.exponent !== undefined
-        ? this.appendToExponent(digit)
-        : this.appendToMantissa(digit);
+      this.exponent === undefined
+        ? this.appendToMantissa(digit)
+        : this.appendToExponent(digit);
 
     return new FloatingPoint(float);
   }

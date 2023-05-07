@@ -15,7 +15,7 @@ export class FloatingPoint {
         : ["0"];
   }
 
-  get value() {
+  get value(): string {
     return (
       this.mantissa + (this.exponent !== undefined ? "e" + this.exponent : "")
     );

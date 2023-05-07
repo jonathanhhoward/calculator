@@ -12,14 +12,14 @@ export class NumberReducer implements Reducer {
   deleteClick(state: State): State {
     return {
       ...state,
-      input: new FloatingPoint("0"),
+      input: new FloatingPoint(),
     };
   }
 
   digitClick(state: State, symbol: Digit): State {
     return {
       ...state,
-      input: new FloatingPoint(state.input as FloatingPoint).append(symbol),
+      input: (state.input as FloatingPoint).append(symbol),
     };
   }
 

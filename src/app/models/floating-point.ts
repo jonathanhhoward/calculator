@@ -4,15 +4,9 @@ export class FloatingPoint {
   private readonly mantissa: string;
   private readonly exponent?: string;
 
-  constructor();
-  constructor(float: string | FloatingPoint);
-  constructor(float?: string | FloatingPoint) {
+  constructor(float?: string) {
     [this.mantissa, this.exponent] =
-      float instanceof FloatingPoint
-        ? float.value.split("e")
-        : typeof float === "string"
-        ? float.split("e")
-        : ["0"];
+      float === undefined ? ["0"] : float.split("e");
   }
 
   get value(): string {

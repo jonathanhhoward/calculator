@@ -23,9 +23,8 @@ export class NumberReducer implements Reducer {
   }
 
   operatorClick(state: State, symbol: string): State {
-    const tag = state.input.endsWith(".") ? "0" : "";
     return {
-      expression: state.expression + state.input + tag,
+      expression: state.expression + state.input,
       input: symbol,
     };
   }
@@ -40,8 +39,7 @@ export class NumberReducer implements Reducer {
   }
 
   equalsClick(state: State): State {
-    const tag = state.input.endsWith(".") ? "0" : "";
-    const expression = state.expression + state.input + tag;
+    const expression = state.expression + state.input;
     return {
       expression: expression + "=",
       input: this.calculator.eval(expression),

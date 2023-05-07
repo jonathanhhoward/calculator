@@ -35,14 +35,13 @@ export class FloatingPoint {
       const isIgnoreSymbol =
         (digit === "." && this.mantissa.includes(".")) ||
         (digit !== "e" && this.mantissa.replace(/[.-]/, "").length === 10);
-      const fill = digit === "e" && this.mantissa.endsWith(".") ? "0" : "";
       const tag = digit === "e" ? "0" : "";
 
       input = isIgnoreSymbol
         ? this.value
         : isOverwriteZero
         ? digit
-        : this.value + fill + digit + tag;
+        : this.value + digit + tag;
     }
 
     return new FloatingPoint(input);

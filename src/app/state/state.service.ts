@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { FloatingPoint } from "app/models/floating-point";
 import { Digit, Operator } from "app/models/types";
 import { NumberReducer } from "app/state/number.reducer";
 import { OperatorReducer } from "app/state/operator.reducer";
@@ -9,7 +10,10 @@ import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class StateService {
-  private readonly initialState: State = { expression: "", input: "0" };
+  private readonly initialState: State = {
+    expression: "",
+    input: new FloatingPoint("0"),
+  };
   private readonly stateSubject = new BehaviorSubject(this.initialState);
   private reducer: Reducer = this.numberReducer;
 

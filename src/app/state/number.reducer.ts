@@ -12,14 +12,16 @@ export class NumberReducer implements Reducer {
   deleteClick(state: State): State {
     return {
       ...state,
-      input: "0",
+      input: new FloatingPoint("0"),
     };
   }
 
   digitClick(state: State, symbol: Digit): State {
     return {
       ...state,
-      input: new FloatingPoint(state.input).append(symbol).value,
+      input: new FloatingPoint((state.input as FloatingPoint).value).append(
+        symbol
+      ),
     };
   }
 
@@ -31,11 +33,14 @@ export class NumberReducer implements Reducer {
   }
 
   negateClick(state: State): State {
-    const [mantissa, exponent] = state.input.split("e");
+    const [mantissa, exponent] = (state.input as FloatingPoint).value.split(
+      "e"
+    );
     return {
       ...state,
-      input:
-        exponent !== undefined ? `${mantissa}e${-exponent}` : `${-mantissa}`,
+      input: new FloatingPoint(
+        exponent !== undefined ? `${mantissa}e${-exponent}` : `${-mantissa}`
+      ),
     };
   }
 

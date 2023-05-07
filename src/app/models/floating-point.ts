@@ -23,6 +23,10 @@ export class FloatingPoint {
     return new FloatingPoint(float);
   }
 
+  toString() {
+    return this.value;
+  }
+
   private appendToMantissa(digit: Digit) {
     const isOverwriteZero = this.mantissa === "0" && !/[.e]/.test(digit);
     const isIgnoreSymbol =

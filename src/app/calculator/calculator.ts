@@ -1,14 +1,16 @@
 import { Injectable } from "@angular/core";
+import { FloatingPoint } from "app/models/floating-point";
 import { evaluate } from "mathjs";
 
 @Injectable({ providedIn: "root" })
 export class Calculator {
-  eval(expression: string): string {
+  eval(expression: string): FloatingPoint | Error {
     const expr = this.normalizeOperators(expression);
     try {
-      return this.setPrecision10(evaluate(expr));
+      const result = this.setPrecision10(evaluate(expr));
+      return new FloatingPoint(result);
     } catch (e) {
-      return (<Error>e).message;
+      return e as Error;
     }
   }
 

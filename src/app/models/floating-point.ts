@@ -16,12 +16,12 @@ export class FloatingPoint {
   }
 
   append(digit: Digit): FloatingPoint {
-    const float =
+    const appended =
       this.exponent === undefined
         ? this.appendToMantissa(digit)
         : this.appendToExponent(digit);
 
-    return new FloatingPoint(float);
+    return new FloatingPoint(appended);
   }
 
   toString() {

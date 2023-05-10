@@ -19,7 +19,7 @@ export class NumberReducer implements Reducer {
   digitClick(state: State, symbol: Digit): State {
     return {
       ...state,
-      input: (state.input as FloatingPoint).append(symbol),
+      input: (<FloatingPoint>state.input).append(symbol),
     };
   }
 
@@ -31,14 +31,10 @@ export class NumberReducer implements Reducer {
   }
 
   negateClick(state: State): State {
-    const [mantissa, exponent] = (state.input as FloatingPoint).value.split(
-      "e"
-    );
+    const negated = this.negateMantissaOrExponent(<FloatingPoint>state.input);
     return {
       ...state,
-      input: new FloatingPoint(
-        exponent !== undefined ? `${mantissa}e${-exponent}` : `${-mantissa}`
-      ),
+      input: new FloatingPoint(negated),
     };
   }
 
@@ -48,5 +44,10 @@ export class NumberReducer implements Reducer {
       expression: expression + "=",
       input: this.calculator.eval(expression),
     };
+  }
+
+  private negateMantissaOrExponent(float: FloatingPoint) {
+    const [mantissa, exponent] = float.value.split("e");
+    return exponent === undefined ? `${-float}` : `${mantissa}e${-exponent}`;
   }
 }

@@ -22,7 +22,7 @@ export class ResultReducer implements Reducer {
 
   operatorClick(state: State, symbol: Operator): State {
     return {
-      expression: (state.input as FloatingPoint).value,
+      expression: (<FloatingPoint>state.input).value,
       input: symbol,
     };
   }

@@ -7,6 +7,12 @@ import { StateService } from "app/state/state.service";
   templateUrl: "./operator-key.component.html",
 })
 export class OperatorKeyComponent {
+  private static readonly operators = new Map([
+    ["Divide", "÷"],
+    ["Multiply", "×"],
+    ["Add", "+"],
+    ["Subtract", "−"],
+  ]);
   @Input() symbol!: Operator;
 
   constructor(private stateService: StateService) {}
@@ -24,14 +30,8 @@ export class OperatorKeyComponent {
   }
 
   private mapCodeToSymbol(code: string): string {
-    const operators = new Map([
-      ["Divide", "÷"],
-      ["Multiply", "×"],
-      ["Add", "+"],
-      ["Subtract", "−"],
-    ]);
     const keyCode = code.substring("Numpad".length);
-    const symbol = operators.get(keyCode) ?? "";
+    const symbol = OperatorKeyComponent.operators.get(keyCode) ?? "";
 
     return code.replace(keyCode, symbol);
   }

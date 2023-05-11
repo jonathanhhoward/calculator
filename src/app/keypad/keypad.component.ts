@@ -9,7 +9,11 @@ import { StateService } from "app/state/state.service";
 export class KeypadComponent {
   constructor(private stateService: StateService) {}
 
-  onClearClick() {
+  onClearClick(): void {
     this.stateService.clearClick();
+  }
+
+  onDeleteClick(): void {
+    this.stateService.deleteClick();
   }
 }

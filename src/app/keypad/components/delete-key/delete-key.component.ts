@@ -1,14 +1,9 @@
-import { Component } from "@angular/core";
-import { StateService } from "app/state/state.service";
+import { Component, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "delete-key",
   templateUrl: "./delete-key.component.html",
 })
 export class DeleteKeyComponent {
-  constructor(private stateService: StateService) {}
-
-  handleClick() {
-    this.stateService.deleteClick();
-  }
+  @Output() deleteClick = new EventEmitter();
 }

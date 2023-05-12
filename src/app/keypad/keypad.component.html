@@ -1,10 +1,10 @@
 <div class="keypad">
   <clear-key (clearClick)="onClearClick()" id="clear"></clear-key>
   <delete-key (deleteClick)="onDeleteClick()" id="delete"></delete-key>
-  <operator-key id="divide" symbol="÷"></operator-key>
-  <operator-key id="multiply" symbol="×"></operator-key>
-  <operator-key id="add" symbol="+"></operator-key>
-  <operator-key id="subtract" symbol="−"></operator-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="divide" symbol="÷"></operator-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="multiply" symbol="×"></operator-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="add" symbol="+"></operator-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="subtract" symbol="−"></operator-key>
   <negate-key (negateClick)="onNegateClick()" id="negate"></negate-key>
   <equals-key (equalsClick)="onEqualsClick()" id="equals"></equals-key>
   <digit-key (digitClick)="onDigitClick($event)" id="exponent" symbol="e"></digit-key>

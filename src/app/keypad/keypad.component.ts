@@ -1,5 +1,5 @@
 import { Component, HostListener } from "@angular/core";
-import { Digit } from "app/models/types";
+import { Digit, Operator } from "app/models/types";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -8,6 +8,13 @@ import { StateService } from "app/state/state.service";
   styleUrls: ["./keypad.component.scss"],
 })
 export class KeypadComponent {
+  private static readonly operators = new Map([
+    ["Divide", "÷"],
+    ["Multiply", "×"],
+    ["Add", "+"],
+    ["Subtract", "−"],
+  ]);
+
   constructor(private stateService: StateService) {}
 
   onClearClick(): void {
@@ -16,6 +23,10 @@ export class KeypadComponent {
 
   onDeleteClick(): void {
     this.stateService.deleteClick();
+  }
+
+  onOperatorClick(symbol: Operator) {
+    this.stateService.operatorClick(symbol);
   }
 
   onNegateClick(): void {
@@ -34,10 +45,23 @@ export class KeypadComponent {
   handleKeydown(code: string): void {
     if (!code.startsWith("Numpad")) return;
 
-    const key = code.slice("Numpad".length);
+    const numpadCode = code.slice("Numpad".length);
 
-    if (key === "Enter") this.onEqualsClick();
-    else if (key === "Decimal") this.onDigitClick(".");
-    else if (/[0-9]/.test(key)) this.onDigitClick(key as Digit);
+    if (numpadCode === "Enter") {
+      this.onEqualsClick();
+    } else if (numpadCode === "Decimal") {
+      this.onDigitClick(".");
+    } else if (/[0-9]/.test(numpadCode)) {
+      this.onDigitClick(numpadCode as Digit);
+    } else {
+      const op = this.mapCodeToSymbol(numpadCode);
+      if (op) {
+        this.onOperatorClick(op as Operator);
+      }
+    }
+  }
+
+  private mapCodeToSymbol(code: string) {
+    return KeypadComponent.operators.get(code);
   }
 }

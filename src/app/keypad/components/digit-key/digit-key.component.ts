@@ -1,6 +1,5 @@
-import { Component, HostListener, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Digit } from "app/models/types";
-import { StateService } from "app/state/state.service";
 
 @Component({
   selector: "digit-key",
@@ -8,18 +7,5 @@ import { StateService } from "app/state/state.service";
 })
 export class DigitKeyComponent {
   @Input() symbol!: Digit;
-
-  constructor(private stateService: StateService) {}
-
-  @HostListener("window:keydown", ["$event.code"])
-  handleKeydown(code: string) {
-    const isThisDecimal = code === "NumpadDecimal" && this.symbol === ".";
-    const isThisDigit = code === "Numpad" + this.symbol;
-
-    if (isThisDigit || isThisDecimal) this.handleClick();
-  }
-
-  handleClick() {
-    this.stateService.digitClick(this.symbol);
-  }
+  @Output() digitClick = new EventEmitter<Digit>();
 }

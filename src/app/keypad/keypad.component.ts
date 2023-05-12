@@ -1,4 +1,5 @@
 import { Component, HostListener } from "@angular/core";
+import { Digit } from "app/models/types";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -17,18 +18,26 @@ export class KeypadComponent {
     this.stateService.deleteClick();
   }
 
-  onEqualsClick() {
-    this.stateService.equalsClick();
-  }
-
-  onNegateClick() {
+  onNegateClick(): void {
     this.stateService.negateClick();
   }
 
-  @HostListener("window:keydown", ["$event.code"])
-  handleKeydown(code: string) {
-    const isThisEquals = code === "NumpadEnter";
+  onEqualsClick(): void {
+    this.stateService.equalsClick();
+  }
 
-    if (isThisEquals) this.onEqualsClick();
+  onDigitClick(symbol: Digit): void {
+    this.stateService.digitClick(symbol);
+  }
+
+  @HostListener("window:keydown", ["$event.code"])
+  handleKeydown(code: string): void {
+    if (!code.startsWith("Numpad")) return;
+
+    const key = code.slice("Numpad".length);
+
+    if (key === "Enter") this.onEqualsClick();
+    else if (key === "Decimal") this.onDigitClick(".");
+    else if (/[0-9]/.test(key)) this.onDigitClick(key as Digit);
   }
 }

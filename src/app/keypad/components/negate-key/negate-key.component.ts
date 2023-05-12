@@ -1,14 +1,9 @@
-import { Component } from "@angular/core";
-import { StateService } from "app/state/state.service";
+import { Component, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: "negate-key",
   templateUrl: "./negate-key.component.html",
 })
 export class NegateKeyComponent {
-  constructor(private stateService: StateService) {}
-
-  handleClick() {
-    this.stateService.negateClick();
-  }
+  @Output() negateClick = new EventEmitter();
 }

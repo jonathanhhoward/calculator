@@ -21,6 +21,10 @@ export class KeypadComponent {
     this.stateService.equalsClick();
   }
 
+  onNegateClick() {
+    this.stateService.negateClick();
+  }
+
   @HostListener("window:keydown", ["$event.code"])
   handleKeydown(code: string) {
     const isThisEquals = code === "NumpadEnter";

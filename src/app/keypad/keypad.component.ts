@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, HostListener } from "@angular/core";
 import { StateService } from "app/state/state.service";
 
 @Component({
@@ -15,5 +15,16 @@ export class KeypadComponent {
 
   onDeleteClick(): void {
     this.stateService.deleteClick();
+  }
+
+  onEqualsClick() {
+    this.stateService.equalsClick();
+  }
+
+  @HostListener("window:keydown", ["$event.code"])
+  handleKeydown(code: string) {
+    const isThisEquals = code === "NumpadEnter";
+
+    if (isThisEquals) this.onEqualsClick();
   }
 }

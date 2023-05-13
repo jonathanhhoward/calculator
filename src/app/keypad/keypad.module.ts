@@ -1,5 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { KeypadComponent } from "./keypad.component";
 import {
   ClearKeyComponent,
   DeleteKeyComponent,
@@ -8,8 +9,7 @@ import {
   KeyComponent,
   NegateKeyComponent,
   OperatorKeyComponent,
-} from "./components";
-import { KeypadComponent } from "./keypad.component";
+} from "./keys";
 
 @NgModule({
   declarations: [

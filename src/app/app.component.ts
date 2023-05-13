@@ -1,5 +1,5 @@
 import { Component, HostListener } from "@angular/core";
-import { KeydownService } from "app/keypad/keydown.service";
+import { KeydownService } from "app/keydown.service";
 
 @Component({
   selector: "app-root",

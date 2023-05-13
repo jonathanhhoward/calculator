@@ -1,5 +1,4 @@
-import { Component, HostListener } from "@angular/core";
-import { KeydownService } from "app/keypad/keydown.service";
+import { Component } from "@angular/core";
 import { Digit, Operator } from "app/models/types";
 import { StateService } from "app/state/state.service";
 
@@ -9,10 +8,7 @@ import { StateService } from "app/state/state.service";
   styleUrls: ["./keypad.component.scss"],
 })
 export class KeypadComponent {
-  constructor(
-    private stateService: StateService,
-    private keydownService: KeydownService
-  ) {}
+  constructor(private stateService: StateService) {}
 
   onClearClick(): void {
     this.stateService.clearClick();
@@ -36,10 +32,5 @@ export class KeypadComponent {
 
   onDigitClick(symbol: Digit): void {
     this.stateService.digitClick(symbol);
-  }
-
-  @HostListener("window:keydown", ["$event.code"])
-  onKeydown(code: string): void {
-    this.keydownService.handleKeydown(code);
   }
 }

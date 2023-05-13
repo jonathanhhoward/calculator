@@ -1,22 +1,22 @@
 <div class="keypad">
-  <clear-key id="clear"></clear-key>
-  <delete-key id="delete"></delete-key>
-  <operator-key id="divide" symbol="÷"></operator-key>
-  <operator-key id="multiply" symbol="×"></operator-key>
-  <operator-key id="add" symbol="+"></operator-key>
-  <operator-key id="subtract" symbol="−"></operator-key>
-  <negate-key id="negate"></negate-key>
-  <equals-key id="equals"></equals-key>
-  <digit-key id="exponent" symbol="e"></digit-key>
-  <digit-key id="decimal" symbol="."></digit-key>
-  <digit-key id="zero" symbol="0"></digit-key>
-  <digit-key id="one" symbol="1"></digit-key>
-  <digit-key id="two" symbol="2"></digit-key>
-  <digit-key id="three" symbol="3"></digit-key>
-  <digit-key id="four" symbol="4"></digit-key>
-  <digit-key id="five" symbol="5"></digit-key>
-  <digit-key id="six" symbol="6"></digit-key>
-  <digit-key id="seven" symbol="7"></digit-key>
-  <digit-key id="eight" symbol="8"></digit-key>
-  <digit-key id="nine" symbol="9"></digit-key>
+  <clear-key (clearClick)="onClearClick()" id="clear"></clear-key>
+  <delete-key (deleteClick)="onDeleteClick()" id="delete"></delete-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="divide" symbol="÷"></operator-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="multiply" symbol="×"></operator-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="add" symbol="+"></operator-key>
+  <operator-key (operatorClick)="onOperatorClick($event)" id="subtract" symbol="−"></operator-key>
+  <negate-key (negateClick)="onNegateClick()" id="negate"></negate-key>
+  <equals-key (equalsClick)="onEqualsClick()" id="equals"></equals-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="exponent" symbol="e"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="decimal" symbol="."></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="zero" symbol="0"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="one" symbol="1"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="two" symbol="2"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="three" symbol="3"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="four" symbol="4"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="five" symbol="5"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="six" symbol="6"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="seven" symbol="7"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="eight" symbol="8"></digit-key>
+  <digit-key (digitClick)="onDigitClick($event)" id="nine" symbol="9"></digit-key>
 </div>

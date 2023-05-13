@@ -4,7 +4,7 @@ import { StateService } from "app/state/state.service";
 
 @Injectable({ providedIn: "root" })
 export class KeydownService {
-  private static readonly operators = new Map([
+  private readonly operators = new Map<string, Operator>([
     ["Divide", "÷"],
     ["Multiply", "×"],
     ["Add", "+"],
@@ -13,26 +13,30 @@ export class KeydownService {
 
   constructor(private stateService: StateService) {}
 
-  handleKeydown(code: string): void {
-    if (!code.startsWith("Numpad")) return;
+  handleKeydown(eventCode: string): void {
+    if (!eventCode.startsWith("Numpad")) return;
 
-    const numpadCode = code.slice("Numpad".length);
+    const numpadCode = eventCode.slice("Numpad".length);
 
     if (numpadCode === "Enter") {
       this.stateService.equalsClick();
     } else if (numpadCode === "Decimal") {
       this.stateService.digitClick(".");
-    } else if (/[0-9]/.test(numpadCode)) {
-      this.stateService.digitClick(numpadCode as Digit);
+    } else if (this.isDigit(numpadCode)) {
+      this.stateService.digitClick(numpadCode);
     } else {
-      const op = this.mapCodeToSymbol(numpadCode);
-      if (op) {
-        this.stateService.operatorClick(op as Operator);
+      const operator = this.mapCodeToOperator(numpadCode);
+      if (operator) {
+        this.stateService.operatorClick(operator);
       }
     }
   }
 
-  private mapCodeToSymbol(code: string) {
-    return KeydownService.operators.get(code);
+  private isDigit(code: string): code is Digit {
+    return /\d/.test(code);
+  }
+
+  private mapCodeToOperator(code: string): Operator | undefined {
+    return this.operators.get(code);
   }
 }

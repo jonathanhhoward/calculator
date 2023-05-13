@@ -48,15 +48,15 @@ export class KeypadComponent {
     const numpadCode = code.slice("Numpad".length);
 
     if (numpadCode === "Enter") {
-      this.onEqualsClick();
+      this.stateService.equalsClick();
     } else if (numpadCode === "Decimal") {
-      this.onDigitClick(".");
+      this.stateService.digitClick(".");
     } else if (/[0-9]/.test(numpadCode)) {
-      this.onDigitClick(numpadCode as Digit);
+      this.stateService.digitClick(numpadCode as Digit);
     } else {
       const op = this.mapCodeToSymbol(numpadCode);
       if (op) {
-        this.onOperatorClick(op as Operator);
+        this.stateService.operatorClick(op as Operator);
       }
     }
   }

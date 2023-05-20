@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   selector: "key",
@@ -8,4 +8,5 @@ import { Component, Input } from "@angular/core";
 export class KeyComponent {
   @Input() type = "";
   @Input() symbol = "";
+  @Output() action = new EventEmitter<string>();
 }

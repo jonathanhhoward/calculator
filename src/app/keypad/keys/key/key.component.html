@@ -1,1 +1,1 @@
-<button [class]="'key ' + type">{{ symbol }}</button>
+<button (click)="action.emit(symbol)" [class]="'key ' + type">{{ symbol }}</button>

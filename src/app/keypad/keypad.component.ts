@@ -18,8 +18,8 @@ export class KeypadComponent {
     this.stateService.deleteClick();
   }
 
-  onOperatorClick(symbol: Operator) {
-    this.stateService.operatorClick(symbol);
+  onOperatorClick(symbol: string) {
+    this.stateService.operatorClick(<Operator>symbol);
   }
 
   onNegateClick(): void {
@@ -30,7 +30,7 @@ export class KeypadComponent {
     this.stateService.equalsClick();
   }
 
-  onDigitClick(symbol: Digit): void {
-    this.stateService.digitClick(symbol);
+  onDigitClick(symbol: string): void {
+    this.stateService.digitClick(<Digit>symbol);
   }
 }

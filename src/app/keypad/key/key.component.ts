@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: "key",
+  selector: "app-key",
   templateUrl: "./key.component.html",
   styleUrls: ["./key.component.scss"],
 })

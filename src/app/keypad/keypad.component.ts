@@ -3,7 +3,7 @@ import { Digit, Operator } from "app/models/types";
 import { StateService } from "app/state/state.service";
 
 @Component({
-  selector: "keypad",
+  selector: "app-keypad",
   templateUrl: "./keypad.component.html",
   styleUrls: ["./keypad.component.scss"],
 })

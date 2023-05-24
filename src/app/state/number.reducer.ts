@@ -31,15 +31,15 @@ export class NumberReducer implements Reducer {
   }
 
   negateClick(state: State): State {
-    const negated = this.negateMantissaOrExponent(<FloatingPoint>state.input);
     return {
       ...state,
-      input: new FloatingPoint(negated),
+      input: this.negateMantissaOrExponent(<FloatingPoint>state.input),
     };
   }
 
   equalsClick(state: State): State {
     const expression = state.expression + state.input;
+
     return {
       expression: expression + "=",
       input: this.calculator.eval(expression),
@@ -48,6 +48,9 @@ export class NumberReducer implements Reducer {
 
   private negateMantissaOrExponent(float: FloatingPoint) {
     const [mantissa, exponent] = float.value.split("e");
-    return exponent === undefined ? `${-float}` : `${mantissa}e${-exponent}`;
+    const negated =
+      exponent === undefined ? `${-mantissa}` : `${mantissa}e${-exponent}`;
+
+    return new FloatingPoint(negated);
   }
 }

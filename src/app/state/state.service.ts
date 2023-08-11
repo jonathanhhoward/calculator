@@ -15,13 +15,15 @@ export class StateService {
     input: new FloatingPoint(),
   };
   private readonly stateSubject = new BehaviorSubject(this.initialState);
-  private reducer: Reducer = this.numberReducer;
+  private reducer: Reducer;
 
   constructor(
     private readonly numberReducer: NumberReducer,
     private readonly operatorReducer: OperatorReducer,
     private readonly resultReducer: ResultReducer
-  ) {}
+  ) {
+    this.reducer = this.numberReducer;
+  }
 
   get state$(): Observable<State> {
     return this.stateSubject.asObservable();

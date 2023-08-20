@@ -20,7 +20,7 @@ export class StateService {
   constructor(
     private readonly numberReducer: NumberReducer,
     private readonly operatorReducer: OperatorReducer,
-    private readonly resultReducer: ResultReducer
+    private readonly resultReducer: ResultReducer,
   ) {
     this.reducer = this.numberReducer;
   }

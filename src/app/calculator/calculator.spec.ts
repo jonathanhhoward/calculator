@@ -51,10 +51,10 @@ test("numbers are rounded to ten digits", () => {
   expect(sut.eval("1.2345678914")).toEqual(new FloatingPoint("1.234567891"));
   expect(sut.eval("1.2345678906")).toEqual(new FloatingPoint("1.234567891"));
   expect(sut.eval("0.00000012345678914")).toEqual(
-    new FloatingPoint("1.234567891e-7")
+    new FloatingPoint("1.234567891e-7"),
   );
   expect(sut.eval("0.00000012345678905")).toEqual(
-    new FloatingPoint("1.234567891e-7")
+    new FloatingPoint("1.234567891e-7"),
   );
 });
 

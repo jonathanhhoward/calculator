@@ -25,7 +25,7 @@ export class KeydownService {
     } else if (this.isDigit(numpadCode)) {
       this.stateService.digitClick(numpadCode);
     } else {
-      const operator = this.mapCodeToOperator(numpadCode);
+      const operator = this.operators.get(numpadCode);
       if (operator) {
         this.stateService.operatorClick(operator);
       }
@@ -34,9 +34,5 @@ export class KeydownService {
 
   private isDigit(code: string): code is Digit {
     return /\d/.test(code);
-  }
-
-  private mapCodeToOperator(code: string): Operator | undefined {
-    return this.operators.get(code);
   }
 }

@@ -36,7 +36,6 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "complex.js",
-              "decimal.js",
               "escape-latex",
               "fraction.js",
               "seedrandom",

@@ -12,7 +12,7 @@ export class NumberReducer implements Reducer {
   deleteClick(state: State): State {
     return {
       ...state,
-      input: new FloatingPoint(),
+      input: FloatingPoint.from("0"),
     };
   }
 

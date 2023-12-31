@@ -10,25 +10,21 @@ export class FloatingPoint {
   }
 
   get value(): string {
-    return (
-      this.mantissa + (this.exponent === undefined ? "" : "e" + this.exponent)
-    );
+    return this.mantissa + (this.exponent ? "e" + this.exponent : "");
   }
 
   append(digit: Digit): FloatingPoint {
-    const appended =
-      this.exponent === undefined
-        ? this.appendToMantissa(digit)
-        : this.appendToExponent(digit);
+    const appended = this.exponent
+      ? this.appendToExponent(digit)
+      : this.appendToMantissa(digit);
 
     return new FloatingPoint(appended);
   }
 
   negateMantissaOrExponent(): FloatingPoint {
-    const negated =
-      this.exponent === undefined
-        ? `${-this.mantissa}`
-        : `${this.mantissa}e${-this.exponent}`;
+    const negated = this.exponent
+      ? `${this.mantissa}e${-this.exponent}`
+      : `${-this.mantissa}`;
 
     return new FloatingPoint(negated);
   }

@@ -8,10 +8,6 @@ export class FloatingPoint {
     [this.mantissa, this.exponent] = float.split("e");
   }
 
-  private get value(): string {
-    return this.mantissa + (this.exponent ? "e" + this.exponent : "");
-  }
-
   static from(float: string): FloatingPoint {
     return new FloatingPoint(float);
   }
@@ -33,7 +29,7 @@ export class FloatingPoint {
   }
 
   toString() {
-    return this.value;
+    return this.mantissa + (this.exponent ? "e" + this.exponent : "");
   }
 
   private appendToMantissa(digit: Digit) {
@@ -44,10 +40,10 @@ export class FloatingPoint {
     const tag = digit === "e" ? "0" : "";
 
     return isIgnoreSymbol
-      ? this.value
+      ? this.toString()
       : isOverwriteZero
         ? digit
-        : this.value + digit + tag;
+        : this.toString() + digit + tag;
   }
 
   private appendToExponent(digit: Digit) {
@@ -56,9 +52,9 @@ export class FloatingPoint {
       /[.e]/.test(digit) || this.exponent?.replace(/-/, "").length === 2;
 
     return isIgnoreSymbol
-      ? this.value
+      ? this.toString()
       : isOverwriteZero
         ? this.mantissa + "e" + digit
-        : this.value + digit;
+        : this.toString() + digit;
   }
 }

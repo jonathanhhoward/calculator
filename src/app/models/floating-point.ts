@@ -4,7 +4,7 @@ export class FloatingPoint {
   private readonly mantissa: string;
   private readonly exponent?: string;
 
-  constructor(float?: string) {
+  private constructor(float?: string) {
     [this.mantissa, this.exponent] =
       float === undefined ? ["0"] : float.split("e");
   }

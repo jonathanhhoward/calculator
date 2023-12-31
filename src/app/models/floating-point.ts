@@ -8,7 +8,7 @@ export class FloatingPoint {
     [this.mantissa, this.exponent] = float.split("e");
   }
 
-  get value(): string {
+  private get value(): string {
     return this.mantissa + (this.exponent ? "e" + this.exponent : "");
   }
 

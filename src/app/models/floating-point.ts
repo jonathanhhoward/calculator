@@ -24,6 +24,15 @@ export class FloatingPoint {
     return new FloatingPoint(appended);
   }
 
+  negateMantissaOrExponent(): FloatingPoint {
+    const negated =
+      this.exponent === undefined
+        ? `${-this.mantissa}`
+        : `${this.mantissa}e${-this.exponent}`;
+
+    return new FloatingPoint(negated);
+  }
+
   toString() {
     return this.value;
   }
@@ -38,8 +47,8 @@ export class FloatingPoint {
     return isIgnoreSymbol
       ? this.value
       : isOverwriteZero
-      ? digit
-      : this.value + digit + tag;
+        ? digit
+        : this.value + digit + tag;
   }
 
   private appendToExponent(digit: Digit) {
@@ -50,7 +59,7 @@ export class FloatingPoint {
     return isIgnoreSymbol
       ? this.value
       : isOverwriteZero
-      ? this.mantissa + "e" + digit
-      : this.value + digit;
+        ? this.mantissa + "e" + digit
+        : this.value + digit;
   }
 }

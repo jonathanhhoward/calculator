@@ -14,6 +14,10 @@ export class Calculator {
     }
   }
 
+  negate(floatingPoint: FloatingPoint): FloatingPoint | Error {
+    return this.eval(`-${floatingPoint}`);
+  }
+
   private normalizeOperators(expression: string) {
     return expression.replace(/−/g, "-").replace(/×/g, "*").replace(/÷/g, "/");
   }

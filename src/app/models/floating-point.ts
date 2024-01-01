@@ -29,7 +29,7 @@ export class FloatingPoint {
   }
 
   toString() {
-    return this.mantissa + (this.exponent ? "e" + this.exponent : "");
+    return `${this.mantissa}${this.exponent ? `e${this.exponent}` : ""}`;
   }
 
   private appendToMantissa(digit: Digit) {
@@ -40,10 +40,10 @@ export class FloatingPoint {
     const tag = digit === "e" ? "0" : "";
 
     return isIgnoreSymbol
-      ? this.toString()
+      ? `${this}`
       : isOverwriteZero
         ? digit
-        : this.toString() + digit + tag;
+        : `${this}${digit}${tag}`;
   }
 
   private appendToExponent(digit: Digit) {
@@ -52,9 +52,9 @@ export class FloatingPoint {
       /[.e]/.test(digit) || this.exponent?.replace(/-/, "").length === 2;
 
     return isIgnoreSymbol
-      ? this.toString()
+      ? `${this}`
       : isOverwriteZero
-        ? this.mantissa + "e" + digit
-        : this.toString() + digit;
+        ? `${this.mantissa}e${digit}`
+        : `${this}${digit}`;
   }
 }

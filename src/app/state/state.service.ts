@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, signal } from "@angular/core";
 import { FloatingPoint } from "app/models/floating-point";
 import { Digit, Operator } from "app/models/types";
 import { NumberReducer } from "app/state/number.reducer";
@@ -6,7 +6,6 @@ import { OperatorReducer } from "app/state/operator.reducer";
 import { Reducer } from "app/state/reducer";
 import { ResultReducer } from "app/state/result.reducer";
 import { State } from "app/state/state";
-import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class StateService {
@@ -14,7 +13,7 @@ export class StateService {
     expression: "",
     input: FloatingPoint.from("0"),
   };
-  private readonly stateSubject = new BehaviorSubject(this.initialState);
+  private readonly stateSignal = signal(this.initialState);
   private reducer: Reducer;
 
   constructor(
@@ -25,16 +24,12 @@ export class StateService {
     this.reducer = this.numberReducer;
   }
 
-  get state$(): Observable<State> {
-    return this.stateSubject.asObservable();
-  }
-
-  private get state(): State {
-    return this.stateSubject.getValue();
+  get state(): State {
+    return this.stateSignal();
   }
 
   private set state(state: State) {
-    this.stateSubject.next(state);
+    this.stateSignal.set(state);
   }
 
   clearClick(): void {

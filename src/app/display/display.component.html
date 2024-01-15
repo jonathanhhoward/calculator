@@ -1,4 +1,4 @@
-<div *ngIf="stateService.state$ | async as state" class="display">
+<div *ngIf="stateService.state as state" class="display">
   <div class="expression" data-testid="expression">{{ state.expression }}</div>
   <div class="input">{{ state.input }}</div>
 </div>

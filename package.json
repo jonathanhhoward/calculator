@@ -8,7 +8,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
-    "deploy": "ng deploy --base-href=/ng-calculator/",
+    "deploy": "ng deploy --dir=dist/ng-calculator --base-href=/ng-calculator/ --repo=https://github.com/jonathanhhoward/ng-calculator.git",
     "lint": "ng lint"
   },
   "private": true,

@@ -18,7 +18,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
           "options": {
             "outputPath": "dist/ng-calculator",
             "index": "src/index.html",
@@ -37,10 +37,10 @@
             "allowedCommonJsDependencies": [
               "complex.js",
               "escape-latex",
-              "fraction.js",
+              "javascript-natural-sort",
               "seedrandom",
-              "typed-function",
-              "javascript-natural-sort"
+              "tiny-emitter",
+              "typed-function"
             ]
           },
           "configurations": {
@@ -68,7 +68,6 @@
             "development": {
               "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true

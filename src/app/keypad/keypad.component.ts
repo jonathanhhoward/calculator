@@ -4,11 +4,11 @@ import { StateService } from "app/state/state.service";
 import { KeyComponent } from "./key/key.component";
 
 @Component({
-    selector: "app-keypad",
-    templateUrl: "./keypad.component.html",
-    styleUrls: ["./keypad.component.scss"],
-    standalone: true,
-    imports: [KeyComponent],
+  selector: "app-keypad",
+  templateUrl: "./keypad.component.html",
+  styleUrls: ["./keypad.component.scss"],
+  standalone: true,
+  imports: [KeyComponent],
 })
 export class KeypadComponent {
   constructor(private stateService: StateService) {}

@@ -3,8 +3,7 @@ import { NgModule } from "@angular/core";
 import { DisplayComponent } from "./display.component";
 
 @NgModule({
-  declarations: [DisplayComponent],
-  imports: [CommonModule],
-  exports: [DisplayComponent],
+    imports: [CommonModule, DisplayComponent],
+    exports: [DisplayComponent],
 })
 export class DisplayModule {}

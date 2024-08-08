@@ -4,8 +4,7 @@ import { KeyComponent } from "./key/key.component";
 import { KeypadComponent } from "./keypad.component";
 
 @NgModule({
-  declarations: [KeyComponent, KeypadComponent],
-  imports: [CommonModule],
-  exports: [KeypadComponent],
+    imports: [CommonModule, KeyComponent, KeypadComponent],
+    exports: [KeypadComponent],
 })
 export class KeypadModule {}

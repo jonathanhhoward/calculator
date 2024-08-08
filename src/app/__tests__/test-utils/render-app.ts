@@ -1,12 +1,9 @@
 import { render } from "@testing-library/angular";
 import { Display, KeyPad } from "app/__tests__/test-utils/types";
 import { AppComponent } from "app/app.component";
-import { AppModule } from "app/app.module";
 
 export default async function () {
-  const { getByText, getAllByText, getByTestId } = await render(AppComponent, {
-    imports: [AppModule],
-  });
+  const { getByText, getAllByText, getByTestId } = await render(AppComponent);
   const zeros = getAllByText("0");
   const display: Display = {
     expression: getByTestId("expression"),

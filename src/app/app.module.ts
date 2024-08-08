@@ -1,12 +1,14 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { DisplayComponent } from "app/display/display.component";
+import { KeypadComponent } from "app/keypad/keypad.component";
 import { AppComponent } from "./app.component";
-import { DisplayModule } from "./display/display.module";
-import { KeypadModule } from "./keypad/keypad.module";
+
+
 
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [AppComponent],
-  imports: [BrowserModule, DisplayModule, KeypadModule],
+  imports: [BrowserModule, KeypadComponent, DisplayComponent],
 })
 export class AppModule {}

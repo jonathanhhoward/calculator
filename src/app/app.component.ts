@@ -1,4 +1,4 @@
-import { Component, HostListener } from "@angular/core";
+import { Component } from "@angular/core";
 import { KeydownService } from "app/keydown.service";
 import { DisplayComponent } from "./display/display.component";
 import { KeypadComponent } from "./keypad/keypad.component";
@@ -13,8 +13,7 @@ import { KeypadComponent } from "./keypad/keypad.component";
 export class AppComponent {
   constructor(private keydownService: KeydownService) {}
 
-  @HostListener("window:keydown", ["$event.code"])
-  onKeydown(code: string): void {
-    this.keydownService.handleKeydown(code);
+  onKeydown(event: KeyboardEvent): void {
+    this.keydownService.handleKeydown(event.code);
   }
 }

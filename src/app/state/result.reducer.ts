@@ -34,7 +34,7 @@ export class ResultReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: this.#calculator.negate(<FloatingPoint>state.input),
+      input: this.#calculator.negate(state.input as FloatingPoint),
     };
   }
 

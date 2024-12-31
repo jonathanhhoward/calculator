@@ -23,7 +23,7 @@ export class NumberReducer implements Reducer {
   digitClick(state: State, symbol: Digit): State {
     return {
       ...state,
-      input: (<FloatingPoint>state.input).append(symbol),
+      input: (state.input as FloatingPoint).append(symbol),
     };
   }
 
@@ -37,7 +37,7 @@ export class NumberReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: (<FloatingPoint>state.input).negate(),
+      input: (state.input as FloatingPoint).negate(),
     };
   }
 

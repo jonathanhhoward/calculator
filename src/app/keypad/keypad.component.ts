@@ -11,7 +11,7 @@ import { KeyComponent } from "./key/key.component";
   imports: [KeyComponent],
 })
 export class KeypadComponent {
-  #stateService: StateService;
+  readonly #stateService: StateService;
 
   constructor(stateService: StateService) {
     this.#stateService = stateService;

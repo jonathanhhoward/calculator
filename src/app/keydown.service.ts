@@ -11,7 +11,7 @@ export class KeydownService {
     ["Subtract", "−"],
   ]);
 
-  constructor(private stateService: StateService) {}
+  constructor(private readonly stateService: StateService) {}
 
   handleKeydown(eventCode: string): void {
     if (!eventCode.startsWith("Numpad")) return;

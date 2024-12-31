@@ -14,8 +14,8 @@ export class FloatingPoint {
 
   append(digit: Digit): FloatingPoint {
     const appended = this.#exponent
-      ? this.appendToExponent(digit)
-      : this.appendToMantissa(digit);
+      ? this.#appendToExponent(digit)
+      : this.#appendToMantissa(digit);
 
     return FloatingPoint.from(appended);
   }
@@ -32,7 +32,7 @@ export class FloatingPoint {
     return `${this.#mantissa}${this.#exponent ? `e${this.#exponent}` : ""}`;
   }
 
-  private appendToMantissa(digit: Digit) {
+  #appendToMantissa(digit: Digit) {
     const isOverwriteZero = this.#mantissa === "0" && !/[.e]/.test(digit);
     const isIgnoreSymbol =
       (digit === "." && this.#mantissa.includes(".")) ||
@@ -46,7 +46,7 @@ export class FloatingPoint {
         : `${this}${digit}${tag}`;
   }
 
-  private appendToExponent(digit: Digit) {
+  #appendToExponent(digit: Digit) {
     const isOverwriteZero = this.#exponent === "0";
     const isIgnoreSymbol =
       /[.e]/.test(digit) || this.#exponent?.replace(/-/, "").length === 2;

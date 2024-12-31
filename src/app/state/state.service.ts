@@ -35,35 +35,35 @@ export class StateService {
     return this.#stateSignal();
   }
 
-  private set state(state: State) {
+  set #state(state: State) {
     this.#stateSignal.set(state);
   }
 
   clearClick(): void {
-    this.state = this.#initialState;
+    this.#state = this.#initialState;
     this.#reducer = this.#numberReducer;
   }
 
   deleteClick(): void {
-    this.state = this.#reducer.deleteClick(this.state);
+    this.#state = this.#reducer.deleteClick(this.state);
   }
 
   digitClick(symbol: Digit): void {
-    this.state = this.#reducer.digitClick(this.state, symbol);
+    this.#state = this.#reducer.digitClick(this.state, symbol);
     this.#reducer = this.#numberReducer;
   }
 
   operatorClick(symbol: Operator): void {
-    this.state = this.#reducer.operatorClick(this.state, symbol);
+    this.#state = this.#reducer.operatorClick(this.state, symbol);
     this.#reducer = this.#operatorReducer;
   }
 
   negateClick(): void {
-    this.state = this.#reducer.negateClick(this.state);
+    this.#state = this.#reducer.negateClick(this.state);
   }
 
   equalsClick(): void {
-    this.state = this.#reducer.equalsClick(this.state);
+    this.#state = this.#reducer.equalsClick(this.state);
     this.#reducer = this.#resultReducer;
   }
 }

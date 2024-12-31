@@ -11,7 +11,11 @@ import { KeypadComponent } from "./keypad/keypad.component";
   imports: [DisplayComponent, KeypadComponent],
 })
 export class AppComponent {
-  constructor(private keydownService: KeydownService) {}
+  private keydownService: KeydownService;
+
+  constructor(keydownService: KeydownService) {
+    this.keydownService = keydownService;
+  }
 
   onKeydown(event: KeyboardEvent): void {
     this.keydownService.handleKeydown(event.code);

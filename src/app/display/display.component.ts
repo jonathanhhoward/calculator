@@ -10,5 +10,9 @@ import { StateService } from "app/state/state.service";
   imports: [NgIf],
 })
 export class DisplayComponent {
-  constructor(public stateService: StateService) {}
+  stateService: StateService;
+
+  constructor(stateService: StateService) {
+    this.stateService = stateService;
+  }
 }

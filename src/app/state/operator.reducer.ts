@@ -7,7 +7,11 @@ import { State } from "app/state/state";
 
 @Injectable({ providedIn: "root" })
 export class OperatorReducer implements Reducer {
-  constructor(private calculator: Calculator) {}
+  private calculator: Calculator;
+
+  constructor(calculator: Calculator) {
+    this.calculator = calculator;
+  }
 
   deleteClick(state: State): State {
     return state;

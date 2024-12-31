@@ -14,13 +14,19 @@ export class StateService {
     input: FloatingPoint.from("0"),
   };
   private readonly stateSignal = signal(this.initialState);
+  private readonly numberReducer: NumberReducer;
+  private readonly operatorReducer: OperatorReducer;
+  private readonly resultReducer: ResultReducer;
   private reducer: Reducer;
 
   constructor(
-    private readonly numberReducer: NumberReducer,
-    private readonly operatorReducer: OperatorReducer,
-    private readonly resultReducer: ResultReducer,
+    numberReducer: NumberReducer,
+    operatorReducer: OperatorReducer,
+    resultReducer: ResultReducer,
   ) {
+    this.numberReducer = numberReducer;
+    this.operatorReducer = operatorReducer;
+    this.resultReducer = resultReducer;
     this.reducer = this.numberReducer;
   }
 

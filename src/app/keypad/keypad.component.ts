@@ -11,7 +11,11 @@ import { KeyComponent } from "./key/key.component";
   imports: [KeyComponent],
 })
 export class KeypadComponent {
-  constructor(private stateService: StateService) {}
+  private stateService: StateService;
+
+  constructor(stateService: StateService) {
+    this.stateService = stateService;
+  }
 
   onClearClick(): void {
     this.stateService.clearClick();

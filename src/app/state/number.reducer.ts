@@ -37,7 +37,7 @@ export class NumberReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: (<FloatingPoint>state.input).negateMantissaOrExponent(),
+      input: (<FloatingPoint>state.input).negate(),
     };
   }
 

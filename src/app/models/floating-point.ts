@@ -16,7 +16,7 @@ export class FloatingPoint {
     return new FloatingPoint(appended);
   }
 
-  negateMantissaOrExponent(): FloatingPoint {
+  negate(): FloatingPoint {
     const negated = this.#exponent
       ? `${this.#mantissa}e${-this.#exponent}`
       : `${-this.#mantissa}`;

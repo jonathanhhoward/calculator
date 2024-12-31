@@ -5,9 +5,9 @@ import { evaluate } from "mathjs";
 @Injectable({ providedIn: "root" })
 export class Calculator {
   eval(expression: string): FloatingPoint | Error {
-    const expr = this.normalizeOperators(expression);
+    const expr = this.#normalizeOperators(expression);
     try {
-      const result = this.setPrecision10(evaluate(expr));
+      const result = this.#setPrecision10(evaluate(expr));
       return new FloatingPoint(result);
     } catch (e) {
       return e as Error;
@@ -18,11 +18,11 @@ export class Calculator {
     return this.eval(`-${floatingPoint}`);
   }
 
-  private normalizeOperators(expression: string) {
+  #normalizeOperators(expression: string) {
     return expression.replace(/−/g, "-").replace(/×/g, "*").replace(/÷/g, "/");
   }
 
-  private setPrecision10(n: number): string {
+  #setPrecision10(n: number): string {
     if (n === 0) return "0";
 
     const absNumber = Math.abs(n);

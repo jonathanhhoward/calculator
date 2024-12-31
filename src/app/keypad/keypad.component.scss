@@ -1,3 +1,5 @@
+@use "sass:string";
+
 .keypad {
   height: 80%;
   background-color: hsl(0, 0%, 10%);
@@ -29,6 +31,6 @@ $keys: "clear", "delete", "divide", "multiply", "subtract", "add", "negate",
 
 @each $key in $keys {
   ##{$key} {
-    grid-area: #{str_slice($key, 1, 3)};
+    grid-area: #{string.slice($key, 1, 3)};
   }
 }

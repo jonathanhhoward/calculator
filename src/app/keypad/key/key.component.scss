@@ -22,7 +22,9 @@ button {
 }
 
 @mixin buttonStyle($h, $s, $l) {
-  background-color: hsl($h, $s, $l);
+  & {
+    background-color: hsl($h, $s, $l);
+  }
 
   &:hover {
     background-color: hsl($h, $s, $l + 30%);

@@ -7,7 +7,7 @@ import { State } from "app/state/state";
 
 @Injectable({ providedIn: "root" })
 export class ResultReducer implements Reducer {
-  #calculator: Calculator;
+  readonly #calculator: Calculator;
 
   constructor(calculator: Calculator) {
     this.#calculator = calculator;

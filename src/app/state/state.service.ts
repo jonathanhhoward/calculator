@@ -14,7 +14,7 @@ export class StateService {
   readonly #resultReducer: ResultReducer;
   #reducer: Reducer;
 
-  #initialState: State = {
+  readonly #initialState: State = {
     expression: "",
     input: new FloatingPoint("0"),
   };

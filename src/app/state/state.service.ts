@@ -16,7 +16,7 @@ export class StateService {
 
   #initialState: State = {
     expression: "",
-    input: FloatingPoint.from("0"),
+    input: new FloatingPoint("0"),
   };
   #stateSignal = signal(this.#initialState);
 

@@ -20,7 +20,7 @@ export class ResultReducer implements Reducer {
   digitClick(_: State, symbol: Digit): State {
     return {
       expression: "",
-      input: FloatingPoint.from("0").append(symbol),
+      input: new FloatingPoint("0").append(symbol),
     };
   }
 

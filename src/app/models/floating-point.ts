@@ -4,12 +4,8 @@ export class FloatingPoint {
   readonly #mantissa: string;
   readonly #exponent?: string;
 
-  private constructor(float: string) {
+  constructor(float: string) {
     [this.#mantissa, this.#exponent] = float.split("e");
-  }
-
-  static from(float: string): FloatingPoint {
-    return new FloatingPoint(float);
   }
 
   append(digit: Digit): FloatingPoint {
@@ -17,7 +13,7 @@ export class FloatingPoint {
       ? this.#appendToExponent(digit)
       : this.#appendToMantissa(digit);
 
-    return FloatingPoint.from(appended);
+    return new FloatingPoint(appended);
   }
 
   negateMantissaOrExponent(): FloatingPoint {
@@ -25,7 +21,7 @@ export class FloatingPoint {
       ? `${this.#mantissa}e${-this.#exponent}`
       : `${-this.#mantissa}`;
 
-    return FloatingPoint.from(negated);
+    return new FloatingPoint(negated);
   }
 
   toString() {

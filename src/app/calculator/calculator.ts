@@ -8,7 +8,7 @@ export class Calculator {
     const expr = this.normalizeOperators(expression);
     try {
       const result = this.setPrecision10(evaluate(expr));
-      return FloatingPoint.from(result);
+      return new FloatingPoint(result);
     } catch (e) {
       return e as Error;
     }

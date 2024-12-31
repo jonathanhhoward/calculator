@@ -11,33 +11,33 @@ import { KeyComponent } from "./key/key.component";
   imports: [KeyComponent],
 })
 export class KeypadComponent {
-  private stateService: StateService;
+  #stateService: StateService;
 
   constructor(stateService: StateService) {
-    this.stateService = stateService;
+    this.#stateService = stateService;
   }
 
   onClearClick(): void {
-    this.stateService.clearClick();
+    this.#stateService.clearClick();
   }
 
   onDeleteClick(): void {
-    this.stateService.deleteClick();
+    this.#stateService.deleteClick();
   }
 
   onOperatorClick(symbol: string) {
-    this.stateService.operatorClick(<Operator>symbol);
+    this.#stateService.operatorClick(<Operator>symbol);
   }
 
   onNegateClick(): void {
-    this.stateService.negateClick();
+    this.#stateService.negateClick();
   }
 
   onEqualsClick(): void {
-    this.stateService.equalsClick();
+    this.#stateService.equalsClick();
   }
 
   onDigitClick(symbol: string): void {
-    this.stateService.digitClick(<Digit>symbol);
+    this.#stateService.digitClick(<Digit>symbol);
   }
 }

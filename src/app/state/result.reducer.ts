@@ -7,10 +7,10 @@ import { State } from "app/state/state";
 
 @Injectable({ providedIn: "root" })
 export class ResultReducer implements Reducer {
-  private calculator: Calculator;
+  #calculator: Calculator;
 
   constructor(calculator: Calculator) {
-    this.calculator = calculator;
+    this.#calculator = calculator;
   }
 
   deleteClick(state: State): State {
@@ -34,7 +34,7 @@ export class ResultReducer implements Reducer {
   negateClick(state: State): State {
     return {
       ...state,
-      input: this.calculator.negate(<FloatingPoint>state.input),
+      input: this.#calculator.negate(<FloatingPoint>state.input),
     };
   }
 

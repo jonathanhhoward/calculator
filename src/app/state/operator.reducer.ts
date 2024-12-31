@@ -7,10 +7,10 @@ import { State } from "app/state/state";
 
 @Injectable({ providedIn: "root" })
 export class OperatorReducer implements Reducer {
-  private calculator: Calculator;
+  #calculator: Calculator;
 
   constructor(calculator: Calculator) {
-    this.calculator = calculator;
+    this.#calculator = calculator;
   }
 
   deleteClick(state: State): State {
@@ -38,7 +38,7 @@ export class OperatorReducer implements Reducer {
   equalsClick(state: State): State {
     return {
       expression: state.expression + "=",
-      input: this.calculator.eval(state.expression),
+      input: this.#calculator.eval(state.expression),
     };
   }
 }

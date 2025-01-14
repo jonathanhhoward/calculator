@@ -6,7 +6,7 @@ import { Reducer } from "app/state/reducer";
 import { State } from "app/state/state";
 
 @Injectable({ providedIn: "root" })
-export class NumberReducer implements Reducer {
+export class FloatingPointReducer implements Reducer {
   readonly #calculator: Calculator;
 
   constructor(calculator: Calculator) {

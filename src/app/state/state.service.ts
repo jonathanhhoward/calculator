@@ -1,7 +1,7 @@
 import { Injectable, signal } from "@angular/core";
 import { FloatingPoint } from "app/models/floating-point";
 import { Digit, Operator } from "app/models/types";
-import { NumberReducer } from "app/state/number.reducer";
+import { FloatingPointReducer } from "app/state/floating-point.reducer";
 import { OperatorReducer } from "app/state/operator.reducer";
 import { Reducer } from "app/state/reducer";
 import { ResultReducer } from "app/state/result.reducer";
@@ -9,7 +9,7 @@ import { State } from "app/state/state";
 
 @Injectable({ providedIn: "root" })
 export class StateService {
-  readonly #numberReducer: NumberReducer;
+  readonly #floatingPointReducer: FloatingPointReducer;
   readonly #operatorReducer: OperatorReducer;
   readonly #resultReducer: ResultReducer;
   #reducer: Reducer;
@@ -21,14 +21,14 @@ export class StateService {
   #stateSignal = signal(this.#initialState);
 
   constructor(
-    numberReducer: NumberReducer,
+    floatingPointReducer: FloatingPointReducer,
     operatorReducer: OperatorReducer,
     resultReducer: ResultReducer,
   ) {
-    this.#numberReducer = numberReducer;
+    this.#floatingPointReducer = floatingPointReducer;
     this.#operatorReducer = operatorReducer;
     this.#resultReducer = resultReducer;
-    this.#reducer = this.#numberReducer;
+    this.#reducer = this.#floatingPointReducer;
   }
 
   get state(): State {
@@ -41,7 +41,7 @@ export class StateService {
 
   clearClick(): void {
     this.#state = this.#initialState;
-    this.#reducer = this.#numberReducer;
+    this.#reducer = this.#floatingPointReducer;
   }
 
   deleteClick(): void {
@@ -50,7 +50,7 @@ export class StateService {
 
   digitClick(symbol: Digit): void {
     this.#state = this.#reducer.digitClick(this.state, symbol);
-    this.#reducer = this.#numberReducer;
+    this.#reducer = this.#floatingPointReducer;
   }
 
   operatorClick(symbol: Operator): void {

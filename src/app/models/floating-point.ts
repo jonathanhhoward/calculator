@@ -27,31 +27,28 @@ export class FloatingPoint {
   }
 
   #appendToMantissa(digit: Digit) {
-    if (digit === "e") {
-      return new FloatingPoint(`${this.#mantissa}e0`);
-    }
-
-    const ignoreDigit =
+    const addExponent = () => digit === "e";
+    const ignoreDigit = () =>
       (digit === "." && this.#mantissa.includes(".")) ||
       this.#mantissa.replace(/[.-]/, "").length === 10;
-    if (ignoreDigit) {
-      return this;
-    }
+    const overwriteZero = () => this.#mantissa === "0" && digit !== ".";
 
-    const overwriteZero = this.#mantissa === "0" && digit !== ".";
-    return new FloatingPoint(overwriteZero ? digit : `${this}${digit}`);
+    return addExponent()
+      ? new FloatingPoint(`${this.#mantissa}e0`)
+      : ignoreDigit()
+        ? this
+        : new FloatingPoint(overwriteZero() ? digit : `${this}${digit}`);
   }
 
   #appendToExponent(digit: Digit) {
-    const ignoreDigit =
+    const ignoreDigit = () =>
       /[.e]/.test(digit) || this.#exponent?.replace(/-/, "").length === 2;
-    if (ignoreDigit) {
-      return this;
-    }
+    const overwriteZero = () => this.#exponent === "0";
 
-    const overwriteZero = this.#exponent === "0";
-    return new FloatingPoint(
-      overwriteZero ? `${this.#mantissa}e${digit}` : `${this}${digit}`,
-    );
+    return ignoreDigit()
+      ? this
+      : new FloatingPoint(
+          overwriteZero() ? `${this.#mantissa}e${digit}` : `${this}${digit}`,
+        );
   }
 }

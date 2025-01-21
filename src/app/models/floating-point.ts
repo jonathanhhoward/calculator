@@ -9,11 +9,9 @@ export class FloatingPoint {
   }
 
   append(digit: Digit): FloatingPoint {
-    const appended = this.#exponent
+    return this.#exponent
       ? this.#appendToExponent(digit)
       : this.#appendToMantissa(digit);
-
-    return new FloatingPoint(appended);
   }
 
   negate(): FloatingPoint {
@@ -29,28 +27,31 @@ export class FloatingPoint {
   }
 
   #appendToMantissa(digit: Digit) {
-    const isOverwriteZero = this.#mantissa === "0" && !/[.e]/.test(digit);
-    const isIgnoreSymbol =
-      (digit === "." && this.#mantissa.includes(".")) ||
-      (digit !== "e" && this.#mantissa.replace(/[.-]/, "").length === 10);
-    const tag = digit === "e" ? "0" : "";
+    if (digit === "e") {
+      return new FloatingPoint(`${this.#mantissa}e0`);
+    }
 
-    return isIgnoreSymbol
-      ? `${this}`
-      : isOverwriteZero
-        ? digit
-        : `${this}${digit}${tag}`;
+    const ignoreDigit =
+      (digit === "." && this.#mantissa.includes(".")) ||
+      this.#mantissa.replace(/[.-]/, "").length === 10;
+    if (ignoreDigit) {
+      return this;
+    }
+
+    const overwriteZero = this.#mantissa === "0" && digit !== ".";
+    return new FloatingPoint(overwriteZero ? digit : `${this}${digit}`);
   }
 
   #appendToExponent(digit: Digit) {
-    const isOverwriteZero = this.#exponent === "0";
-    const isIgnoreSymbol =
+    const ignoreDigit =
       /[.e]/.test(digit) || this.#exponent?.replace(/-/, "").length === 2;
+    if (ignoreDigit) {
+      return this;
+    }
 
-    return isIgnoreSymbol
-      ? `${this}`
-      : isOverwriteZero
-        ? `${this.#mantissa}e${digit}`
-        : `${this}${digit}`;
+    const overwriteZero = this.#exponent === "0";
+    return new FloatingPoint(
+      overwriteZero ? `${this.#mantissa}e${digit}` : `${this}${digit}`,
+    );
   }
 }

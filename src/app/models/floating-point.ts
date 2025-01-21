@@ -15,11 +15,11 @@ export class FloatingPoint {
   }
 
   negate(): FloatingPoint {
-    const negated = this.#exponent
-      ? `${this.#mantissa}e${-this.#exponent}`
-      : `${-this.#mantissa}`;
-
-    return new FloatingPoint(negated);
+    return new FloatingPoint(
+      this.#exponent
+        ? `${this.#mantissa}e${-this.#exponent}`
+        : `${-this.#mantissa}`,
+    );
   }
 
   toString() {

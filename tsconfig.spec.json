@@ -8,5 +8,5 @@
     "emitDecoratorMetadata": true,
     "allowJs": true
   },
-  "include": ["src/**/*.spec.ts", "src/**/*.d.ts", "setup-jest.ts"]
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts", "src/app/__tests__/*.ts"]
 }

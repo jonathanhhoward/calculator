@@ -1,4 +1,5 @@
-<div *ngIf="stateService.state as state" class="display">
+@let state = stateService.state;
+<div class="display">
   <div class="expression" data-testid="expression">{{ state.expression }}</div>
   <div class="input">{{ state.input }}</div>
 </div>

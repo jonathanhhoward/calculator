@@ -5,7 +5,6 @@ import { StateService } from "app/state/state.service";
   selector: "app-display",
   templateUrl: "./display.component.html",
   styleUrls: ["./display.component.scss"],
-  standalone: true,
 })
 export class DisplayComponent {
   readonly stateService: StateService;

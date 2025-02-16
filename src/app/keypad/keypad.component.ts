@@ -7,7 +7,6 @@ import { KeyComponent } from "./key/key.component";
   selector: "app-keypad",
   templateUrl: "./keypad.component.html",
   styleUrls: ["./keypad.component.scss"],
-  standalone: true,
   imports: [KeyComponent],
 })
 export class KeypadComponent {

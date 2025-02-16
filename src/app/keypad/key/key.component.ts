@@ -4,7 +4,6 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
   selector: "app-key",
   templateUrl: "./key.component.html",
   styleUrls: ["./key.component.scss"],
-  standalone: true,
 })
 export class KeyComponent {
   @Input() type = "";

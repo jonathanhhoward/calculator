@@ -25,7 +25,7 @@ export class KeypadComponent {
     this.#stateService.deleteClick();
   }
 
-  onOperatorClick(symbol: string) {
+  onOperatorClick(symbol: string): void {
     this.#stateService.operatorClick(symbol as Operator);
   }
 

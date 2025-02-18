@@ -1,3 +1,3 @@
-# Ng Calculator
+# Calculator
 
 A simple expression calculator.

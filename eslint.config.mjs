@@ -1,9 +1,9 @@
 // @ts-check
 import eslint from "@eslint/js";
-import { defineConfig } from "eslint/config";
-import tseslint from "typescript-eslint";
 import angular from "angular-eslint";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import { defineConfig } from "eslint/config";
+import tseslint from "typescript-eslint";
 
 export default defineConfig([
   {
@@ -33,7 +33,7 @@ export default defineConfig([
           style: "kebab-case",
         },
       ],
-      "@angular-eslint/prefer-inject": "off"
+      "@angular-eslint/prefer-inject": "off",
     },
   },
   {

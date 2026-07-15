@@ -1,11 +1,11 @@
 import { Injectable, signal } from "@angular/core";
-import { FloatingPoint } from "app/models/floating-point";
-import { Digit, Operator } from "app/models/types";
-import { FloatingPointReducer } from "app/state/floating-point.reducer";
-import { OperatorReducer } from "app/state/operator.reducer";
-import { Reducer } from "app/state/reducer";
-import { ResultReducer } from "app/state/result.reducer";
-import { State } from "app/state/state";
+import { FloatingPoint } from "../models/floating-point";
+import { Digit, Operator } from "../models/types";
+import { FloatingPointReducer } from "../state/floating-point.reducer";
+import { OperatorReducer } from "../state/operator.reducer";
+import { Reducer } from "../state/reducer";
+import { ResultReducer } from "../state/result.reducer";
+import { State } from "../state/state";
 
 @Injectable({ providedIn: "root" })
 export class StateService {

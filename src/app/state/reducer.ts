@@ -1,5 +1,5 @@
-import { Digit, Operator } from "app/models/types";
-import { State } from "app/state/state";
+import { Digit, Operator } from "../models/types";
+import { State } from "../state/state";
 
 export interface Reducer {
   deleteClick(state: State): State;

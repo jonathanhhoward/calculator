@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { StateService } from "app/state/state.service";
+import { StateService } from "../state/state.service";
 
 @Component({
   selector: "app-display",

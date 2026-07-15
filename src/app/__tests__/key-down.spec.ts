@@ -1,8 +1,5 @@
-import {
-  fireKeydownEvents,
-  getTextContent,
-} from "app/__tests__/test-utils/helpers";
-import renderApp from "app/__tests__/test-utils/render-app";
+import { fireKeydownEvents, getTextContent } from "./test-utils/helpers";
+import renderApp from "./test-utils/render-app";
 
 test("handles numpad keydown events", async () => {
   const { display } = await renderApp();

@@ -1,8 +1,5 @@
-import {
-  fireClickEvents,
-  getTextContent,
-} from "app/__tests__/test-utils/helpers";
-import renderApp from "app/__tests__/test-utils/render-app";
+import { fireClickEvents, getTextContent } from "./test-utils/helpers";
+import renderApp from "./test-utils/render-app";
 
 test("does nothing after operator", async () => {
   const { display, keyPad } = await renderApp();

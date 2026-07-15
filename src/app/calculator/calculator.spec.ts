@@ -1,5 +1,5 @@
-import { Calculator } from "app/calculator/calculator";
-import { FloatingPoint } from "app/models/floating-point";
+import { FloatingPoint } from "../models/floating-point";
+import { Calculator } from "./calculator";
 
 const sut = new Calculator();
 

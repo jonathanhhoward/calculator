@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { KeydownService } from "app/keydown.service";
 import { DisplayComponent } from "./display/display.component";
+import { KeydownService } from "./keydown.service";
 import { KeypadComponent } from "./keypad/keypad.component";
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
-import { Digit, Operator } from "app/models/types";
-import { StateService } from "app/state/state.service";
+import { Digit, Operator } from "../models/types";
+import { StateService } from "../state/state.service";
 import { KeyComponent } from "./key/key.component";
 
 @Component({

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Calculator } from "app/calculator/calculator";
-import { FloatingPoint } from "app/models/floating-point";
-import { Digit, Operator } from "app/models/types";
-import { Reducer } from "app/state/reducer";
-import { State } from "app/state/state";
+import { Calculator } from "../calculator/calculator";
+import { FloatingPoint } from "../models/floating-point";
+import { Digit, Operator } from "../models/types";
+import { Reducer } from "../state/reducer";
+import { State } from "../state/state";
 
 @Injectable({ providedIn: "root" })
 export class ResultReducer implements Reducer {

@@ -1,4 +1,4 @@
-import { Digit } from "app/models/types";
+import { Digit } from "../models/types";
 
 export class FloatingPoint {
   readonly #mantissa: string;

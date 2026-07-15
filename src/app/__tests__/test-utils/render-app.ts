@@ -1,6 +1,6 @@
 import { render } from "@testing-library/angular";
-import { Display, KeyPad } from "app/__tests__/test-utils/types";
-import { AppComponent } from "app/app.component";
+import { AppComponent } from "../../app.component";
+import { Display, KeyPad } from "./types";
 
 export default async function () {
   const { getByText, getAllByText, getByTestId } = await render(AppComponent);

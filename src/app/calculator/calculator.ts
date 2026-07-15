@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { FloatingPoint } from "app/models/floating-point";
 import { evaluate } from "mathjs";
+import { FloatingPoint } from "../models/floating-point";
 
 @Injectable({ providedIn: "root" })
 export class Calculator {
